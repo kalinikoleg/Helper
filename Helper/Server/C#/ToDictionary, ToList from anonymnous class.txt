@@ -1,0 +1,3 @@
+http://blog.vkuznetsov.ru/posts/2011/09/04/malenkie-chudesa-csharp-net-todictionary-i-tolist#.UnlD6jZpnJk
+
+IDictionary<string, object> id = prop.ToDictionary(x => x.Name, x => x.GetValue(htmlAttributes, null));

@@ -1,0 +1,6 @@
+[RegularExpression(@"^.{6,16}$", ErrorMessageResourceName = "IncorrectPassword", ErrorMessageResourceType = typeof(ValidationErrorMessage_cshtml))]
+
+
+Get to global resources 
+App_GlobalResources, App_LocalResources создать папку и доступ Resources.CommonErrors, где
+CommonErrors - фай локаьных ресурсов

@@ -1,0 +1,5 @@
+указать custom tool: PublicResXFileCodeGenerator
+Build Action: Embedded Resource
+
+создать файл с Res.chtml.resx - это файл по умолчаний, который забирает currentUICulture
+CartFormResource.fr-FR.resx - это с указанием культуры

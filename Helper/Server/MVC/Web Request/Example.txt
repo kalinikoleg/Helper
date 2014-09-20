@@ -1,0 +1,4 @@
+ //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://vppneuapps.volvo.com/ww19/pckservices/SnlService/SnlService.asmx?op=GetModelFromSerial");
+            //HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+
+           // string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();

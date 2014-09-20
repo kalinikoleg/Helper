@@ -1,0 +1,8 @@
+File structure Ctrl+Alt+F Ctrl+F11
+
+1. Vis studio schema
+2. Use resharper
+
+http://www.jetbrains.com/resharper/docs/ReSharper80DefaultKeymap_VS_scheme.pdf
+
+http://www.jetbrains.com/resharper/webhelp/Reference__Keyboard_Shortcuts.html
