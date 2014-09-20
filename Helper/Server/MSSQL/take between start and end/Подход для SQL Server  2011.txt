@@ -1,0 +1,26 @@
+DBCC DROPCLEANBUFFERS
+DBCC FREEPROCCACHE
+
+USE TSQLDB;
+GO
+
+SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+GO
+
+Declare @RowSkip As int
+Declare @RowFetch As int
+
+Set @RowSkip = 20000
+Set @RowFetch = 50000
+
+Select *
+From dbo.tblSample
+Order by (Select 1)
+Offset @RowSkip Row
+Fetch  Next @RowFetch Rows Only;
+GO
+
+SET STATISTICS IO OFF;
+SET STATISTICS TIME OFF;
+GO

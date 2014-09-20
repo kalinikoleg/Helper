@@ -1,0 +1,17 @@
+*********
+--LAG берет предидущее поле(которое сверху)
+
+1. LAG(Order date) OVER(ORDER BY orderDate ASC)
+2. LAG(Order date, 2) возьмет предудыщую, но через одну
+LAG(Order date, 2, 0) - третий параметр ставит значение вместо null
+
+*************
+--LEED
+
+***************
+--DATEDIFF - разница между датами
+
+1. DATEDIFF(DAY, FIRSTDATE, SECONDDATE) -посчитает разницу между датами в днях
+
+***************
+--GETDATE, GETUTCDATE

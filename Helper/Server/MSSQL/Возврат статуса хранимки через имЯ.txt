@@ -1,0 +1,7 @@
+http://msdn.microsoft.com/en-us/library/ms188655(v=sq..
+11.07.14	
+
+Oleg
+Хранимка может возвращать статус своего выполнения через своё имя, а-la: 
+DECLARE @result int; 
+EXECUTE @result = my_proc;

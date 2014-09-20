@@ -1,0 +1,59 @@
+SET @ChangedFields = N'<root><r>' + 
+	(SELECT TOP 1
+		CASE WHEN PatFullName = @FullName
+			THEN '' 
+			ELSE 'Changed : [Patient Full Name]  FROM: [' + ISNULL(PatFullName, '') + ']  TO: [' + ISNULL(@FullName, '') + ']' 
+		END + '</r><r>' +	
+		CASE WHEN PatFirstName = @FirstName
+			THEN '' 
+			ELSE 'Changed : [Patient First Name]  FROM: [' + ISNULL(PatFirstName, '') + ']  TO: [' + ISNULL(@FirstName, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatLastName = @LastName
+			THEN '' 
+			ELSE 'Changed : [Patient Last Name]  FROM: [' + ISNULL(PatLastName, '') + ']  TO: [' + ISNULL(@LastName, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN Credentials = @Credentials
+			THEN '' 
+			ELSE 'Changed : [Patient Credentials]  FROM: [' + ISNULL(Credentials, '') + ']  TO: [' + ISNULL(@Credentials, '') + ']' 
+		END + '</r><r>' +			
+		CASE WHEN PatMiddleInitial = @MiddleInitial
+			THEN '' 
+			ELSE 'Changed : [Patient Middle Initial]  FROM: [' + ISNULL(PatMiddleInitial, '') + ']  TO: [' + ISNULL(@MiddleInitial, '') + ']' 
+		END + '</r><r>' +		
+		CASE WHEN PatAddress = @Address
+			THEN ''
+			ELSE 'Changed : [Patient Address]  FROM: [' + ISNULL(PatAddress, '') + ']  TO: [' + ISNULL(@Address, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatZipCode = @ZipCode
+			THEN ''
+			ELSE 'Changed : [Patient Zip Code]  FROM: [' + ISNULL(PatZipCode, '') + ']  TO: [' + ISNULL(@ZipCode, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatCity = @City
+			THEN ''
+			ELSE 'Changed : [Patient City]  FROM: [' + ISNULL(PatCity, '') + ']  TO: [' + ISNULL(@City, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatState = @State
+			THEN ''
+			ELSE 'Changed : [Patient State]  FROM: [' + ISNULL(PatState, '') + ']  TO: [' + ISNULL(@State, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatPhone = @Phone
+			THEN ''
+			ELSE 'Changed : [Patient Phone]  FROM: [' + ISNULL(PatPhone, '') + ']  TO: [' + ISNULL(@Phone, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatSSN = @SSN
+			THEN ''
+			ELSE 'Changed : [Patient SSN]  FROM: [' + ISNULL(PatSSN, '') + ']  TO: [' + ISNULL(@SSN, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN PatDOB = @Birthday
+			THEN ''
+			ELSE 'Changed : [Patient DOB]  FROM: [' + ISNULL(CONVERT(VARCHAR(30), PatDOB), '') + ']  TO: [' + ISNULL(CONVERT(VARCHAR(30), @Birthday), '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN EmployerName = @EmployerName
+			THEN ''
+			ELSE 'Changed : [Patient Employer Name]  FROM: [' + ISNULL(EmployerName, '') + ']  TO: [' + ISNULL(@EmployerName, '') + ']' 
+		END + '</r><r>' +
+		CASE WHEN EmployerPhone = @EmployerPhone
+			THEN ''
+			ELSE 'Changed : [Patient Employer Phone]  FROM: [' + ISNULL(EmployerPhone, '') + ']  TO: [' + ISNULL(@EmployerPhone, '') + ']' 
+		END
+	FROM dbo.tblPatient

@@ -1,0 +1,21 @@
+1. View  - только select, все столбцы должны иметь имена, не иметь 
+сортировки, но можно использовать order by desck только для получения TOP
+во view сохраняется только текс, не результат
+
+CREATE VIEW mySales
+	AS
+		SELECT title
+		from table
+		group by Tite
+2. Функции - проблемы с производительрностью
+
+3. Temporary View
+-- живет только на один select
+;WITH MyReport(Title, Total) --
+	AS (
+		SELECT title, isnull(sum(sqt), 0)
+		from table
+		group by Tite
+	    )
+select * 
+from MyReport

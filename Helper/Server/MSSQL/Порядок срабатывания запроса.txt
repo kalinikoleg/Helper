@@ -1,0 +1,97 @@
+
+1.
+JOIN* (все джойны)(модифицирующие таблицу, where работет с новой таблицей, которая
+получилась после join)
+
+2.
+WHERE
+
+(модифицирующие таблицу, т.е. создают новую)
+3., 4.
+Агрегация*
+GROUP BY*
+HAVING
+
+5.
+ORDER BY DESC|ASK
+
+6.
+TOP(DISTINCT*)  (сразу пишется после select)
+
+7.
+SELECT
+
+
+
+
+DISTINCT* - DISTINCT (name, surName) - будет неповторяющая комбинация
+Агрегация* - COUNT, MIN, MAX, SUM, формирует новую таблицу.
+GROUP BY* - GROUP BY(YEAR, COUNTRY) -уникальная комбинация, формирует новую таблицу 
+
+JOIN*
+CROSS JOIN(FROM firstTable CROSS JOIN secondTable) - ставит в соответствие каждой 
+строке левой таблицы все строки правой таблицы.
+
+INNER(LEFT|RIGHT)* JOIN(FROM firstTable INNER JOIN secondTable ON C.CustomerID = O.CustomerID) 
+- делает фильтрацию во время самого джойна
+
+(LEFT|RIGHT)* JOINS - при использовании помнить ->
+-если сразу делается джоин, он соеденяет две таблицы, а затем идет WHERE, то WHERE 
+фильтрует уже по результирующей таблице. Если нужно найти КАЖДОЕ значение левой таблицы, то 
+фильтрацию(условие WHERE) нужно делать во время джойна, т.е.(выбрать количесвто заказов
+для КАЖДОГО покупателя в городе берлин, так вот получится, что left join выберет все значения
+левой таблицы и поставит значения nulL в правой таблице, где не было заказов для этого покупателя
+в берлине, а WHERE shipmentcity='berlin' уберет всех покупателей, у которых заказы не равны 
+берлину, т.е. мы добавляем дополнительный фильтр
+) ->
+Если делается (LEFT|RIGHT) JOIN, необходимо все остальные джойны тоже делать LEFT|RIGHT,
+потому что inner удалит все несоответствующие строки.
+
+ПРОБЛЕМА ПРИ LEFT|RIGHT JOINS-
+при левом джойне, если я фильтрую по правой части таблицы, а сумирую по левой, то фильтруются
+и сумируются разные вещи, получается ерунда всегда.
+из этой ситуации выходить нужно так: в скобочках inner join объеженять данные,
+а потом left join каждому продавцу ставить в соответствие записи
+
+SELECT LastName +' '+FirstName, ISNULL( SUM(OD.UnitPrice*Quantity*(1-Discount)), 0)
+FROM Employees E LEFT JOIN
+	( 
+		Orders O INNER JOIN [Order Details]
+		ON O.OrderID = OD.OrderID
+		INNER JOIN Products P
+		ON OD.ProductID = P.ProductID
+		AND P.ProductName = 'Chai'
+	)
+	
+	ON E.EmployeeID = O.EmployeeID
+	AND O.ShipCity = 'London'
+	
+GROUP BY LastName +' '+FirstName 
+
+
+--ПЕРЕМЕННЫЕ
+
+DECLARE @var1 int
+
+SELECT @var1 = COUNT(*)
+FROM Orders
+
+IF @var1 > 800
+BEGIN
+	SELECT @var1
+	SET @var1 = @var1- 30
+END
+
+SELECT @var1
+
+
+ДИНАМЧЕСКИЕ ЗАПРОСЫ
+
+DECLARE @tableName varchar(100);
+SET @tableName='Products';
+
+EXECUTE ('SELECT * FROM ' + @tableName)
+
+
+
+

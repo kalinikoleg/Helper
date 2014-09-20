@@ -1,0 +1,42 @@
+DBCC DROPCLEANBUFFERS
+DBCC FREEPROCCACHE
+
+USE TSQLDB;
+GO
+
+SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+GO
+
+Declare @RowSkip As int
+Declare @RowFetch As int
+
+Set @RowSkip = 20000
+Set @RowFetch = 50000
+
+;With Cte As
+(
+    Select
+        rn=ROW_NUMBER()
+        Over(Order by (Select 1))
+        ,*
+    From dbo.tblSample
+
+)
+
+Select
+     [Person ID]
+    ,[Person Name]
+    ,Age
+    ,DOB
+    ,Address
+From Cte
+
+Where rn Between  (@RowSkip+1) <em> </em>
+    And  (@RowSkip+ @RowFetch)
+
+GO
+
+SET STATISTICS IO OFF;
+SET STATISTICS TIME OFF;
+GO

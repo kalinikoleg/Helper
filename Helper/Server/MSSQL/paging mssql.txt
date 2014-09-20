@@ -1,0 +1,53 @@
+--PARAMETRS FROM .NET
+DECLARE @AccountId BIGINT = 2
+DECLARE @RecordsPerPage INT = NULL -- if null or 0 - all records this is output parameter
+DECLARE @Page INT = NULL -- if null or 0 - first page(1) this is output parameter
+DECLARE @TotalRecords INT = NULL -- this is output parameter
+
+
+
+
+    DECLARE @TotalPages INT
+	declare @Start int
+	declare @End int
+
+	SELECT @TotalRecords = COUNT(DeviceID)
+	FROM DeviceList
+	WHERE AccountId = @AccountId AND DevisePurchaseHistoryActive = 1
+	--DON`T FORGET MAKE CHANGES IN FILTER "WHERE" IN Cte
+    
+    
+    
+    IF (@RecordsPerPage IS NULL OR @RecordsPerPage = 0)
+    BEGIN
+        IF (@TotalRecords > 0)
+        BEGIN
+            SELECT @RecordsPerPage = @TotalRecords;
+        END
+    ELSE  BEGIN 
+    -- if no records found, then we assume that we have 1 record per page to avoid division by zero
+        SELECT @RecordsPerPage = 1;
+        END
+    END
+    
+	SET @TotalPages = (@TotalRecords + @RecordsPerPage - 1) / @RecordsPerPage;
+	IF @Page > @TotalPages
+		SET @Page = @TotalPages 
+	IF @Page < 1 OR @Page IS NULL
+		SET @Page = 1
+	
+	SET @Start = ((@Page - 1) * @RecordsPerPage)+1;
+	SET @End = @Page * @RecordsPerPage;
+
+	;With Cte As
+	(
+		SELECT
+			rn = ROW_NUMBER() Over(Order by (Select 1))
+			,*
+		FROM DeviceList
+		WHERE AccountId = @AccountId AND DevisePurchaseHistoryActive = 1 
+		
+	)
+	SELECT *
+	FROM Cte
+	WHERE rn between  @Start and @End

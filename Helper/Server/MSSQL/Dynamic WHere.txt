@@ -1,0 +1,8 @@
+where(
+(@PROMO_CODE is null or PROMO_CODE like '%'+@PROMO_CODE+'%') 
+and ( @SUBSCRIPTION_PERIOD_ID is null or PRICE_LIST_ID = @SUBSCRIPTION_PERIOD_ID )
+and (@STATE is null or STATE = @STATE )
+and (@EXPIRED is null or EXPIRED = @EXPIRED)
+and ((@GENERATED_FROM is null) or (CONVERT(date, DATE_GENERATED) >= @GENERATED_FROM))
+and ((@GENERATED_TO is null) or (CONVERT(date, DATE_GENERATED) <= @GENERATED_TO))
+)

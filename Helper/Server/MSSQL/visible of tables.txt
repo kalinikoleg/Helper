@@ -1,0 +1,31 @@
+Table variables (DECLARE @t TABLE) are visible only to the connection that creates it, and are deleted when the batch or stored procedure ends.
+
+Local temporary tables (CREATE TABLE #t) are visible only to the connection that creates it, and are deleted when the connection is closed.
+
+Global temporary tables (CREATE TABLE ##t) are visible to everyone, and are deleted when all connections that have referenced them have closed.
+
+Tempdb permanent tables (USE tempdb CREATE TABLE t) are visible to everyone, and are deleted when the server is restarted.
+
+1. если хранить миллионы и миллиарды записей, нужно создавать временную таблицу
+
+CREATE TABLE #MyTablr(
+							NAME varchar(100),
+							PRICE money)
+							
+DROP TABLE #MyTablr
+
+2. если хранить нужно меньше миллиона записей, нужно создвать табличные переменые
+(её не нужно удалять, когда выйдет из области видимости сервер сам удалит)
+
+DECLARE @MY_TABLE TABLE(
+							NAME varchar(100),
+							PRICE money
+						)
+						
+INSERT INTO @MY_TABLE (Name, Price)
+VALUES (@Name, @Price)
+
+INSERT INTO @MY_TABLE (DATE)
+SELECT OrderDate
+  FROM [Northwind].[dbo].[Orders]
+  WHERE EmployeeID = 1
