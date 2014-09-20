@@ -1,0 +1,7 @@
+Very easy way to copy the dll.
+
+1. Go to start -> run
+
+2. Type following C:\windows\assembly\GAC_32 and press enter
+
+  It will open windows explorer that let you copy the dll you want.
