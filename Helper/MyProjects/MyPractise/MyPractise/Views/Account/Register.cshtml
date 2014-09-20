@@ -1,0 +1,136 @@
+﻿@using MyPractise.Exstentions
+
+@section scripts{
+    @Scripts.Render("~/Base/scripts")
+    @Scripts.Render("~/Scripts/ViewModels/Account/register.js")
+}
+
+<div class="row">
+    <div class="col-xs-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="#" data-bind="click: chanheVisible.bind($data, 1)">Home</a></li>
+            <li><a href="#" data-bind="click: chanheVisible.bind($data, 2)">Profile</a></li>
+            <li><a href="#" data-bind="click: chanheVisible.bind($data, 3)">Messages</a></li>
+        </ul>
+
+    </div>
+    <div class="col-xs-10">
+        <div id="features1" class="top-buffer" data-bind="visible: feature1Visible">
+            <div class="row" role="form">
+                <div class="form-group col-xs-3">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                </div>
+                <div class="form-group col-xs-3">
+                    <label>Address</label>
+                    <input class="form-control" type="email" placeholder="Enter address">
+                </div>
+                <div class="form-group col-xs-3">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Enter password">
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-xs-12">
+                    @RazorHelpers.Button(Html, text: "Filter")
+                    @RazorHelpers.Button(Html, text: "Reset")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 top-buffer">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="text-center">Name of Corporation</td>
+                                <td class="text-center">Options</td>
+                                <td class="text-center">Comment</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4">Phone Id Corporation </td>
+                                <td class="col-xs-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                            to project manager
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                            to development team
+                                        </label>
+                                    </div>
+                                    <div class="radio disabled">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                                            to support team
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="col-xs-4">
+                                    <textarea cols="40" rows="5"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4">Paraben Corporation</td>
+                                <td class="col-xs-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                            to project manager
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                            to development team
+                                        </label>
+                                    </div>
+                                   
+                                </td>
+                                <td class="col-xs-4">
+                                    <textarea cols="40" rows="5"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <p id="features2" class="top-buffer" data-bind="visible: feature2Visible">
+            Paraben Corporation is a longtime leader in the field of digital forensics and investigations. Paraben’s technology is utilized by a variety of
+            federal, state, and international law enforcement and government agencies to insure the protection of evidence. Paraben’s Hawk Mobile Monitoring
+            system was designed with parents and companies in mind to be able to watch and secure the data on mobile devices. Paraben’s inspiration for this
+            system came from their own BYOD policies and the active roles of the executives as parents of teenagers. Paraben has been a trusted source for
+            securing, protecting, and monitoring mobile devices for over 10 years and continues to lead this field.
+        </p>
+        <p id="features3" class="top-buffer" data-bind="visible: feature3Visible">
+            It may be a federal and/or state offense to install monitoring/surveillance software onto a
+            Phone/Computer which you do not own or have proper authorization to install. It may also be an
+            offense in your jurisdiction to monitor the activities of other individuals. Check all state,
+            federal and local laws before installing any Monitoring Software such as Hawk Mobile. You may
+            also have to notify a person that they are being monitored if they are over age 18. Federal or
+            local law governs the use of some types of software; it is responsibility of the user to follow such laws.”
+            The Computer Fraud and Abuse Act ("CFAA", 18 U.S.C. § 1030) In Section 1030(g), CFAA provides that
+            "[a]ny person who suffers damage or loss by reason of a violation of this section may maintain a
+            civil action against the violator to obtain compensatory damages and injunctive relief or other
+            equitable relief." 18 U.S.C. 1030(g). CFAA defines "damage" as "any impairment to the integrity
+            or availability of data, a program, a system, or information." Id. at § 1030(e)(8). CFAA defines
+            "loss" as "any reasonable cost to any victim, including the cost of responding to an offense,
+            conducting a damage assessment, and restoring the data, program, system, or information to its
+            condition prior to the offense, and any revenue lost, cost incurred, or other consequential damages
+            incurred because of interruption of service."
+        </p>
+    </div>
+</div>
