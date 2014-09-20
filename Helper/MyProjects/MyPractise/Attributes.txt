@@ -1,0 +1,36 @@
+Attributes
+1. ChildActionOnlyAttribute: Гарантирует, что метод действия может быть вызван только 
+из другого действия (обычно из представления с помощью Html.Action), но не может быть 
+вызван напрямую
+2. RequireHttpsAttribute:  Гарантирует,  что  действие  может  быть  доступно  только  через 
+безопасное соединение
+3. ValidateAntiForgeryTokenAttribute:  Гарантирует,  что  был  указан  действительный 
+маркер для борьбы с фальсификацией (вы узнаете об этом больше в следующем разделе)
+4. ValidateInputAttribute:  Указывает,  должен  ли  ASP.NET  проводить  валидацию 
+пользовательского ввода для обнаружения потенциально опасного содержимого
+5. [Authorize(Users = "admin")]
+[Authorize(Roles = "admins, developers")]
+6.[AllowHtml]
+public string Comment { get; set; }
+7. [ValidateInput(false)] 
+public ViewResult Save(CommentInput form){}
+Когда  для  него  установлено  значение  false,  атрибут  ValidateInput  указывает  ASP.NET
+пропустить  обычную  проверку  на  наличие  вредоносного  содержимого.  Без  этого  атрибута  будет 
+проведена валидация по умолчанию: проверка строки запроса, формы и куки на наличие вредоносного 
+содержимого.
+8. 
+[SubtitleData]
+public ActionResult About()
+{
+	return View();
+}
+Всякий раз при вызове действия будет выполнен фильтр действия, показанный в следующем листинге.
+Листинг 12-2: Пользовательский фильтр действия, который добавляет данные в словарь ViewData 
+public class SubtitleDataAttribute : ActionFilterAttribute
+{
+	public override void OnActionExecuted(ActionExecutedContext filterContext)
+	{
+		var subtitle = new SubtitleBuilder();
+		filterContext.Controller.ViewData["subtitle"] = subtitle.Subtitle();
+	}
+} 

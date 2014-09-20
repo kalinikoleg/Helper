@@ -1,0 +1,1128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PhoneIdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="AccountExists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="AccExists" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="AddAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Salt" Type="nvarchar" Mode="In" />
+          <Parameter Name="WipeCount" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="AccountId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddDevice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
+          <Parameter Name="Manufacturer" Type="nvarchar" Mode="In" />
+          <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Imei" Type="varchar" Mode="In" />
+          <Parameter Name="Meid" Type="varchar" Mode="In" />
+          <Parameter Name="SerialNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="SimPresent" Type="bit" Mode="In" />
+          <Parameter Name="SdCardPresent" Type="bit" Mode="In" />
+          <Parameter Name="AdditionalInfo" Type="xml" Mode="In" />
+          <Parameter Name="DeviceId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddDevicePurchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PurchaseStatus" Type="smallint" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="PcIdentifier" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerDetailsId" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
+          <Parameter Name="TechnicianId" Type="bigint" Mode="In" />
+          <Parameter Name="Manufacturer" Type="nvarchar" Mode="In" />
+          <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Imei" Type="varchar" Mode="In" />
+          <Parameter Name="Meid" Type="varchar" Mode="In" />
+          <Parameter Name="SerialNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="SimPresent" Type="bit" Mode="In" />
+          <Parameter Name="SdCardPresent" Type="bit" Mode="In" />
+          <Parameter Name="AdditionalInfo" Type="xml" Mode="In" />
+          <Parameter Name="HistoryEntryId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddNewHardware" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="PerformerAccId" Type="bigint" Mode="In" />
+          <Parameter Name="PcIdentifier" Type="varchar" Mode="In" />
+          <Parameter Name="HardwareId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddNewPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PriceHistoryId" Type="bigint" Mode="In" />
+          <Parameter Name="NewPrice" Type="decimal" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="AddNewSoftwareVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Filename" Type="nvarchar" Mode="In" />
+          <Parameter Name="Version" Type="varchar" Mode="In" />
+          <Parameter Name="ReleaseDate" Type="datetime" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="PaymentMethod" Type="smallint" Mode="In" />
+          <Parameter Name="TransactionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="OrderId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddOrderItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+          <Parameter Name="PriceListId" Type="bigint" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="AdditionalInfo" Type="text" Mode="In" />
+          <Parameter Name="OrderItemId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Company" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Type" Type="smallint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="PersonId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddRoleToAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="RoleId" Type="bigint" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="Type" Type="smallint" Mode="In" />
+          <Parameter Name="PcIdentifier" Type="varchar" Mode="In" />
+          <Parameter Name="ExpirationDate" Type="datetime" Mode="In" />
+          <Parameter Name="Token" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="AddWipe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TechnicianId" Type="bigint" Mode="In" />
+          <Parameter Name="WipeStatus" Type="smallint" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="WipeCode" Type="varchar" Mode="In" />
+          <Parameter Name="IsJailbroken" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="LogData" Type="text" Mode="In" />
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
+          <Parameter Name="Manufacturer" Type="nvarchar" Mode="In" />
+          <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Imei" Type="varchar" Mode="In" />
+          <Parameter Name="Meid" Type="varchar" Mode="In" />
+          <Parameter Name="SerialNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="SimPresent" Type="bit" Mode="In" />
+          <Parameter Name="SdCardPresent" Type="bit" Mode="In" />
+          <Parameter Name="AdditionalInfo" Type="xml" Mode="In" />
+          <Parameter Name="HistoryEntryId" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="AddWipes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="WipesCount" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ChargeWipe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="DisablePurchaseHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="DevicePurchaseId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="DisableWipeHistoryEntry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="TechnicianId" Type="bigint" Mode="In" />
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GenerateToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Token" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="GetAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="GetAccountInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="GetAccountRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetCurrentSoftwareVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetDeviceIdByBarcode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="GetDeviceInfoByPurchaseId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DevicePurchaseHistoryId" Type="bigint" Mode="In" />
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetDeviceStatistic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="PurchaseStatus" Type="int" Mode="In" />
+          <Parameter Name="TechnicianId" Type="bigint" Mode="In" />
+          <Parameter Name="SerialNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="Meid" Type="nvarchar" Mode="In" />
+          <Parameter Name="Emei" Type="nvarchar" Mode="In" />
+          <Parameter Name="DeviceModel" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="Page" Type="int" Mode="InOut" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetLicenseListPaged" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="Page" Type="int" Mode="InOut" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetOrderSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+          <Parameter Name="OrderItemId" Type="bigint" Mode="In" />
+          <Parameter Name="PaymentMethod" Type="smallint" Mode="In" />
+          <Parameter Name="TransactionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="PriceType" Type="smallint" Mode="In" />
+          <Parameter Name="PriceId" Type="bigint" Mode="In" />
+          <Parameter Name="PriceHistoryId" Type="bigint" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetPersonById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PersonId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetPersonListPaged" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="Type" Type="smallint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="PageNum" Type="int" Mode="InOut" />
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetPhoneIdStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="Hwid" Type="varchar" Mode="In" />
+          <Parameter Name="WipeCount" Type="int" Mode="InOut" />
+          <Parameter Name="DeviceInfoAvailable" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="GetPriceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PriceListId" Type="bigint" Mode="In" />
+          <Parameter Name="PriceItemType" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="GetTechniciansPaged" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="TechnicianId" Type="bigint" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="PageNum" Type="int" Mode="InOut" />
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Token" Type="varchar" Mode="In" />
+          <Parameter Name="Type" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="GetUserStatisticsPaged" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="Page" Type="int" Mode="InOut" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetWipeHistoryPaged" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="WipeCode" Type="varchar" Mode="In" />
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
+          <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Imei" Type="varchar" Mode="In" />
+          <Parameter Name="Meid" Type="varchar" Mode="In" />
+          <Parameter Name="SerialNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="WipeStatus" Type="smallint" Mode="In" />
+          <Parameter Name="TechnicianId" Type="bigint" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="PageNum" Type="int" Mode="InOut" />
+          <Parameter Name="TotalPages" Type="int" Mode="InOut" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetWipesInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="RemoveTokens" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountId" Type="bigint" Mode="In" />
+          <Parameter Name="TokenType" Type="smallint" Mode="In" />
+          <Parameter Name="PcIdentifier" Type="varchar" Mode="In" />
+          <Parameter Name="Token" Type="varchar" Mode="In" />
+          <Parameter Name="ExpirationDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="WipeCount" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UpdateHardware" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HardwareId" Type="bigint" Mode="In" />
+          <Parameter Name="PerformerAccId" Type="bigint" Mode="In" />
+          <Parameter Name="PcIdentifier" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="TransactionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdatePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Salt" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="PriceId" Type="bigint" Mode="In" />
+          <Parameter Name="Price" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="UpdateTechnician" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="Company" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="PhoneIdModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PhoneIdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PhoneIdEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="AccountExists">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="AccExists" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddAccount">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Salt" Mode="In" Type="String" />
+            <Parameter Name="WipeCount" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="AccountId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddDevice">
+            <Parameter Name="Barcode" Mode="In" Type="String" />
+            <Parameter Name="Manufacturer" Mode="In" Type="String" />
+            <Parameter Name="ModelName" Mode="In" Type="String" />
+            <Parameter Name="Imei" Mode="In" Type="String" />
+            <Parameter Name="Meid" Mode="In" Type="String" />
+            <Parameter Name="SerialNumber" Mode="In" Type="String" />
+            <Parameter Name="SimPresent" Mode="In" Type="Boolean" />
+            <Parameter Name="SdCardPresent" Mode="In" Type="Boolean" />
+            <Parameter Name="AdditionalInfo" Mode="In" Type="String" />
+            <Parameter Name="DeviceId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddDevicePurchase">
+            <Parameter Name="PurchaseStatus" Mode="In" Type="Int16" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="PcIdentifier" Mode="In" Type="String" />
+            <Parameter Name="CustomerDetailsId" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="Barcode" Mode="In" Type="String" />
+            <Parameter Name="TechnicianId" Mode="In" Type="Int64" />
+            <Parameter Name="Manufacturer" Mode="In" Type="String" />
+            <Parameter Name="ModelName" Mode="In" Type="String" />
+            <Parameter Name="Imei" Mode="In" Type="String" />
+            <Parameter Name="Meid" Mode="In" Type="String" />
+            <Parameter Name="SerialNumber" Mode="In" Type="String" />
+            <Parameter Name="SimPresent" Mode="In" Type="Boolean" />
+            <Parameter Name="SdCardPresent" Mode="In" Type="Boolean" />
+            <Parameter Name="AdditionalInfo" Mode="In" Type="String" />
+            <Parameter Name="HistoryEntryId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewHardware">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="PerformerAccId" Mode="In" Type="Int64" />
+            <Parameter Name="PcIdentifier" Mode="In" Type="String" />
+            <Parameter Name="HardwareId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewPrice">
+            <Parameter Name="PriceHistoryId" Mode="In" Type="Int64" />
+            <Parameter Name="NewPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSoftwareVersion">
+            <Parameter Name="Filename" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="String" />
+            <Parameter Name="ReleaseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddOrder">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="PaymentMethod" Mode="In" Type="Int16" />
+            <Parameter Name="TransactionId" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="OrderId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddOrderItem">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="PriceListId" Mode="In" Type="Int64" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="AdditionalInfo" Mode="In" Type="String" />
+            <Parameter Name="OrderItemId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddPerson">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Company" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Zip" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="Int16" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="PersonId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddRoleToAccount">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="RoleId" Mode="In" Type="Int64" />
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddToken">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="Type" Mode="In" Type="Int16" />
+            <Parameter Name="PcIdentifier" Mode="In" Type="String" />
+            <Parameter Name="ExpirationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Token" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddWipe">
+            <Parameter Name="TechnicianId" Mode="In" Type="Int64" />
+            <Parameter Name="WipeStatus" Mode="In" Type="Int16" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="WipeCode" Mode="In" Type="String" />
+            <Parameter Name="IsJailbroken" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="LogData" Mode="In" Type="String" />
+            <Parameter Name="Barcode" Mode="In" Type="String" />
+            <Parameter Name="Manufacturer" Mode="In" Type="String" />
+            <Parameter Name="ModelName" Mode="In" Type="String" />
+            <Parameter Name="Imei" Mode="In" Type="String" />
+            <Parameter Name="Meid" Mode="In" Type="String" />
+            <Parameter Name="SerialNumber" Mode="In" Type="String" />
+            <Parameter Name="SimPresent" Mode="In" Type="Boolean" />
+            <Parameter Name="SdCardPresent" Mode="In" Type="Boolean" />
+            <Parameter Name="AdditionalInfo" Mode="In" Type="String" />
+            <Parameter Name="HistoryEntryId" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="AddWipes">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="WipesCount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ChargeWipe">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="DisablePurchaseHistory">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="DevicePurchaseId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="DisableWipeHistoryEntry">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="TechnicianId" Mode="In" Type="Int64" />
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateToken">
+            <Parameter Name="Token" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAccount" ReturnType="Collection(PhoneIdModel.GetAccount_Result)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetAccountInfo" ReturnType="Collection(PhoneIdModel.GetAccountInfo_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetAccountRoles" ReturnType="Collection(PhoneIdModel.GetAccountRoles_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetCurrentSoftwareVersion" ReturnType="Collection(PhoneIdModel.GetCurrentSoftwareVersion_Result)" />
+          <FunctionImport Name="GetDeviceIdByBarcode">
+            <Parameter Name="Barcode" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetDeviceInfoByPurchaseId" ReturnType="Collection(PhoneIdModel.GetDeviceInfoByPurchaseId_Result)">
+            <Parameter Name="DevicePurchaseHistoryId" Mode="In" Type="Int64" />
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetDeviceStatistic" ReturnType="Collection(PhoneIdModel.GetDeviceStatistic_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="PurchaseStatus" Mode="In" Type="Int32" />
+            <Parameter Name="TechnicianId" Mode="In" Type="Int64" />
+            <Parameter Name="SerialNumber" Mode="In" Type="String" />
+            <Parameter Name="Meid" Mode="In" Type="String" />
+            <Parameter Name="Emei" Mode="In" Type="String" />
+            <Parameter Name="DeviceModel" Mode="In" Type="String" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="Page" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLicenseListPaged" ReturnType="Collection(PhoneIdModel.GetLicenseListPaged_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="Page" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetOrderSummary" ReturnType="Collection(PhoneIdModel.GetOrderSummary_Result)">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="OrderItemId" Mode="In" Type="Int64" />
+            <Parameter Name="PaymentMethod" Mode="In" Type="Int16" />
+            <Parameter Name="TransactionId" Mode="In" Type="String" />
+            <Parameter Name="PriceType" Mode="In" Type="Int16" />
+            <Parameter Name="PriceId" Mode="In" Type="Int64" />
+            <Parameter Name="PriceHistoryId" Mode="In" Type="Int64" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetPersonById" ReturnType="Collection(PhoneIdModel.GetPersonById_Result)">
+            <Parameter Name="PersonId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetPersonListPaged" ReturnType="Collection(PhoneIdModel.GetPersonListPaged_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="Type" Mode="In" Type="Int16" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="PageNum" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPhoneIdStatus">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="Hwid" Mode="In" Type="String" />
+            <Parameter Name="WipeCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="DeviceInfoAvailable" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetPriceList" ReturnType="Collection(PhoneIdModel.GetPriceList_Result)">
+            <Parameter Name="PriceListId" Mode="In" Type="Int64" />
+            <Parameter Name="PriceItemType" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="GetTechniciansPaged" ReturnType="Collection(PhoneIdModel.GetTechniciansPaged_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="TechnicianId" Mode="In" Type="Int64" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="PageNum" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetToken" ReturnType="Collection(PhoneIdModel.GetToken_Result)">
+            <Parameter Name="Token" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserStatisticsPaged" ReturnType="Collection(PhoneIdModel.GetUserStatisticsPaged_Result)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="Page" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWipeHistoryPaged" ReturnType="Collection(PhoneIdModel.GetWipeHistoryPaged_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="WipeCode" Mode="In" Type="String" />
+            <Parameter Name="Barcode" Mode="In" Type="String" />
+            <Parameter Name="ModelName" Mode="In" Type="String" />
+            <Parameter Name="Imei" Mode="In" Type="String" />
+            <Parameter Name="Meid" Mode="In" Type="String" />
+            <Parameter Name="SerialNumber" Mode="In" Type="String" />
+            <Parameter Name="WipeStatus" Mode="In" Type="Int16" />
+            <Parameter Name="TechnicianId" Mode="In" Type="Int64" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="PageNum" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPages" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWipesInfo" ReturnType="Collection(PhoneIdModel.GetWipesInfo_Result)">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="RemoveTokens">
+            <Parameter Name="AccountId" Mode="In" Type="Int64" />
+            <Parameter Name="TokenType" Mode="In" Type="Int16" />
+            <Parameter Name="PcIdentifier" Mode="In" Type="String" />
+            <Parameter Name="Token" Mode="In" Type="String" />
+            <Parameter Name="ExpirationDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAccount">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="WipeCount" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateHardware">
+            <Parameter Name="HardwareId" Mode="In" Type="Int64" />
+            <Parameter Name="PerformerAccId" Mode="In" Type="Int64" />
+            <Parameter Name="PcIdentifier" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateOrder">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="TransactionId" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePassword">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Salt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePrice">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="PriceId" Mode="In" Type="Int64" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateTechnician">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="Lastname" Mode="In" Type="String" />
+            <Parameter Name="Company" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Zip" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAccount_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="WipeCount" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAccountInfo_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="WipeCount" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAccountRoles_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="GetCurrentSoftwareVersion_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="ReleaseDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Filename" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Version" Nullable="false" MaxLength="24" />
+        </ComplexType>
+        <ComplexType Name="GetDeviceInfoByPurchaseId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Barcode" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="32" />
+          <Property Type="Boolean" Name="SimCardPresent" Nullable="false" />
+          <Property Type="Boolean" Name="SdCard" Nullable="false" />
+          <Property Type="String" Name="ModelName" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Imei" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Meid" Nullable="true" MaxLength="14" />
+          <Property Type="String" Name="SerialNumber" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="AdditionalInfo" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="GetDeviceStatistic_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="TechnicianId" Nullable="false" />
+          <Property Type="Int64" Name="DeviceId" Nullable="false" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Int16" Name="PurchaseStatus" Nullable="false" />
+          <Property Type="String" Name="ModelName" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="SerialNumber" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Meid" Nullable="true" MaxLength="14" />
+          <Property Type="String" Name="Imei" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="PcIdentifier" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetLicenseListPaged_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="PcIdentifier" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastChangeDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetOrderSummary_Result">
+          <Property Type="Int64" Name="OrderId" Nullable="false" />
+          <Property Type="Int64" Name="OrderItemId" Nullable="false" />
+          <Property Type="Int16" Name="PaymentMethod" Nullable="true" />
+          <Property Type="String" Name="TransactionId" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="String" Name="AdditionalInfo" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="PriceName" Nullable="true" MaxLength="64" />
+          <Property Type="Int16" Name="PriceType" Nullable="true" />
+          <Property Type="Int64" Name="PriceId" Nullable="false" />
+          <Property Type="Int64" Name="PriceHistoryId" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="12" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetPersonById_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Company" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="128" />
+          <Property Type="Int16" Name="Type" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPersonListPaged_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Company" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="128" />
+          <Property Type="Int16" Name="Type" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPriceList_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="PriceId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="64" />
+          <Property Type="Int16" Name="Type" Nullable="true" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="12" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetTechniciansPaged_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Company" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="128" />
+          <Property Type="Int16" Name="Type" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="SuccessfulWipes" Nullable="true" />
+          <Property Type="Int32" Name="UnsuccessfulWipes" Nullable="true" />
+          <Property Type="Int32" Name="Purchased" Nullable="true" />
+          <Property Type="Int32" Name="NotPurchased" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetToken_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <Property Type="String" Name="Token" Nullable="false" MaxLength="32" />
+          <Property Type="Int16" Name="Type" Nullable="false" />
+          <Property Type="String" Name="PcIdentifier" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetUserStatisticsPaged_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="AvailableWipesCount" Nullable="true" />
+          <Property Type="Int32" Name="LicensesCount" Nullable="true" />
+          <Property Type="Int32" Name="SuccessfulWipesCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalWipesPerformedCount" Nullable="true" />
+          <Property Type="Int32" Name="UniqueWipesCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetWipeHistoryPaged_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="String" Name="WipeCode" Nullable="false" MaxLength="32" />
+          <Property Type="Int64" Name="AccountId" Nullable="false" />
+          <Property Type="Int64" Name="TechnicianId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="128" />
+          <Property Type="Int64" Name="DeviceId" Nullable="false" />
+          <Property Type="String" Name="Barcode" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="ModelName" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Manufacturer" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Imei" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Meid" Nullable="true" MaxLength="14" />
+          <Property Type="String" Name="SerialNumber" Nullable="true" MaxLength="32" />
+          <Property Type="Int16" Name="WipeStatus" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetWipesInfo_Result">
+          <Property Type="Int32" Name="WipesLeft" Nullable="true" />
+          <Property Type="Int32" Name="WipesPerformedThisMonth" Nullable="true" />
+          <Property Type="Int32" Name="WipesPerformedInTotal" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PhoneIdModelStoreContainer" CdmEntityContainer="PhoneIdEntities" >
+          <FunctionImportMapping FunctionImportName="AccountExists" FunctionName="PhoneIdModel.Store.AccountExists" />
+          <FunctionImportMapping FunctionImportName="AddAccount" FunctionName="PhoneIdModel.Store.AddAccount" />
+          <FunctionImportMapping FunctionImportName="AddDevice" FunctionName="PhoneIdModel.Store.AddDevice" />
+          <FunctionImportMapping FunctionImportName="AddDevicePurchase" FunctionName="PhoneIdModel.Store.AddDevicePurchase" />
+          <FunctionImportMapping FunctionImportName="AddNewHardware" FunctionName="PhoneIdModel.Store.AddNewHardware" />
+          <FunctionImportMapping FunctionImportName="AddNewPrice" FunctionName="PhoneIdModel.Store.AddNewPrice" />
+          <FunctionImportMapping FunctionImportName="AddNewSoftwareVersion" FunctionName="PhoneIdModel.Store.AddNewSoftwareVersion" />
+          <FunctionImportMapping FunctionImportName="AddOrder" FunctionName="PhoneIdModel.Store.AddOrder" />
+          <FunctionImportMapping FunctionImportName="AddOrderItem" FunctionName="PhoneIdModel.Store.AddOrderItem" />
+          <FunctionImportMapping FunctionImportName="AddPerson" FunctionName="PhoneIdModel.Store.AddPerson" />
+          <FunctionImportMapping FunctionImportName="AddRoleToAccount" FunctionName="PhoneIdModel.Store.AddRoleToAccount" />
+          <FunctionImportMapping FunctionImportName="AddToken" FunctionName="PhoneIdModel.Store.AddToken" />
+          <FunctionImportMapping FunctionImportName="AddWipe" FunctionName="PhoneIdModel.Store.AddWipe" />
+          <FunctionImportMapping FunctionImportName="AddWipes" FunctionName="PhoneIdModel.Store.AddWipes" />
+          <FunctionImportMapping FunctionImportName="ChargeWipe" FunctionName="PhoneIdModel.Store.ChargeWipe" />
+          <FunctionImportMapping FunctionImportName="DisablePurchaseHistory" FunctionName="PhoneIdModel.Store.DisablePurchaseHistory" />
+          <FunctionImportMapping FunctionImportName="DisableWipeHistoryEntry" FunctionName="PhoneIdModel.Store.DisableWipeHistoryEntry" />
+          <FunctionImportMapping FunctionImportName="GenerateToken" FunctionName="PhoneIdModel.Store.GenerateToken" />
+          <FunctionImportMapping FunctionImportName="GetAccount" FunctionName="PhoneIdModel.Store.GetAccount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetAccount_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="WipeCount" ColumnName="WipeCount" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAccountInfo" FunctionName="PhoneIdModel.Store.GetAccountInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetAccountInfo_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="WipeCount" ColumnName="WipeCount" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAccountRoles" FunctionName="PhoneIdModel.Store.GetAccountRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetAccountRoles_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCurrentSoftwareVersion" FunctionName="PhoneIdModel.Store.GetCurrentSoftwareVersion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetCurrentSoftwareVersion_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDeviceIdByBarcode" FunctionName="PhoneIdModel.Store.GetDeviceIdByBarcode" />
+          <FunctionImportMapping FunctionImportName="GetDeviceInfoByPurchaseId" FunctionName="PhoneIdModel.Store.GetDeviceInfoByPurchaseId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetDeviceInfoByPurchaseId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="SimCardPresent" ColumnName="SimCardPresent" />
+                <ScalarProperty Name="SdCard" ColumnName="SdCard" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="Imei" ColumnName="Imei" />
+                <ScalarProperty Name="Meid" ColumnName="Meid" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDeviceStatistic" FunctionName="PhoneIdModel.Store.GetDeviceStatistic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetDeviceStatistic_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TechnicianId" ColumnName="TechnicianId" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PurchaseStatus" ColumnName="PurchaseStatus" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Meid" ColumnName="Meid" />
+                <ScalarProperty Name="Imei" ColumnName="Imei" />
+                <ScalarProperty Name="PcIdentifier" ColumnName="PcIdentifier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLicenseListPaged" FunctionName="PhoneIdModel.Store.GetLicenseListPaged">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetLicenseListPaged_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PcIdentifier" ColumnName="PcIdentifier" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastChangeDate" ColumnName="LastChangeDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOrderSummary" FunctionName="PhoneIdModel.Store.GetOrderSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetOrderSummary_Result">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+                <ScalarProperty Name="PriceName" ColumnName="PriceName" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="PriceHistoryId" ColumnName="PriceHistoryId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPersonById" FunctionName="PhoneIdModel.Store.GetPersonById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetPersonById_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPersonListPaged" FunctionName="PhoneIdModel.Store.GetPersonListPaged">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetPersonListPaged_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPhoneIdStatus" FunctionName="PhoneIdModel.Store.GetPhoneIdStatus" />
+          <FunctionImportMapping FunctionImportName="GetPriceList" FunctionName="PhoneIdModel.Store.GetPriceList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetPriceList_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTechniciansPaged" FunctionName="PhoneIdModel.Store.GetTechniciansPaged">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetTechniciansPaged_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SuccessfulWipes" ColumnName="SuccessfulWipes" />
+                <ScalarProperty Name="UnsuccessfulWipes" ColumnName="UnsuccessfulWipes" />
+                <ScalarProperty Name="Purchased" ColumnName="Purchased" />
+                <ScalarProperty Name="NotPurchased" ColumnName="NotPurchased" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetToken" FunctionName="PhoneIdModel.Store.GetToken">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetToken_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PcIdentifier" ColumnName="PcIdentifier" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserStatisticsPaged" FunctionName="PhoneIdModel.Store.GetUserStatisticsPaged">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetUserStatisticsPaged_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AvailableWipesCount" ColumnName="AvailableWipesCount" />
+                <ScalarProperty Name="LicensesCount" ColumnName="LicensesCount" />
+                <ScalarProperty Name="SuccessfulWipesCount" ColumnName="SuccessfulWipesCount" />
+                <ScalarProperty Name="TotalWipesPerformedCount" ColumnName="TotalWipesPerformedCount" />
+                <ScalarProperty Name="UniqueWipesCount" ColumnName="UniqueWipesCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetWipeHistoryPaged" FunctionName="PhoneIdModel.Store.GetWipeHistoryPaged">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetWipeHistoryPaged_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="WipeCode" ColumnName="WipeCode" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TechnicianId" ColumnName="TechnicianId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Imei" ColumnName="Imei" />
+                <ScalarProperty Name="Meid" ColumnName="Meid" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="WipeStatus" ColumnName="WipeStatus" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetWipesInfo" FunctionName="PhoneIdModel.Store.GetWipesInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PhoneIdModel.GetWipesInfo_Result">
+                <ScalarProperty Name="WipesLeft" ColumnName="WipesLeft" />
+                <ScalarProperty Name="WipesPerformedThisMonth" ColumnName="WipesPerformedThisMonth" />
+                <ScalarProperty Name="WipesPerformedInTotal" ColumnName="WipesPerformedInTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RemoveTokens" FunctionName="PhoneIdModel.Store.RemoveTokens" />
+          <FunctionImportMapping FunctionImportName="UpdateAccount" FunctionName="PhoneIdModel.Store.UpdateAccount" />
+          <FunctionImportMapping FunctionImportName="UpdateHardware" FunctionName="PhoneIdModel.Store.UpdateHardware" />
+          <FunctionImportMapping FunctionImportName="UpdateOrder" FunctionName="PhoneIdModel.Store.UpdateOrder" />
+          <FunctionImportMapping FunctionImportName="UpdatePassword" FunctionName="PhoneIdModel.Store.UpdatePassword" />
+          <FunctionImportMapping FunctionImportName="UpdatePrice" FunctionName="PhoneIdModel.Store.UpdatePrice" />
+          <FunctionImportMapping FunctionImportName="UpdateTechnician" FunctionName="PhoneIdModel.Store.UpdateTechnician" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
