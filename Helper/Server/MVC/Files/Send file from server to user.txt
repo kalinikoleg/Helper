@@ -1,0 +1,37 @@
+Response.TransmitFile VS Response.WriteFile: 
+1. TransmitFile: This method sends the file to the client without loading it to the Application memory on the server. It is the ideal way to use it if the file size being download is large.
+2. WriteFile: This method loads the file being download to the server's memory before sending it to the client. If the file size is large, you might the ASPNET worker process might get restarted.
+
+Please Note: If you want to bypass the Open/Save/Cancel dialog you just need to replace LINE1 by the below code
+Response.AddHeader("Content-Disposition", "inline; filename=" + file.Name);
+
+//To Get the physical Path of the file(me2.doc)
+   string filepath = Server.MapPath("me2.doc");
+
+   // Create New instance of FileInfo class to get the properties of the file being downloaded
+   FileInfo myfile = new FileInfo(filepath);
+  
+   // Checking if file exists
+   if (myfile.Exists)
+   {
+    // Clear the content of the response
+    Response.ClearContent();
+    
+    // Add the file name and attachment, which will force the open/cancel/save dialog box to show, to the header
+    Response.AddHeader("Content-Disposition", "attachment; filename=" + myfile.Name);
+    
+    // Add the file size into the response header
+    Response.AddHeader("Content-Length", myfile.Length.ToString());
+
+    // Set the ContentType
+    Response.ContentType = ReturnExtension(myfile.Extension.ToLower());
+
+    // Write the file into the response (TransmitFile is for ASP.NET 2.0. In ASP.NET 1.1 you have to use WriteFile instead)
+    Response.TransmitFile(myfile.FullName);
+	
+	// Send file immediately
+	Response.flush()
+
+    // End the response
+    Response.End();
+   }

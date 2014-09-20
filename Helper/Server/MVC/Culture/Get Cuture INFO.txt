@@ -1,0 +1,23 @@
+берут инфу с сервера о €зыке пользовател€ 
+
+System.Threading.Thread.CurrentThread.CurrentUICulture;
+System.Threading.Thread.CurrentThread.CurrentCulture; // return object System.Globalization.cultureInfo 
+- определе€ютс€ в только в базовом контроллере, т.е. модель св€зывани€ моделей происзодит
+раньше, там его нельз€ использвать
+
+System.Globalization.CultureInfo - статическое, доступно в любом месте проги.
+           
+ работают одинаково берут инфу из браузера о €зыке пользовател€
+Request.Headers["Accept-Language"];
+this.Request.UserLanguages;
+
+en в случае английского €зыка, es дл€ испанского и de дл€ немецкого, и региональных параметров (например US дл€ —Ўј, GB дл€ ¬еликобритании).
+—войство UICulture может быть различным в различных обозревател€х, но Culture остаетс€ неизменным.“аким образом, цены всегда отображаютс€ в 
+одной валюте и в одинаковом формате. ќбычно UICulture = culture и в run time диспетчер ресурсов считывает данные из UICulture  и подгружает 
+соответствующие файлы ресурсов, из которых отображаетс€ UI страницы, в онсновном только €зык, а все остальное, типа формата денег, даты,
+беетс€ и currentCuture
+
+Thread.CurrentUICulture - ѕолучает или задает текущие €зык и региональные параметры, используемые диспетчером ресурсов дл€ поиска ресурсов, 
+	св€занных с €зыком и региональными параметрами, во врем€ выполнени€.
+
+System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en");

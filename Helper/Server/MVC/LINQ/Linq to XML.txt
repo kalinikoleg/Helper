@@ -1,0 +1,15 @@
+http://habrahabr.ru/post/24673/
+
+самое крутое решение
+http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer.deserialize(v=vs.71).aspx
+
+
+XmlSerializer xmlser = new XmlSerializer(typeof(List<Item>));
+StreamReader srdr = new StreamReader(@"C:\serialize.xml");
+List<Item> p = (List<Item>)xmlser.Deserialize(srdr);
+srdr.Close();
+
+
+//read from string(not file)
+TextReader tr = new StringReader(model.Device.AdditionalInfo);
+XDocument doc = XDocument.Load(tr);

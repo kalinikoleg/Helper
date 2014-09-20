@@ -1,0 +1,27 @@
+    public static class StreamHelper
+    {
+        /// <summary>
+        /// Reads a stream into byte array
+        /// </summary>
+        /// <param name="stream">stream</param>
+        /// <returns>byte array read</returns>
+        public static byte[] ReadStream(Stream stream)
+        {
+            using (Stream inputStream = stream)
+            {
+				if(inputStream is MemoryStream)
+				{
+					return ((MemoryStream) inputStream).ToArray();
+				}
+                else
+                {
+					using (var memoryStream = new MemoryStream())
+					{
+						inputStream.CopyTo(memoryStream);
+
+						return memoryStream.ToArray();
+					}
+                }
+            }
+        }
+    }

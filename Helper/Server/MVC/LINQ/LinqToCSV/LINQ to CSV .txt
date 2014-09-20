@@ -1,0 +1,1 @@
+http://www.codeproject.com/Articles/25133/LINQ-to-CSV-library#QuoteAllFields

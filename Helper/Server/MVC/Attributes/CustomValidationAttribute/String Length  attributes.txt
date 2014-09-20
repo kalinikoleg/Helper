@@ -1,0 +1,8 @@
+// Minimum of 3 characters, unlimited maximum
+[RegularExpression(@"^.{3,}$", ErrorMessage = "Not long enough!")]
+
+// No minimum, maximum of 42 characters
+[RegularExpression(@"^.{,42}$", ErrorMessage = "Too long!")]
+
+// Minimum of 13 characters, maximum of 37 characters
+[RegularExpression(@"^.{13,37}$", ErrorMessage = "Needs to be 13 to 37 characters yo!")]

@@ -1,0 +1,2 @@
+@Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer()
+.Serialize(productModels.Select(z=>new {modelName = z.ModelName, engineType =  z.EngineType})));

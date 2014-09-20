@@ -1,0 +1,239 @@
+﻿с. 106
+ groupjoin 109 - 110, groupby ,
+let, into
+
+ orderby, - посмотреть пример с ICompare, идет ли автоматический 
+ вызов!
+
+c. 68 таблица отложенных и не отложенных запросов.
+
+данные из таблиц считуются в IQuerable<>
+--IQuerable<> наследуется от IEnumerable<>
+
+3&1 ?????????????????????????? отбор непарных чисел
+
+--Кеширование данных источника 
+c. 68 таблица отложенных запросов.
+	int[] intArray = new int[] {1,2,3};
+	IEnumerable<int> ints = intArray.Select(i=> i);
+	foreach(int i in ints)
+	{выведет 1 2 3}
+	intArray[0] = 5;
+	foreach(int i in ints)
+	{выведет 5 2 3}
+так как происходит отложенная выборка из источника ints(для того, 
+чтобы он был отложенным, нужно что бы возвращаемый тип был IEnumerable)
+	int[] intArray = new int[] {1,2,3};
+	List<int> ints = intArray.Select(i=> i).ToList();
+	foreach(int i in ints)
+	{выведет 1 2 3}
+	intArray[0] = 5;
+	foreach(int i in ints)
+	{выведет 1 2 3}
+метод ToList не является отложенным и запрос выполняется на том месте, 
+на котором он вызван.
+
+
+LINQ TO OBJECT
+--.Where(p=>p); - p это объект коллекции
+.Where((p,i)=> (i&1)==1); - i - индекс объекта p в коллекции.
+
+--SelectMany
+на один объект string он возвращает несколько, эти несколько объеденяются
+а одну последовательность и возвращаются.
+	List<string> idn = new List<string>
+	{
+		"Oleg",
+		"Kalinik"
+	};
+	Enumerable<char> c = idn.SelectMany(p => p.ToArray());
+	foreach (char b in c)
+	{
+		Console.WriteLine(b);
+	}
+Мой пример один ко многим
+	IEnumerable<char> c = idn.SelectMany(p =>
+	{
+		char[] mas = new char[5];
+		for (int i = 0; i < 5; i++)
+		{
+			 mas[i] = 'c';
+		}
+		return mas;
+	});
+		
+--TakeWhile() возвращает каждый элемент последовательности до тех пор,
+пока верно условие.
+	List<string> idn = new List<string>
+	{
+		"Oleg",
+		"Kalinik"
+	};
+	IEnumerable<string> c = idn.TakeWhile(x => x.Length > 10);	
+	
+--.Cast<int>() - приводит все элементы коллекции к заданному типу,
+елси не получится привидения, исключение.	
+	
+--.ofType<string>() - помещает в коллекцию те элементы, которые могут быть 
+приведены  к заданному типу.
+
+--.Skip(n) пропускает n первых элементов последовательности
+
+--.SkipWhile() пропускает элементы до тех пор, пока условие истинно
+
+--.Concat() соединяет две последовательности в одну.
+pres.Concat(list);
+
+
+Упорядочивание 
+OredrBy,  OrderBydescending требуют последовательности типа IEnumerable<T>
+, и возвращают последовательности IOrderedEnumerable<T>. Нельзя передавать
+IOrderedEnumerable<T> в качестве входной в orderBy и OrderByDescending, 
+поэтому это работать не будет:
+sequence.OrderBy(z=>z.LastName).OrderBy(s=>s.FirstName);
+нужно испольpовать ThenBy, ThenByDescending, они принимают
+IOrderedEnumerable<T> и возвращают IOrderedEnumerable<T>:
+sequence.OrderBy(z=>z.LastName).ThenBy(s=>s.FirstName);
+
+--Join
+так как в обоих пример вывод идет анонимного типа new, везде нужно 
+использовать var.
+	from c in cusomers
+	join o in orders
+	on c.Customer equals o.CustomerID
+	select new{c.Name, o.OrderDate}
+анонимные свойства будут называться Name, OrderDate(выводтся имена сами)
+    var mainList = list1.Join(
+	list2,
+	e => e.ID, // list1
+	o => o.ID, // list2
+	(e, o) => new
+	{
+		ID = e.ID,
+		NAME = string.Format("{0} {1}", o.Name, e.Surname)
+	});
+	
+--GroupBy 
+с.112 с классом Compare
+	IEnumerable<IGrouping<int, Employee>> mainList = list1.GroupBy(x => x.ID);
+              
+	foreach (IGrouping<int, Employee> keySequence in mainList)
+	{
+		Console.WriteLine(keySequence.Key +"  " + keySequence.Count());
+		foreach (Employee e in keySequence)
+		  Console.WriteLine(e.Name + "  " + e.Surname );
+	}
+	
+	from c in greetings
+	group c by c.Country into g
+	select new 
+	{
+		Country = g.Key,
+		Cust = g.Count()
+	}
+	<=>
+	greetings.GroupBy(c=>c.Country)
+	.Select(g=> new {g.Key, Cust = g.Count()})
+	
+--.Union(list) - объеденяет две последовательности без повторений, т.е. каждое
+значение в выходной послдеовательности уникально.
+
+--.Intersect(list) возвращает пересеченно множество двух последовательностей.
+
+--.Except(list) возвращает последовательность, содержащую все элементы
+первой последовательности, которых нет во второй последовательности.
+
+-.DefaultIfEmpty() если входная последовательность пуста, то это возвращает 
+последовательность из одного элемента, в котором находится значение по
+умолчанию(для ссылочных null)
+-.DefaultIfEmpty("ewfrere") если последовательность пуста, то вернет значение
+по умолчанию, которое находится в скобках. 
+
+--Enumerable.Range(start, count) генерирует последовательность целых чисел начиная
+со значения start и длительностью count. 
+
+--Enumerable.Repeat(e, n) - генерирует последовательность повторяя заданный элемент e
+n раз 
+
+--.Empty() генерирует пустую последовательность заданного типа.
+IEnumerable<string> str = Enumerable.Empty<string>();
+
+Не отложенные операции
+
+--.ToDictionary()
+Dictionary<int, Employee> mainList = list1.ToDictionary(x => x.ID);
+записует в mainlist словарь по ключю ID(должен быть уникальным), 
+объекты Employee.
+
+--.ToLookUp()
+т.е. на один ID может быть два поля name, принцип группировки
+	ILookup<int, Employee> mainList = list1.ToLookup(x => x.ID);
+	foreach(var c in mainList)
+	{
+		Console.WriteLine(c.Key);
+		foreach(Employee f in c )
+		{
+			Console.WriteLine(f.Name);
+		}
+	  
+	}
+ 
+.--SequenceEqual() определяет, эквивалентны ли две входные последовательности.
+Если эдементы двух последовательностей одинаковы и содержат одинаковое кол-во 
+элементов, возвращает true 
+
+.--First(), First(предикат bool) если любой из прототипов не находит элемента, 
+который нужно возвратить(первый: последовательность пуста, второй:
+если не получилось условия true), генерируется исключение, чтобы избежать исключения
+необходимо использовать firstordefault.
+
+.--FirstorDefault(),FirstorDefault(предикат bool) если не нашло(читать выше),
+то вернет значение по умолчанию, для ссылочных null.
+ 
+.--Last(), LastOrDefault()
+
+.--SingleOrDefault(), SingleOrDefault(предикат bool), если найдено 
+если найдено более одного элемента, генерируется исключение.
+ 
+КВАНТИФАКТОРЫ
+
+--.Any(), вернет true, если есть хоть один элемент
+Any(predocate bool) вернет true, если хотя бы один элемент заставит
+predicate вернуть true. 
+
+--All() вернет true, если каждый элемент входной последовательности
+отвечает условию.
+ 
+--.Contains() вернет true, если любой элемент входящей последовательности 
+соответствует указанному значению. list.Contains("Oleg").
+
+АГРЕГАЦИЯ
+
+--.Count вернет int, longCount вернет long
+
+--.Sum()  возвращает сумму числовых значений в элементах последовательности
+
+--.Min(.Max) возвращает минимальное значение последовательности
+
+--.Average() возвращает средне арифметическое число(только для Numeric) 
+
+--intSequence.Aggregate((av,e)) => av*e);
+intSequence = {1,2,3,4,5}
+агрегат делает так: берет первый элемент за основу 1 и умножает на 1 элемент,
+и возвращает return 1,
+берет второй элемент и * на возвращаемое значение 2*1 = 2,
+берет третий элемент и умножает на возращаемое 3*2.s
+
+intSequence.Aggregate(0,(av,e)) => av*e) берет за основу первый параметр.
+  
+
+
+
+
+
+
+
+
+
+
+
