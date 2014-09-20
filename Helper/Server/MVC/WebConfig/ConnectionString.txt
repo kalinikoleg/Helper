@@ -1,0 +1,6 @@
+<add name="ShopEntities" connectionString="metadata=res://*/Entities.Shop.ShopEntities.csdl|res://*/Entities.Shop.ShopEntities.ssdl|res://*/Entities.Shop.ShopEntities.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=linux-parasites;user id=root;password=root;persistsecurityinfo=False;database=parabenshop;Charset=utf8&quot;" providerName="System.Data.EntityClient"
+xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/>
+прогстранство имен , где лежит .edmx file - Entities.Shop
+
+
+1. Кодировка толкьо для MySql  Charset=utf8 (см. выше)

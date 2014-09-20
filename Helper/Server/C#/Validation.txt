@@ -1,0 +1,23 @@
+  List<Func<byte[], bool>> validators = new List<Func<byte[], bool>>
+                    {
+                        { (v) => {return ValidateMP4(v);}},
+                        { (z) => {return ValidateAVI(z);}}
+                    };
+
+ private static bool ValidateMP4(byte[] mas)
+        {
+            bool isValidate = true;
+            byte[] videoMPGED4 = new List<byte> { 0x00, 0x00, 0x00, 0x18, 0x66, 0x74, 0x79, 0x70 }.ToArray();//MP4, 3GG, 3GP, 3G2, M4V, MOV
+
+            for (int i = 0; i < videoMPGED4.Length; i++)
+            {
+                if (i != 3)
+                {
+                    if (!mas[i].Equals(videoMPGED4[i]))
+                    {
+                        isValidate = false;
+                    }
+                }
+            }
+            return isValidate;
+        }

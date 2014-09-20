@@ -1,0 +1,24 @@
+     public interface IRepository<T, K> where K : struct where T: class
+    {
+        T GetItem(int id);
+
+        IEnumerable<T> getById(K obj);
+
+    }
+ 
+ public class Repository : IRepository<User, double>
+    {
+        public User GetItem(int id)
+        {
+            return new User();
+        }
+
+        public IEnumerable<User> getById(double param)
+        {
+            List<User> list = new List<User>();
+
+            return list;
+        }
+
+    }
+

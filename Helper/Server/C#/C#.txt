@@ -1,0 +1,50 @@
+--Анонимные типы:
+ var list = new 
+            {
+               Item = 1,
+               Item1= 2
+            };
+создает объект лист анонимного класса(тоже самое, что new Custom, только
+здесь все будет автоматом).	
+
+--Лямбда-выражения
+(z,y)=> x==y - лямбда-выражение, которому передается два переметра
+(x,y) => {  if(x>y) return x; else return y;  }
+
+--Создание(инициализация) массива:
+string[] greetings = { "hellp world", "hello LINQ", "hello Apress" };
+
+--Создание(инициализация) объекта
+new Employee
+{
+	ID="2",
+	name = "fer"
+}
+
+--Создание(инициализация) коллекции
+List<string> list = new List<string>
+{
+"45",
+"43"
+};
+
+--Методы расширения
+это статический метод, который можно вызывать на уровне экземпляра,
+а не на самом классе.
+
+	public static class StringConversation
+    {
+        public static double ToDoube(this string s)
+        {
+            return Double.Parse(s);
+        }
+    }
+
+	double ds = "1".ToDoube();
+будет вызываться для типа, который указан в (this string s). 
+И метод, и класс - являются статическими.
+
+--Делегат Func
+public delegate TR Func<T0,T1,T2, TR>(T0 a0, T1 a1 ,T2 a2)
+T0,T1,T2 - ссылаются на входные параметры, переданные методу.
+TR - возвращаемый тип данных, он в конце всегда.

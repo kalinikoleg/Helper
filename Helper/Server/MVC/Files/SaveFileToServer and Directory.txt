@@ -1,0 +1,16 @@
+http://habrahabr.ru/post/116328/
+
+http://perebeg.blogspot.com/2010/02/aspnet_18.html
+
+ var fileName = dados.cod_cliente;
+    bool folder_exists = Directory.Exists(Server.MapPath("~/uploads"));
+    if(!folder_exists)
+        Directory.CreateDirectory(Server.MapPath("~/uploads"));
+    bool folder_exists2 = Directory.Exists(Server.MapPath("~/uploads/logo"));
+    if(!folder_exists2)
+        Directory.CreateDirectory(Server.MapPath("~/uploads/logo"));
+    bool folder_exists3 = Directory.Exists(Server.MapPath("~/uploads/logo/" + fileName));
+    if(!folder_exists3)
+        Directory.CreateDirectory(Server.MapPath("~/uploads/logo/"+fileName));
+
+    file.SaveAs(Server.MapPath("~/uploads/logo/" + fileName+"/"));

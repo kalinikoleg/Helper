@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0054)http://msdn.microsoft.com/en-us/magazine/cc300437.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml" style="" overflow:auto""=""><head id="ctl00_Head"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link id="ctl00_HeaderLink2" rel="stylesheet" type="text/css" href="./Nine Options for Managing Persistent User State in ASP.NET_files/Msdn10a-bn1651.css"><link id="ctl00_HeaderLink3" rel="stylesheet" type="text/css" href="./Nine Options for Managing Persistent User State in ASP.NET_files/Magazine2-bn1651.css"><link rel="alternate" type="application/rss+xml" title="MSDN Magazine - Current Issue" href="http://msdn.microsoft.com/magazine/rss/default.aspx?z=z&iss=1"><link rel="alternate" type="application/rss+xml" title="MSDN Magazine - Complete" href="http://msdn.microsoft.com/magazine/rss/default.aspx?z=z&all=1"><link rel="alternate" type="application/rss+xml" title="MSDN Magazine Blog" href="http://blogs.msdn.com/msdnmagazine/rss.xml"><meta name="NormalizedUrl" content="http://msdn.microsoft.com/en-us/magazine(d=default)/cc300437(l=en-us,v=MSDN.10).aspx"><meta name="VotingContextUrl" content="http://msdn.microsoft.com/en-us/magazine(d=default)/cc300437(l=en-us,v=MSDN.10).aspx"><meta name="ROBOTS" content="NOINDEX,NOFOLLOW"><meta name="MN" content="BF1CA939-1:26:58 PM"><meta name="ms.locale" content="en-us"><meta name="Search.ShortId" content="cc300437">
+<!-- Looking for metadata? Use the robot view instead http://currentsite/currenturl(robot).aspx -->
+<link rel="stylesheet" type="text/css" href="./Nine Options for Managing Persistent User State in ASP.NET_files/mtps-bn1651.css"><link rel="alternate" media="print" href="http://msdn.microsoft.com/en-us/magazine/cc300437(printer).aspx">
+<title>
+	Nine Options for Managing Persistent User State in ASP.NET
+</title><style>#affiliateToolbarDiv{visibility:hidden}</style><script type="text/javascript" id="jw_00" src="./Nine Options for Managing Persistent User State in ASP.NET_files/affiliate_client.js"></script></head>
+<body id="ctl00_MTPS_Body" class="MsdnPageBody" dir="ltr">
+    <form name="aspnetForm" method="post" action="./Nine Options for Managing Persistent User State in ASP.NET_files/Nine Options for Managing Persistent User State in ASP.NET.htm" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUBMGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFImN0bDAwJE1hc3RoZWFkJFNlYXJjaCRTZWFyY2hCdXR0b24lmakQCE49nay/Oh+qSjeDZiRv+Q==">
+</div>
+
+<script type="text/javascript" async="" src="./Nine Options for Managing Persistent User State in ASP.NET_files/ms2.js"></script><script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/WebResource.axd" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var CurUserId="";var ClientURL="http%3a%2f%2fmsdn.microsoft.com%2fen-us%2fmagazine(d%3ddefault)%2fcc300437(l%3den-us%2cv%3dMSDN.10).aspx";var maxRating=5;var RatingObjId="ctl00_tb1_Flyout_Rating1";var tbCommentsId="ctl00_tb1_Flyout_tbComments";var PageId="cc300437";var pageTag="contentRatingcc300437MSDN.10en-us";var sendBtnId="ctl00_tb1_Flyout_btnSend";var curRating="4";var contentRated=false;var RatingTooltipText="Click a star and provide feedback";var RatedTooltipText="You have already rated this content. Thank you for your feedback.";var userIPAddress="1.0.218.250";var MtpsPageDirection="ltr";var RatingFlyoutID="ctl00_tb1_Flyout";var Rating_Device="default";//]]>
+</script>
+
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/jquery-1.2.6-bn1651.js" type="text/javascript"></script>
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/Silverlight-bn1651.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var wt_nvr_ru = "WT_NVR_RU";var wt_fpcdom = ".microsoft.com";var wt_domlist = "msdn.microsoft.com";var wt_pathlist = "";var wt_paramlist = "DCSext.mtps_devcenter";var wt_siteid = "MSDN";var gDomain="m.webtrends.com";
+var gDcsId="dcsmgru7m99k7mqmgrhudo0k8_8c6m";
+var gFpc="WT_FPC";
+/*<![CDATA[*/
+if(document.cookie.indexOf(gFpc+"=")==-1){document.write("<scr"+"ipt type='text/javascript' src='"+"http"+(window.location.protocol.indexOf('https:')==0?'s':'')+"://"+gDomain+"/"+gDcsId+"/wtid.js"+"'><\/scr"+"ipt>");}
+/*]]>*/
+var detectedLocale = 'en-us';
+var wtsp="_msdnmag_";
+var gTrackEvents = 1;
+var omni_guid='f286813d-8528-458e-afd5-e89ec9f8ef8d';//]]>
+</script>
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/omni_rsid_msdn-bn1651.js" type="text/javascript"></script><noscript>&lt;a href='http://www.omniture.com' title='Web Analytics'&gt;&lt;img src='http://msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0'  height='1' width='1' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() { var sf = "a[@rel$='sitefeedback']"; if ($(sf) == null) return;  $(sf).click(function() {   var t = $(this).attr('targetUrl');   window.open(t,'SiteFeedback','width=670,resizable=no,height=700,toolbar=no,location=no,scrollbars=yes,directories=no,status=no,menubar=no'); return false; }); });//]]>
+</script>
+
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/compositejscript3.js" type="text/javascript"></script>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <div id="ctl00_checkFlyer">
+
+</div>
+    
+    
+    <div id="BodyBackground">
+        <div id="ctl00_JelloSizer" class="JelloSizer">
+            <div id="JelloExpander">
+                <div id="ctl00_JelloWrapper" class="JelloWrapper">
+                    <div class="Clear"> </div>
+                    
+                        <div class="Clear"> </div>
+                        
+
+<div class="Masthead">
+    <div id="ctl00_Masthead_brandLogo" class="BrandLogo">
+        <a href="http://msdn.microsoft.com/en-us/magazine/default.aspx" id="ctl00_Masthead_brandlink" title="MSDN Magazine">MSDN Magazine</a>
+    </div>
+    <div class="Search">
+        <div id="ctl00_Masthead_Search_SearchBox" class="SearchBox">
+    <input name="ctl00$Masthead$Search$SearchTextBox" type="text" id="ctl00_Masthead_Search_SearchTextBox" title="Search MSDN Magazine with Bing" class="TextBoxSearch" autocomplete="off" style="color: rgb(170, 170, 170); font-style: italic;">
+    <input type="image" name="ctl00$Masthead$Search$SearchButton" id="ctl00_Masthead_Search_SearchButton" title="Search MSDN Magazine with Bing" class="SearchButton" alt="Click here to search" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;">
+    <span class="Bing"></span>
+<script type="text/javascript" defer="defer" src="./Nine Options for Managing Persistent User State in ASP.NET_files/SearchBox.jss" id="mscom.srch.searchBox"></script><div id="SearchFlyoutContainer" style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: Arial; font-size: 13px;"><div id="SuggestionContainer"><ul style="list-style: none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></div>
+    </div>
+    <div class="GlobalBar">
+        <div id="ctl00_Masthead_passportScarab" class="PassportScarab"> 
+            <a id="idPPScarab" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=12&ct=1389907618&rver=6.0.5276.0&wp=MCLBI&wlcxt=msdn%24msdn%24msdn&wreply=http%3a%2f%2fmsdn.microsoft.com%2fen-us%2fmagazine%2fcc300437.aspx&lc=1033&id=254354&mkt=en-US"><span id="idPPScarabSIT" class="MTPS_GlobalToolbarLinks_msdn">Sign in</span></a>
+<div id="idPPMWOverlay" style="display: none;"></div>
+        </div>
+        <div class="LocaleFlyout">
+            
+    <div id="MainDiv" onmouseover="FlyoutPopupShow()" onmouseout="FlyoutPopupHide()">
+        <div id="FlyoutTop">
+            <a id="ctl00_Masthead_LocaleManagement_linkCountryLanguage" class="LocaleManagementFlyoutStaticLink">United States - English&nbsp;</a>
+            <img id="img_Arrow" class="LocaleManagementFlyoutPopArrow" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" alt="choose your country or language">
+        </div>
+        <div id="FlyoutPopup" class="LocaleManagementFlyoutPopup">
+            <table class="LocaleManagementFlyoutPopupTable">
+                <tbody><tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Arg" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Arg','')">
+                Argentina (Español)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Bra" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Bra','')">
+                Brasil (Português)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_CanE" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_CanE','')">
+                Canada (English)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_CanF" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_CanF','')">
+                Canada (Français)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Chi" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Chi','')">
+                中国 (简体中文)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Col" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Col','')">
+                Colombia (Español)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Deu" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Deu','')">
+                Deutschland (Deutsch)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Esp" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Esp','')">
+                España (Español)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Fra" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Fra','')">
+                France (Français)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Ind" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Ind','')">
+                India (English)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Ita" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Ita','')">
+                Italia (Italiano)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Jpa" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Jpa','')">
+                日本 (日本語)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Kor" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Kor','')">
+                한국 (한국어)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Mex" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Mex','')">
+                México (Español)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Per" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Per','')">
+                Perú (Español)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Рос" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Рос','')">
+                Россия (Pусский)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_Tai" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_Tai','')">
+                台灣 (繁體中文)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_UK" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_UK','')">
+                United Kingdom (English)</a></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_US" href="javascript:__doPostBack('ctl00$Masthead$LocaleManagement$lkbtn_US','')">
+                United States (English)</a></td></tr>
+                <tr><td class="LocaleManagementFlyoutPopupHr"></td></tr>
+                <tr><td><a id="ctl00_Masthead_LocaleManagement_lkbtn_More" href="http://msdn.microsoft.com/en-us/selectLocale">More...</a></td></tr>
+            </tbody></table>
+        </div>
+    </div>
+
+
+        </div>
+        <div class="Clear"></div>
+        <div id="ctl00_Masthead_ProfileLink_UserName" class="UserName"></div>
+    </div>
+    <div class="Clear"></div>
+    <div id="ctl00_Masthead_networkTagLineArea" class="NetworkLogo">
+        <a href="http://msdn.microsoft.com/en-us/default.aspx" id="ctl00_Masthead_networkLink"><img title="microsoft developer network" src="./Nine Options for Managing Persistent User State in ASP.NET_files/brand_logo.png" style="border-width:0px;"></a>
+    </div>
+    
+
+<div class="leftcap"></div>
+    <div class="internav">
+	    <div id="ctl00_Masthead_tabs_manTabsHolder"><a id="ctl00_Masthead_tabs_ctl01" class="normal" href="http://msdn.microsoft.com/en-us/magazine/default.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl00|ctl00_Masthead_tabs_ctl01&#39;,this);">Home</a><a id="ctl00_Masthead_tabs_ctl03" class="normal" href="http://msdn.microsoft.com/en-us/magazine/ee532082.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl02|ctl00_Masthead_tabs_ctl03&#39;,this);">Topics</a><a id="ctl00_Masthead_tabs_ctl05" class="active" href="http://msdn.microsoft.com/en-us/magazine/ee310108.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl04|ctl00_Masthead_tabs_ctl05&#39;,this);">Issues and Downloads</a><a id="ctl00_Masthead_tabs_ctl07" class="normal" href="http://msdn.microsoft.com/en-us/magazine/ee729207.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl06|ctl00_Masthead_tabs_ctl07&#39;,this);">Script Junkie</a><a id="ctl00_Masthead_tabs_ctl09" class="normal" href="http://msdn.microsoft.com/en-us/magazine/ee358702.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl08|ctl00_Masthead_tabs_ctl09&#39;,this);">Subscribe</a><a id="ctl00_Masthead_tabs_ctl11" class="normal" href="http://msdn.microsoft.com/en-us/magazine/ee291618.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl10|ctl00_Masthead_tabs_ctl11&#39;,this);">Submit an Article</a><a id="ctl00_Masthead_tabs_ctl13" class="normal" href="http://msdn.microsoft.com/en-us/magazine/cc194384.aspx" onclick="javascript:Track(&#39;|TabStrip Link|ctl00_Masthead_tabs_ctl12|ctl00_Masthead_tabs_ctl13&#39;,this);">RSS</a></div>
+    </div>
+<div class="rightcap"></div>
+<div class="Clear"></div>
+   
+</div>
+                        <div class="Clear"> </div>
+                        <div class="topleftcorner"> </div>
+                        <div class="toprightcorner"> </div>
+                        <div class="alley">
+                            <div class="wrapper">
+                                <div class="inner">
+                                    
+                                    <div class="Clear"> </div>
+                                    <div id="ctl00_EyebrowMenu_EyebrowContainer" class="EyebrowContainer"><a id="ctl00_EyebrowMenu_ctl00" title="MSDN Magazine" class="EyebrowLink" href="http://msdn.microsoft.com/en-us/magazine/dd767791.aspx" onclick="javascript:Track(&#39;|Eyebrow|ctl00_EyebrowMenu_EyebrowContainer|ctl00_EyebrowMenu_ctl00&#39;,this);">MSDN Magazine</a><span>&nbsp;&gt;&nbsp;</span><a id="ctl00_EyebrowMenu_ctl01" title="Issues and Downloads" class="EyebrowLink" href="http://msdn.microsoft.com/en-us/magazine/ee310108.aspx" onclick="javascript:Track(&#39;|Eyebrow|ctl00_EyebrowMenu_EyebrowContainer|ctl00_EyebrowMenu_ctl01&#39;,this);">Issues and Downloads</a><span>&nbsp;&gt;&nbsp;</span><a id="ctl00_EyebrowMenu_ctl02" title="2003" class="EyebrowLink" href="http://msdn.microsoft.com/en-us/magazine/cc135857.aspx" onclick="javascript:Track(&#39;|Eyebrow|ctl00_EyebrowMenu_EyebrowContainer|ctl00_EyebrowMenu_ctl02&#39;,this);">2003</a><span>&nbsp;&gt;&nbsp;</span><a id="ctl00_EyebrowMenu_ctl03" title="April" class="EyebrowLink" href="http://msdn.microsoft.com/en-us/magazine/cc135523.aspx" onclick="javascript:Track(&#39;|Eyebrow|ctl00_EyebrowMenu_EyebrowContainer|ctl00_EyebrowMenu_ctl03&#39;,this);">April</a><span>&nbsp;&gt;&nbsp;</span><span class="EyebrowElement">&nbsp;Nine Options for Managing Persistent User State...</span></div>
+                                    <div class="Clear"> </div>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="width: 100%; table-layout: fixed;">
+                                        <tbody><tr>
+                                            <td style="vertical-align: top; width: auto;" valign="top">
+                                                
+                                                <div id="MainContent" style="width: 100%">
+                                                    <span id="ctl00_altSelector"></span>
+                                                            
+                                                            <div class="navpage"><div class="topic"><div><div class="clsRed">New information has been added to this article since publication. <br>Refer to the <a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#edupdate" xmlns:ms="urn:schemas-microsoft-com:xslt">Editor's Update</a> below.</div><p><br></p><div class="FeatureSmallHead">ASP.NET</div><div class="FeatureHeadline">Nine Options for Managing Persistent User State in Your ASP.NET Application</div><div class="FeatureByLine">Steven A. Smith</div><div><span class="CodeDownloadText">Code download available at:</span><a id="ctl00_MTContentSelector1_mainContentContainer_ctl01" href="http://download.microsoft.com/download/2/a/3/2a3d3cb9-b231-41b8-8ba7-b46b10885d79/ASPNETUserState.exe" onclick="javascript:Track(&#39;ctl00_MTContentSelector1_mainContentContainer_ctl00|ctl00_MTContentSelector1_mainContentContainer_ctl01&#39;,this);">ASPNETUserState.exe</a><span class="CodeDownloadText">(117 KB)</span><br></div><p><br></p><div class="familiar">This article assumes you're familiar with ASP.NET</div><div class="clsLevel"><strong>Level of Difficulty</strong><span class="clsLevel">1</span><span class="msdnlevel">2</span><span class="clsLevel">3</span></div><div class="clsSum">SUMMARY</div><div class="ArticleNormalPara">ASP.NET provides many different ways to persist data between user requests. You can use the Application object, cookies, hidden fields, the Session or Cache objects, and lots of other methods. Deciding when to use each of these can sometimes be difficult. This article will introduce the aforementioned techniques and present some guidelines on when to use them. Although many of these techniques existed in classic ASP, best practices for when to use them have changed with the introduction of the .NET Framework. To persist data in ASP.NET, you'll have to adjust what you learned previously about handling state in ASP.</div><div class="ContentSeparator"><!--PublishThis!: An empty tag was encountered. This comment was inserted to prevent a self-closing tag.--></div><p><span class="CodeDownloadText">
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Contents
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S1" xmlns:ms="urn:schemas-microsoft-com:xslt">Application</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S2" xmlns:ms="urn:schemas-microsoft-com:xslt">Cookies</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S3" xmlns:ms="urn:schemas-microsoft-com:xslt">Form Post / Hidden Form Field</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S4" xmlns:ms="urn:schemas-microsoft-com:xslt">QueryString</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S5" xmlns:ms="urn:schemas-microsoft-com:xslt">Session</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S6" xmlns:ms="urn:schemas-microsoft-com:xslt">New State Containers in ASP.NET</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S7" xmlns:ms="urn:schemas-microsoft-com:xslt">Cache</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S8" xmlns:ms="urn:schemas-microsoft-com:xslt">Context</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S9" xmlns:ms="urn:schemas-microsoft-com:xslt">ViewState</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S10" xmlns:ms="urn:schemas-microsoft-com:xslt">Web.config and Machine.config Files</a><br><a href="http://msdn.microsoft.com/en-us/magazine/cc300437.aspx#S11" xmlns:ms="urn:schemas-microsoft-com:xslt">Conclusion</a><br>
+</div>
+</div>
+<p></p><div class="ArticleNormalPara">Since the dawn of the Web, managing state in the stateless world of HTTP has been a problem for Web developers. More recently, various techniques for storing and retrieving data have emerged. In this article I will describe how ASP.NET developers can maintain or pass state across page requests.</div><div class="ArticleNormalPara"><p>In ASP.NET, there are several different ways to persist data between user requests—so many, in fact, that the novice developer is often confused about which object to use in a particular situation. In order to answer this question, there are three criteria that should be considered:</p><ul><li>Who needs the data?</li><li>How long does the data need to be persisted?</li><li>How large is the set of data?</li></ul></div><div class="ArticleNormalPara">By answering these questions, you can determine which object provides the best solution for persisting data between requests in an ASP.NET application. <strong>Figure 1</strong> lists the different state management objects and describes when they should be used. In ASP.NET, four new objects have been added: Cache, Context, ViewState, and the Web.Config file. Classic ASP objects that are also available in ASP.NET include Application, Cookie, Form Post with a hidden form field, QueryString, and Session. Note that the proper use of these five data containers has changed, so experienced ASP programmers may have some "unlearning" to do when considering these familiar objects.</div><p><br></p><span>
+<div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;1&nbsp;Data Container Objects in ASP.NET
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<table class="charttable"><tbody><tr valign="top"><th id="th125DC2F80000">Persistence Method</th><th id="th125DC2F80001">Who Needs the Data?</th><th id="th125DC2F80002">For How Long?</th><th id="th125DC2F80003">How Much Data?</th></tr><tr valign="top"><td headers="th125DC2F80000">Application</td><td headers="th125DC2F80001">All users</td><td headers="th125DC2F80002">Until the next application restart</td><td headers="th125DC2F80003">Can be almost any size—it will only be stored once</td></tr><tr valign="top"><td headers="th125DC2F80000">Cookie</td><td headers="th125DC2F80001">One user</td><td headers="th125DC2F80002">As short as desired, or for months or even years if the user doesn't delete their cookies</td><td headers="th125DC2F80003">Minimal, simple data</td></tr><tr valign="top"><td headers="th125DC2F80000">Form Post</td><td headers="th125DC2F80001">One user</td><td headers="th125DC2F80002">For the next request (can be reused across many requests)</td><td headers="th125DC2F80003">Virtually any size—the data is sent back and forth with every page</td></tr><tr valign="top"><td headers="th125DC2F80000">QueryString</td><td headers="th125DC2F80001">One user or one group of users</td><td headers="th125DC2F80002">For the next request (can be reused across many requests)</td><td headers="th125DC2F80003">Minimal, simple data</td></tr><tr valign="top"><td headers="th125DC2F80000">Session</td><td headers="th125DC2F80001">One user</td><td headers="th125DC2F80002">As long as the user is active, plus a timeout period (typically 20 minutes)</td><td headers="th125DC2F80003">Can be almost any size, but should be minimized since every user has their own separate session store</td></tr><tr valign="top"><td headers="th125DC2F80000">Cache</td><td headers="th125DC2F80001">All users or a subset of users</td><td headers="th125DC2F80002">As long or as short as needed</td><td headers="th125DC2F80003">Can be used for large or small, simple or complex data</td></tr><tr valign="top"><td headers="th125DC2F80000">Context</td><td headers="th125DC2F80001">One user</td><td headers="th125DC2F80002">This request only</td><td headers="th125DC2F80003">Can hold large objects, but typically does not since it is often used for every request</td><td>&nbsp;</td></tr><tr valign="top"><td headers="th125DC2F80000">ViewState</td><td headers="th125DC2F80001">One user</td><td headers="th125DC2F80002">One Web form</td><td headers="th125DC2F80003">Minimal; as with Form Post, this data is sent back and forth with every page</td></tr><tr valign="top"><td headers="th125DC2F80000">Config file</td><td headers="th125DC2F80001">All users</td><td headers="th125DC2F80002">Until the configuration file is updated</td><td headers="th125DC2F80003">Can hold a lot of data; usually organized as many small strings or XML structures</td></tr></tbody></table>
+</div>
+</div>
+</span><p><br></p><div class="ArticleTypeTitle" id="S1">Application</div><div class="ArticleNormalPara">Let's set the object use criteria by answering the state questions I asked earlier. Who needs this data? All users need access to it. How long does this data need to be persisted? It has to live forever, or for the life of the application. How large is this data? It can be almost any size—only one copy of the data will exist at any given time.</div><div class="ArticleNormalPara">In classic ASP, the Application object provided a great place to store frequently used pieces of data that changed infrequently, such as the contents of menus or other reference data. While the Application object is still available as a data container in ASP.NET, other objects are generally better suited for the kinds of data that would have been stored in the Application collection of a classic ASP application.</div><div class="ArticleNormalPara">In classic ASP, the Application object was an ideal choice if the data that was to be stored did not vary at all (or very rarely) for the life of the application (such as read-only or read-mostly data). Connection strings were one of the more common pieces of data stored in Application variables, but in ASP.NET such configuration data is best stored in the Web.config file. One thing to consider if you are using the Application object is that any writes to it should be done either in its Application_OnStart event (in global.asax) or within an Application.Lock section. While using Application.Lock is necessary to ensure that writes are performed properly, it also serializes requests for the Application object, which can be a serious performance bottleneck for the application. <strong>Figure 2</strong> demonstrates how to use the Application object; it consists of a Web form and its code-behind file. An example of its output is shown in <strong>Figure 3</strong>.</div><p><span>
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;2&nbsp;Accessing the Application Object in ASP.NET
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<br><span class="clsCap">Application.aspx</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl40_ctl00_ctl00">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl40_ctl00_ctl00_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl40_ctl00_ctl00_code" space="preserve">&lt;form id="Application" method="post" runat="server"&gt; &lt;asp:validationsummary id="valSummary" Runat="server"&gt; &lt;/asp:validationsummary&gt; &lt;table&gt; &lt;tr&gt; &lt;td colSpan="3"&gt;Set Application Variable:&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;Name&lt;/td&gt; &lt;td&gt;&lt;asp:textbox id="txtName" Runat="server"&gt;&lt;/asp:textbox&gt; &lt;/td&gt; &lt;td&gt;&lt;asp:requiredfieldvalidator id="nameRequired" runat="server" Display="Dynamic" ErrorMessage="Name is required." ControlToValidate="txtName"&gt;* &lt;/asp:requiredfieldvalidator&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;Value&lt;/td&gt; &lt;td&gt;&lt;asp:textbox id="txtValue" Runat="server"&gt; &lt;/asp:textbox&gt;&lt;/td&gt; &lt;td&gt;&lt;asp:requiredfieldvalidator id="valueRequired" Runat="server" Display="Dynamic" ErrorMessage="Value is required." ControlToValidate="txtValue"&gt;* &lt;/asp:requiredfieldvalidator&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td colSpan="3"&gt;&lt;asp:button id="btnSubmit" Runat="server" Text="Update Value"&gt;&lt;/asp:button&gt;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;asp:Label ID="lblResult" Runat="server" /&gt; &lt;/form&gt;</pre>
+    </div>
+</div>
+
+</span><span class="clsCap">Application.aspx.cs</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl40_ctl00_ctl01">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl40_ctl00_ctl01_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl40_ctl00_ctl01_code" space="preserve">private void btnSubmit_Click(object sender, System.EventArgs e) { if(IsValid) { Application.Lock(); Application[txtName.Text] = txtValue.Text; Application.UnLock(); lblResult.Text = "The value of &lt;b&gt;" + txtName.Text + "&lt;/b&gt; in the Application object is &lt;b&gt;" + Application[txtName.Text].ToString() + "&lt;/b&gt;"; } }</pre>
+    </div>
+</div>
+
+</span>
+</div>
+</div>
+<p></p><div class="ArticleImageSpacer"><p><img alt="" src="./Nine Options for Managing Persistent User State in ASP.NET_files/cc300437.fig03(en-us).gif"></p><div class="ArticleImageCaptionText">Figure 3<strong>&nbsp;Contents of Application Object&nbsp;</strong></div></div><div class="ArticleNormalPara">Note that in <strong>Figure 3</strong> the contents of the Application object are displayed in the trace output. Tracing is a really great debugging tool, but you can expect that at some point, a page with tracing turned on will accidentally make it into your production environment. When that happens, you really won't want anything sensitive to be shown. This is one of the primary reasons why the Application object is no longer the recommended place to store sensitive information like connection strings.</div><p><br></p><div class="ArticleTypeTitle" id="S2">Cookies</div><div class="ArticleNormalPara">Cookies are handy when a particular user needs a specific piece of data, and it needs to be persisted for a variable period of time. It can be as brief as the life of the browser window, or as long as months or even years. As far as size goes, cookies are very small. Cookies can be as small as only a few bytes of data, and since they are passed with every browser request, their contents should be kept as small as possible.</div><div><span class="clsRed">[<strong>Editor's Update - 1/11/2005:</strong> The best way to secure sensitive state that should not be viewed or modified by a hostile user is to store that state on the server. If sensitive data must be sent to the client, it should be encrypted beforehand, regardless of the storage mechanism employed.]</span></div><div class="ArticleNormalPara">A particular named cookie can store a single value or a collection of name/value pairs. <strong>Figure 4</strong> shows an example of both single- and multi-value cookies, as output by the built-in trace features of ASP.NET. These values can be manipulated within an ASP.NET page by using the Request.Cookies and Response.Cookies collections, as <strong>Figure 5</strong> demonstrates.</div><p><span>
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;5&nbsp;Accessing Cookies in ASP.NET
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<br><span class="clsCap">Cookies.aspx.cs</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl41_ctl00_ctl00">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl41_ctl00_ctl00_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl41_ctl00_ctl00_code" space="preserve">// Setting a cookie's value and/or subvalue using the HttpCookie class HttpCookie cookie; if(Request.Cookies[txtName.Text] == null) cookie = new HttpCookie(txtName.Text, txtValue.Text); else cookie = Request.Cookies[txtName.Text]; if(txtSubValueName.Text.Length &gt; 0) cookie.Values.Add(txtSubValueName.Text, txtSubValueValue.Text); cookie.Expires = System.DateTime.Now.AddDays(1); // tomorrow Response.AppendCookie(cookie); // Retrieving a cookie's value(s) if(!Request.Cookies[txtName.Text].HasKeys) lblResult.Text = "The value of the &lt;b&gt;" + txtName.Text + "&lt;/b&gt; cookie is &lt;b&gt;" + Request.Cookies[txtName.Text].Value.ToString() + "&lt;/b&gt;"; else { lblResult.Text = "The value of the &lt;b&gt;" + txtName.Text + "&lt;/b&gt; cookie is &lt;b&gt;" + Request.Cookies[txtName.Text].Value.ToString() + "&lt;/b&gt;, with subvalues:&lt;br&gt;"; foreach(string key in Request.Cookies[txtName.Text].Values.Keys) { lblResult.Text += "[" + key + " = " + Request.Cookies[txtName.Text].Values[key].ToString() + "]&lt;br&gt;"; } }</pre>
+    </div>
+</div>
+
+</span><span class="clsCap">Delete a Cookie</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl41_ctl00_ctl01">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl41_ctl00_ctl01_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl41_ctl00_ctl01_code" space="preserve">// Set the value of the cookie to null and // set its expiration to some time in the past Response.Cookies[txtName.Text].Value = null; Response.Cookies[txtName.Text].Expires = System.DateTime.Now.AddMonths(-1); // last month</pre>
+    </div>
+</div>
+
+</span><br>
+</div>
+</div>
+<span>
+<div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;4&nbsp;Single-value and Multi-value Cookies
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<img alt="" height="189" src="./Nine Options for Managing Persistent User State in ASP.NET_files/fig04(en-us).gif" width="500">
+</div>
+</div>
+</span><br><p></p><div class="ArticleTypeTitle" id="S3">Form Post / Hidden Form Field</div><div class="ArticleNormalPara">Form data is needed by a particular user, and it must be persisted for any period from a single request to the life of the application. The data can be virtually any size; it's sent back and forth over the network with each form post.</div><div class="ArticleNormalPara">In classic ASP, this was a common way to retain state within an application, especially in a multi-page form. However, in ASP.NET, this technique is rarely appropriate since Web controls and ViewState handle this automatically as long as you use the postback model (that is, pages that post back to themselves). ViewState is an ASP.NET implementation of this technique, which I will describe later in this article. Access to form values sent through a POST is done using the HttpRequest object's Form collection. In <strong>Figure 6</strong>, a user ID is set by one ASP.NET page, after which it is persisted in a hidden form field. Subsequent requests to either page retain the value as long as the pages use Submit buttons to link to each other.</div><p><span>
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;6&nbsp;Using Hidden Form Fields to Persist Data in ASP.NET
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<br><span class="clsCap">Form1.aspx</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl00">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl00_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl00_code" space="preserve">&lt;h1&gt;Form 1&lt;/h1&gt; &lt;form id="Application" method="post" runat="server"&gt; &lt;p&gt;Your username: &lt;asp:Label ID="lblUsername" Runat="server" /&gt; &lt;/p&gt; &lt;asp:Panel Runat="server" ID="pnlSetValue"&gt; &lt;asp:validationsummary id="valSummary" Runat="server"&gt; &lt;/asp:validationsummary&gt; &lt;TABLE&gt; &lt;TR&gt; &lt;TD colSpan="3"&gt;Set Hidden Form Username Variable:&lt;/TD&gt;&lt;/TR&gt; &lt;TR&gt; &lt;TD&gt;Username&lt;/TD&gt; &lt;TD&gt; &lt;asp:textbox id="txtName" Runat="server"&gt;&lt;/asp:textbox&gt;&lt;/TD&gt; &lt;TD&gt; &lt;asp:requiredfieldvalidator id="nameRequired" runat="server" ControlToValidate="txtName" ErrorMessage="Name is required." Display="Dynamic"&gt;*&lt;/asp:requiredfieldvalidator&gt;&lt;/TD&gt;&lt;/TR&gt; &lt;TR&gt; &lt;TD colSpan="3"&gt; &lt;asp:button id="btnSubmit" Runat="server" Text="Set Value"&gt; &lt;/asp:button&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt; &lt;/asp:Panel&gt; &lt;asp:Label ID="lblResult" Runat="server" /&gt; &lt;/form&gt; &lt;form action="form2.aspx" method="post" name="form2" id="form2"&gt; &lt;input type="hidden" name="username" value="&lt;%# username %&gt;" &gt; &lt;input type="submit" value="Go to Form2.aspx" &lt;/form&gt;</pre>
+    </div>
+</div>
+
+</span><span class="clsCap">Form1.aspx.cs</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl01">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl01_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl01_code" space="preserve">private void Page_Load(object sender, System.EventArgs e) { if(!IsPostBack) // new request or request from form2.aspx { // check Forms collection if(Request.Form["username"] == null) pnlSetValue.Visible = true; else { // need to set the username value pnlSetValue.Visible = false; username = Request.Form["username"].ToString(); lblUsername.Text = username; // Databind to set the hidden form field's value this.DataBind(); } } } private void btnSubmit_Click(object sender, System.EventArgs e) { if(IsValid) { // Hide the form to set the value. pnlSetValue.Visible = false; username = txtName.Text; lblResult.Text = "Username set to " + txtName.Text + "."; lblUsername.Text = username; this.DataBind(); } }</pre>
+    </div>
+</div>
+
+</span><span class="clsCap">Form2.aspx</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl02">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl02_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl02_code" space="preserve">&lt;h1&gt;Form 2&lt;/h1&gt; &lt;form id="Application" method="post" runat="server"&gt; &lt;p&gt;Your username: &lt;asp:Label ID="lblUsername" Runat="server" /&gt;&lt;/p&gt; &lt;/form&gt; &lt;form action="form1.aspx" method="post" id="form2" name="form2"&gt; &lt;input type="hidden" name="username" value="&lt;%# username %&gt;" &gt; &lt;input type="submit" value="Go to Form1.aspx" &lt;/form&gt;</pre>
+    </div>
+</div>
+
+</span><span class="clsCap">Form2.aspx.cs</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl03">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl03_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl43_ctl00_ctl03_code" space="preserve">private void Page_Load(object sender, System.EventArgs e) { if(Request.Form["username"] != null) { username = Request.Form["username"].ToString(); lblUsername.Text = username; this.DataBind(); } }</pre>
+    </div>
+</div>
+
+</span>
+</div>
+</div>
+<p></p><div class="ArticleNormalPara">In ASP.NET, only one server-side form can exist on a page, and that form must submit back to itself (client-side forms can still be used, without limitations). One of the major reasons that hidden form fields are no longer used to pass data around applications built on the Microsoft® .NET Framework is that all .NET Framework controls are capable of maintaining their own state automatically using ViewState. ViewState simply encapsulates the work involved in setting and retrieving values using hidden form fields into a simple-to-use collection object.</div><p><br></p><div class="ArticleTypeTitle" id="S4">QueryString</div><div class="ArticleNormalPara">The data stored in the QueryString object is used by the individual user. Its lifetime can be as brief as a single request, or as long as the user continues to use the application (if architected appropriately). This data is typically less than 1KB. Data in a QueryString is passed in the URL and is visible to the user, so as you might guess, sensitive data or data that can be used to control the application should be encrypted when using this technique.</div><div class="ArticleNormalPara">That said, the QueryString is a great way to send information between Web forms in ASP.NET. For example, if you have a DataGrid with a list of products, and a hyperlink in the grid that goes to a product detail page, it would be an ideal use of the QueryString to include the product ID in the QueryString of the link to the product details page (for example, productdetails.aspx?id=4). Another advantage of using QueryStrings is that the state of the page is contained in the URL. This means that a user can put a page in their Favorites folder in its generated form when it's created with a QueryString. When they return to it as a favorite, it will be the same as when they actually made it a favorite. Obviously, this only works if the page doesn't rely on any state outside the QueryString and nothing else changes.</div><div class="ArticleNormalPara">Along with sensitive data, any variable that you don't want the user to be able to manipulate should be avoided here (unless encryption is used to remove human-readability). Also, keep in mind that characters that are not valid in a URL must be encoded using Server.UrlEncode, as <strong>Figure 7</strong> shows. When dealing with a single ASP.NET page, ViewState is a better choice than QueryString for maintaining state. For long-term data storage, Cookie, Session, or Cache are more appropriate data containers than QueryStrings.</div><p><span>
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;7&nbsp;Using QueryStrings to Pass Data in ASP.NET
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<br><span class="clsCap">Querystring.aspx</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl44_ctl00_ctl00">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl44_ctl00_ctl00_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl44_ctl00_ctl00_code" space="preserve">&lt;form id="Querystring" method="post" runat="server"&gt; &lt;asp:validationsummary id="valSummary" Runat="server"&gt; &lt;/asp:validationsummary&gt; &lt;table&gt; &lt;tr&gt; &lt;td colSpan="3"&gt;Set Querystring Variable:&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;Name&lt;/td&gt; &lt;td&gt;&lt;asp:textbox id="txtName" Runat="server"&gt;&lt;/asp:textbox&gt; &lt;/td&gt; &lt;td&gt;&lt;asp:requiredfieldvalidator id="nameRequired" runat="server" Display="Dynamic" ErrorMessage="Name is required." ControlToValidate="txtName"&gt;* &lt;/asp:requiredfieldvalidator&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;Value&lt;/td&gt; &lt;td&gt;&lt;asp:textbox id="txtValue" Runat="server"&gt; &lt;/asp:textbox&gt;&lt;/td&gt; &lt;td&gt;&lt;asp:requiredfieldvalidator id="valueRequired" Runat="server" Display="Dynamic" ErrorMessage="Value is required." ControlToValidate="txtValue"&gt;* &lt;/asp:requiredfieldvalidator&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td colSpan="3"&gt;&lt;asp:button id="btnSubmit" Runat="server" Text="Update Value"&gt;&lt;/asp:button&gt;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;asp:Label ID="lblResult" Runat="server" /&gt; &lt;a href="http://querystring.aspx?x=1"&gt;Set querystring x equal to 1&lt;/a&gt; &lt;/form&gt;</pre>
+    </div>
+</div>
+
+</span><span class="clsCap">Querystring.aspx.cs</span><span id="ctl00_MTContentSelector1_mainContentContainer_ctl44_ctl00_ctl01">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl44_ctl00_ctl01_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl44_ctl00_ctl01_code" space="preserve">private void Page_Load(object sender, System.EventArgs e) { // Retrieving a cookie's value(s) if(Request.QueryString.HasKeys()) { lblResult.Text = "The values of the &lt;b&gt;" + txtName.Text + "&lt;/b&gt; querystring parameter are:&lt;br&gt;"; foreach(string key in Request.QueryString.Keys) { lblResult.Text += "[" + key + " = " + Request.QueryString[key].ToString() + "]&lt;br&gt;"; } } } private void btnSubmit_Click(object sender, System.EventArgs e) { if(IsValid) { string url = "querystring.aspx?"; foreach(string key in Request.QueryString.Keys) { url += key + "=" + Request.QueryString[key].ToString() + "&amp;"; } Response.Redirect(url + txtName.Text + "=" + Server.UrlEncode(txtValue.Text)); } }</pre>
+    </div>
+</div>
+
+</span><br>
+</div>
+</div>
+<p></p><div class="ArticleTypeTitle" id="S5">Session</div><div class="ArticleNormalPara">Session data is specific to a particular user. It lives for as long as the user continues to makes requests plus some period of time afterward (typically 20 minutes). The Session object can hold large or small amounts of data, but total storage should be kept minimal if the application is intended to scale to hundreds of users or more.</div><div class="ArticleNormalPara">Unfortunately, the Session object earned itself a very bad name in classic ASP because it tied an application to a particular machine, precluding the use of clustering and Web farms for scalability. In ASP.NET, this is less of an issue, since it is a simple matter to change the location where the session is stored. By default (and for best performance), session data is still stored in the memory of the local Web server, but ASP.NET also supports an external state server or database for managing Session data.</div><div class="ArticleNormalPara">Using the Session object is easy and its syntax is identical to classic ASP. However, the Session object is one of the less efficient ways of storing user data, since it is held in memory for some time even after the user has stopped using the application. This can have serious effects on scalability for a very busy site. Other options allow more control over the release of memory, such as the Cache object, which may be better suited for some large data values. Also, ASP.NET sessions rely on cookies by default so if the user disables or doesn't support cookies, sessions won't work. Support for cookie-free sessions can be configured, however. For small amounts of data, the Session object can be a perfectly valid place to store user-specific data that needs to persist only for the duration of the user's current session. The following example demonstrates how to set and retrieve values from the Session object: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl20">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl20_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl20_code" space="preserve">private void btnSubmit_Click(object sender, System.EventArgs e) { if(IsValid) { // Set the Session value. Session[txtName.Text] = txtValue.Text; // Read and display the value we just set lblResult.Text = "The value of &lt;b&gt;" + txtName.Text + "&lt;/b&gt; in the Session object is &lt;b&gt;" + Session[txtName.Text].ToString() + "&lt;/b&gt;"; } }</pre>
+    </div>
+</div>
+
+</span> The Web form is almost identical to the one used for the Application object, and the contents of the Session collection are also visible when page tracing is enabled.</div><div class="ArticleNormalPara">You should be aware that even when not in use, sessions carry some overhead for an application. You can squeeze a little bit more performance out of your pages if you turn off sessions on pages that do not use it. Also, setting session state to read-only can also optimize pages that read but do not write data to sessions. Configure sessions in this fashion by adding an attribute to the @Page directive in one of these two ways:: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl21">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl21_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl21_code" space="preserve">&lt;%@ Page EnableSessionState="false" %&gt; &lt;%@ Page EnableSessionState="readonly" %&gt;</pre>
+    </div>
+</div>
+
+</span></div><div class="ArticleNormalPara">ASP.NET sessions can be configured in the Web.config or Machine.config with the sessionState element. This element supports the attributes listed in <strong>Figure 8</strong>.</div><p><br></p><span>
+<div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;8&nbsp;sessionState Attributes
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<table class="charttable"><thead><tr valign="top"><th id="th11C35AA00000">Attribute</th><th id="th11C35AA00001">Options</th><th id="th11C35AA00002">Description</th></tr></thead><tbody><tr valign="top"><td headers="th11C35AA00000" rowspan="4">mode</td><td headers="th11C35AA00001">Off</td><td headers="th11C35AA00002">Disables sessions.</td></tr><tr valign="top"><td headers="th11C35AA00000">Inproc</td><td headers="th11C35AA00001">Same as classic ASP. Stored in the Web server's local memory. This option provides the best performance, but it is not clusterable. This is the default option.</td></tr><tr valign="top"><td headers="th11C35AA00000">StateServer</td><td headers="th11C35AA00001">Session data is stored in memory on another server.</td></tr><tr valign="top"><td headers="th11C35AA00000">SqlServer</td><td headers="th11C35AA00001">Session data is stored in a SQL Server database.</td></tr><tr valign="top"><td headers="th11C35AA00000" rowspan="2">cookieless</td><td headers="th11C35AA00001">True</td><td headers="th11C35AA00002">Enables cookieless sessions. Session ID is automatically passed in the QueryString instead of in a cookie for all relative URLs in the application.</td></tr><tr valign="top"><td headers="th11C35AA00000">False</td><td headers="th11C35AA00001">This is the default setting. Sessions use cookies.</td></tr><tr valign="top"><td colspan="2" headers="th11C35AA00000">timeout</td><td headers="th11C35AA00002">Session timeout in minutes. The default is 20.</td></tr><tr valign="top"><td colspan="2" headers="th11C35AA00000">sqlConnectionString</td><td headers="th11C35AA00002">Connection string used for SqlServer mode sessions.</td></tr><tr valign="top"><td colspan="2" headers="th11C35AA00000">stateConnectionString</td><td headers="th11C35AA00002">Connection string used for StateServer mode sessions.</td></tr></tbody></table>
+</div>
+</div>
+</span><div class="ArticleNormalPara">Here is an example of the settings in the Web.config: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl23">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl23_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl23_code" space="preserve">&lt;sessionState timeout="10" cookieless="false" mode="Inproc" /&gt;</pre>
+    </div>
+</div>
+
+</span></div><p><br></p><div class="ArticleTypeTitle" id="S6">New State Containers in ASP.NET</div><div class="ArticleNormalPara">As mentioned earlier, ASP.NET adds several new ways to store data during and between user requests. This gives you much finer control over how state information is persisted. These new techniques narrow the scope down to as small as a single request (the Context object), or widen the scope to as large as the whole Web server and all applications on that server (the Machine.config file). In many cases, you will have several options available to you when you need to store a particular piece of data—use the questions and answers provided with each method description to determine if it is appropriate for your situation.</div><p><br></p><div class="ArticleTypeTitle" id="S7">Cache</div><div class="ArticleNormalPara">Cache data is specific to the single user, a subset of users, or even all users. This data persists for multiple requests. It can persist for a long time, but not across application restarts. Also, data can expire based on time or other dependencies. It can hold both large and small amounts of data effectively.</div><div class="ArticleNormalPara">The Cache is one of the coolest objects in all of ASP.NET. It offers incredible flexibility, versatility, and performance, and is therefore often a better choice than Application or Session for persisting data within an ASP.NET application. A complete description of the ways in which the Cache object can be used (both declaratively and programmatically) is beyond the scope of this article, but suffice to say, it's a versatile object. Like the other collection objects, it is simply a name-value collection, but by using a key value that is specific to a user, you can make the cached values user-specific. Similarly, you can cache multiple sets of data for different related data, like several sets of car data with keys like "fordcars", "chevycars", and "gmcars". Data in the Cache can be given an expiration period that is absolute, sliding, or based on changes to a file. They also implement a callback function that is invoked whenever the cached value is ejected from the cache, which is useful because you can then check to see if there is a more recent version of the data available, and if not (or if the data source is unavailable), re-cache the value that was just expired.</div><div class="ArticleNormalPara">Adding and accessing data in the cache is done using a syntax similar to what I have already covered. However, in addition to the standard indexer method of accessing this collection's contents, Cache also supports a number of methods to allow more control over the data that is cached. The method you will most often use is Insert, which supports several overloads that allow you to specify dependencies, timeouts, priority, and callbacks. Some simple examples are shown in the following code: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl24">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl24_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl24_code" space="preserve">// Add item to cache Cache["myKey"] = myValue; // Read item from cache Response.Write(Cache["myKey"]); // Set a CacheDuration of 10 seconds and add item to cache Cache.Insert("myKey",myValue, null, System.DateTime.Now.AddSeconds(10), System.Web.Caching.Cache.NoSlidingExpiration);</pre>
+    </div>
+</div>
+
+</span></div><div class="ArticleNormalPara">One of the more powerful features of the Cache object is its ability to execute a callback when an item in the cache expires. This uses delegates or function pointers, a fairly advanced topic that I won't be covering in this article. Fortunately, once you have a bit of sample code showing how this technique works, you can take advantage of it in your applications by simply cutting and pasting, without knowing all the intricacies of how delegates work. There are many reasons why you might use this functionality, the most common being to refill the cache with current data whenever it expires, or restoring the old cache data if the data source to repopulate the cache is unavailable.</div><div class="ArticleNormalPara">In my example, I am simply going to cache the current time, and whenever the cache expires, I am going to add an asterisk character (*) to the end of the string in the cache. Over time, you will be able to determine how many times the cache has expired by counting the asterisks. <strong>Figure 9</strong> demonstrates the important concept of callbacks and provides a good template for building more functional callback routines into your use of the cache.</div><p><span>
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;9&nbsp;Caching Callback Example
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<span id="ctl00_MTContentSelector1_mainContentContainer_ctl50_ctl00_ctl00">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl50_ctl00_ctl00_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl50_ctl00_ctl00_code" space="preserve">private void Page_Load(object sender, System.EventArgs e) { string cacheKey = "myKey"; string data = ""; // Check to see if the data is in the cache already if(Cache[cacheKey]==null) { // Get the data since it isn't in the cache data = System.DateTime.Now.ToString(); //create an instance of the callback delegate CacheItemRemovedCallback callBack = new CacheItemRemovedCallback(onRemove); Label1.Text = "Generated: " + data; Cache.Insert(cacheKey,data,null, System.DateTime.Now.AddSeconds(5), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Default, callBack); } else { Label1.Text = "Cached: " + Cache[cacheKey].ToString(); } } private void onRemove(string key, object val, CacheItemRemovedReason reason) { //create an instance of the callback delegate CacheItemRemovedCallback callBack = new CacheItemRemovedCallback(onRemove); Cache.Insert(key,val.ToString() + "*",null,System.DateTime.Now.AddSeconds(5),Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Default, callBack); }</pre>
+    </div>
+</div>
+
+</span>
+</div>
+</div>
+<p></p><div class="ArticleNormalPara">One important feature to note in <strong>Figure 9</strong> is the pattern used in the Page_Load to determine whether or not to use the data in the cache. You will always want to use this pattern when you deal with items in the cache. Use an if statement to check if the current contents of the cache are null (use a variable for your cache key since you'll be referencing it several times). If it is null, generate the data from its source and place it in the cache. If it is not null, return the data from the cache. If you have some very complex data access logic, you should place the whole if statement in a separate function that's tasked with retrieving the data.</div><div class="ArticleNormalPara">The Cache object has a lot more functionality than most of the other objects I have discussed. It is one of the more powerful features of ASP.NET, and I would definitely recommend reading more on it. The summary at the beginning of this article lists some places to start your search for more information.</div><p><br></p><div class="ArticleTypeTitle" id="S8">Context</div><div class="ArticleNormalPara">The Context object holds data for a single user, for a single request, and it is only persisted for the duration of the request. The Context container can hold large amounts of data, but typically it is used to hold small pieces of data because it is often implemented for every request through a handler in the global.asax.</div><div class="ArticleNormalPara">The Context container (accessible from the Page object or using System.Web.HttpContext.Current) is provided to hold values that need to be passed between different HttpModules and HttpHandlers. It can also be used to hold information that is relevant for an entire request. For example, the IBuySpy portal stuffs some configuration information into this container during the Application_BeginRequest event handler in the global.asax. Note that this only applies during the current request; if you need something that will still be around for the next request, consider using ViewState.</div><div class="ArticleNormalPara">Setting and getting data from the Context collection uses syntax identical to what you have already seen with other collection objects, like the Application, Session, and Cache. Two simple examples are shown here: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl27">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl27_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl27_code" space="preserve">// Add item to Context Context.Items["myKey"] = myValue; // Read an item from the Context Response.Write(Context["myKey"]);</pre>
+    </div>
+</div>
+
+</span></div><p><br></p><div class="ArticleTypeTitle" id="S9">ViewState</div><div class="ArticleNormalPara">ViewState holds the state information for a single user, for as long as he is working with this ASPX page. The ViewState container can hold large amounts of data, but care must be taken to manage the size of ViewState since it adds to the download size of every request and response.</div><div class="ArticleNormalPara">ViewState is one of the new containers in ASP.NET that you're probably already using, even if you don't know it. That's because all of the built-in Web controls use ViewState to persist their values between page postbacks. This is all done behind the scenes, so you don't need to worry about it most of the time. You should be aware of it, though, since it does impose a performance penalty on your application. How big this penalty is depends on how much ViewState you are carrying between postbacks—for most Web forms the amount of data is quite small.</div><div class="ArticleNormalPara">The easiest way to determine the amount of ViewState being used by each control on a page is to turn on page tracing and examine how much ViewState each control is carrying. If a particular control doesn't need to have its data persisted between postbacks, turn off ViewState for that control by setting EnableViewState to false. You can also see the total size of the ViewState on a given ASP.NET page by viewing the HTML source of the page in a browser and examining the hidden form field, __VIEWSTATE. Note that the contents are Base64-encoded to prevent casual viewing and manipulation. ViewState can also be disabled for an entire page by adding EnableViewState="false" to the @Page directive.</div><div class="ArticleNormalPara">A typical Web form won't need to manipulate ViewState directly. If you build custom Web controls, however, you will want to understand how ViewState works and implement it for your controls so that they work similarly to the Web controls that ship with ASP.NET. Reading and writing values to and from ViewState is done using the same syntax I've used for the other collection objects: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl28">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl28_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl28_code" space="preserve">// Add item to ViewState ViewState["myKey"] = myValue; // Read an item from the Context Response.Write(ViewState["myKey"]);</pre>
+    </div>
+</div>
+
+</span></div><div class="ArticleNormalPara">When building your own custom Web controls, you may also want them to take advantage of ViewState. This is simply done at the property level in your controls. <strong>Figure 10</strong> shows how you might store the PersonName property of a simple custom control in ViewState, and use it in the control's Render method.</div><p><span>
+</span></p><div class="MTPS_CollapsibleRegion">
+<div class="CollapseRegionLink"> <!-- ApplyClick with current id -->
+<img class="LibC_o" src="./Nine Options for Managing Persistent User State in ASP.NET_files/clear.gif" style="border-width:0px;vertical-align:middle;">
+&nbsp;Figure&nbsp;10&nbsp;Storing a Property in ViewState
+</div>
+<div class="MTPS_CollapsibleSection" style="display:block;">  
+<span id="ctl00_MTContentSelector1_mainContentContainer_ctl53_ctl00_ctl00">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl53_ctl00_ctl00_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl53_ctl00_ctl00_code" space="preserve">namespace MSDN.StateManagement { public class HelloPerson : System.Web.UI.Control { public string PersonName { get { string s = (string)ViewState["PersonName"]; return ((s == null) ? "" : s); } set { ViewState["PersonName"] = value; } } protected override void Render(System.Web.UI.HtmlTextWriter writer) { writer.Write("Hello " + PersonName); } } }</pre>
+    </div>
+</div>
+
+</span><br>
+</div>
+</div>
+<p></p><div class="ArticleTypeTitle" id="S10">Web.config and Machine.config Files</div><div class="ArticleNormalPara">The data in these files is available to all users of an application. Data stored in the Web.config file is available for the life of the application. The data is generally small and the object works well for holding strings for file locations and database connections. Larger pieces of data are better kept elsewhere.</div><div class="ArticleNormalPara">In addition to the various collection objects available, ASP.NET introduces a set of XML configuration files that are used to manage many of the settings for your applications, and even for your whole server. Each ASP.NET application uses a Web.config file to set many of its properties, and each server has a Machine.config file located in its system folder that is used as a basis for all applications. These settings are used as defaults unless overridden. In addition to storing configuration data, these files can store data that your application (or many applications, in the case of the Machine.config) needs.</div><div class="ArticleNormalPara">Configuration information is read whenever the application starts, and is then cached. Since it is cached, the application can read this data very quickly, so you should not be concerned that your application will have a bottleneck because it has to constantly refer to a text file for some integral information. In addition, changes to the Web.config result in an application restart for that application (or all applications on the machine with Machine.config). This ensures that changes to configuration information are always reflected immediately by the application.</div><div class="ArticleNormalPara">Database connection information, default image paths, and paths to XML data files are some of the more common pieces of data that are stored in the Web.config file. The syntax for storing data in the Web.config file is as follows, although ideally you might want to use integrated SQL authentication: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl31">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl31_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl31_code" space="preserve">&lt;configuration&gt; &lt;!-- application specific settings --&gt; &lt;appSettings&gt; &lt;add key="connectionString" value="server=myDBServer; uid=myUID;pwd=myPassword;database=myDB" /&gt; &lt;/appSettings&gt; &lt;system.web&gt; &lt;!-- all wsb settings go here --&gt; &lt;/system.web&gt; &lt;/configuration&gt;</pre>
+    </div>
+</div>
+
+</span></div><div class="ArticleNormalPara">To access these values within your ASP.NET pages, you use the ConfigurationSettings collection, which is in the System.Configuration namespace. The following simple example demonstrates how to extract the previous connection string into a local variable: <span id="ctl00_MTContentSelector1_mainContentContainer_ctl32">
+<div class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl32_">
+    
+    <div class="CodeSnippetTitleBar">
+        <div class="CodeDisplayLanguage">
+            
+        </div>
+        
+    </div>
+    <div dir="ltr" style="background-color: #ddd">
+    <pre class="libCScode" id="ctl00_MTContentSelector1_mainContentContainer_ctl32_code" space="preserve">using System.Configuration; ••• String strConnString = ConfigurationSettings.AppSettings["connectionString"];</pre>
+    </div>
+</div>
+
+</span></div><div class="ArticleNormalPara">Adding a reference to the System.Configuration namespace reduces the amount of code required to reference these values. Since changes to the Web.config or Machine.config result in an immediate application restart, these values are typically only modified by the server administrator, usually by hand. Thus, you should think of these files as being a good place to store read-only data, not data that you will need to modify within your application.</div><p><br></p><div class="ArticleTypeTitle" id="S11">Conclusion</div><div class="ArticleNormalPara">Effective state management can mean the difference between a frustrating user experience with the potential for data corruption and a smooth, fast page or transaction process. While state management in ASP 3.0 was somewhat unwieldy, ASP.NET brings it under control with the state objects discussed here. With their careful use, you'll be on your way to presenting the best Web experience possible to your customers.</div><p><br></p><div class="ContentSeparator"><strong>For related articles see:</strong><br><a id="ctl00_MTContentSelector1_mainContentContainer_ctl33" href="http://msdn.microsoft.com/msdnmag/issues/01/11/cutting/default.aspx" onclick="javascript:Track(&#39;ctl00_MTContentSelector1_mainContentContainer_ctl00|ctl00_MTContentSelector1_mainContentContainer_ctl33&#39;,this);">Cutting Edge: Using Session and Application Objects in ASP .NET</a><br><a id="ctl00_MTContentSelector1_mainContentContainer_ctl34" href="http://msdn.microsoft.com/library/ms972379.aspx" onclick="javascript:Track(&#39;ctl00_MTContentSelector1_mainContentContainer_ctl00|ctl00_MTContentSelector1_mainContentContainer_ctl34&#39;,this);">ASP.NET Caching</a><br><br></div><p><strong>For background information see:</strong><br><a id="ctl00_MTContentSelector1_mainContentContainer_ctl35" href="http://msdn.microsoft.com/library/6hbbsfk6(v=VS.71).aspx" onclick="javascript:Track(&#39;ctl00_MTContentSelector1_mainContentContainer_ctl00|ctl00_MTContentSelector1_mainContentContainer_ctl35&#39;,this);">Caching Application Data</a><br><br><br></p><div class="ContentSeparator"><!--PublishThis!: An empty tag was encountered. This comment was inserted to prevent a self-closing tag.--></div><div class="AuthorBio"><strong>Steven A. Smith</strong>is president of ASPAlliance.com, LLC, a popular resource for the ASP and ASP.NET developer community. He conducts ASP.NET training for ASPSmith.com, LTD. Steve is a coauthor of the <em>ASP</em>.<em>NET Developer's Cookbook</em> (SAMS, 2003). He can be reached at <a id="ctl00_MTContentSelector1_mainContentContainer_ctl36" href="mailto:ssmith@aspalliance.com" onclick="javascript:Track(&#39;ctl00_MTContentSelector1_mainContentContainer_ctl00|ctl00_MTContentSelector1_mainContentContainer_ctl36&#39;,this);">ssmith@aspalliance.com</a>.</div><p><br></p></div></div></div>
+                                                        
+                                                </div>
+                                                <div class="FeatureSmallHeadWithLogo">&nbsp;</div>
+                                            </td>
+                                            <td style="width: 303px; vertical-align: top; padding-left: 3px;" valign="top">
+                                                <div id="RightContent">
+                                                    <div id="ctl00_RightSideBox">
+	<p:primary pcat:primaryformat="Mtps.Xhtml" xmlns:asp="http://msdn2.microsoft.com/aspnet" xmlns:pcat="urn:mtpg-com:mtps/2004/1/primary/category" xmlns:p="urn:mtpg-com:mtps/2004/1/primary"><div class="navpage"><div style="margin-bottom:10px;"><iframe frameborder="0" framespacing="0" height="250" id="4f2320cbb2378" name="4f2320cbb2378" scrolling="no" src="./Nine Options for Managing Persistent User State in ASP.NET_files/afr(1).htm" width="300">&lt;a id="ctl00_ctl12" href="http://ox-d.101m3.com/w/1.0/rc?cs=4f2320cbb2378&amp;cb=INSERT_RANDOM_NUMBER_HERE" onclick="javascript:Track('ctl00_ctl11|ctl00_ctl12',this);"&gt;&lt;img alt="" border="0" src="http://ox-d.101m3.com/w/1.0/ai?auid=139281&amp;amp;cs=4f2320cbb2378&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" /&gt;&lt;/a&gt;</iframe></div><div style="margin-bottom:10px;"><iframe frameborder="0" framespacing="0" height="250" id="4f2320971b57d" name="4f2320971b57d" scrolling="no" src="./Nine Options for Managing Persistent User State in ASP.NET_files/afr.htm" width="300">&lt;a id="ctl00_ctl13" href="http://ox-d.101m3.com/w/1.0/rc?cs=4f2320971b57d&amp;cb=INSERT_RANDOM_NUMBER_HERE" onclick="javascript:Track('ctl00_ctl11|ctl00_ctl13',this);"&gt;&lt;img alt="" border="0" src="http://ox-d.101m3.com/w/1.0/ai?auid=139280&amp;amp;cs=4f2320971b57d&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" /&gt;&lt;/a&gt;</iframe></div><div style="border-width:5px;border-color:black;border-style:solid;"><div style="margin-left:5px; margin-right:5px;"><h3><a id="ctl00_ctl14" href="http://blogs.msdn.com/msdnmagazine/" onclick="javascript:Track(&#39;ctl00_ctl11|ctl00_ctl14&#39;,this);">MSDN Magazine Blog</a></h3><p><!-- RSSURL : http://blogs.msdn.com/msdnmagazine/rss.xml | RSS GUID : 44CFFA5F-CCC2-14A2-2403-529DE793E787 --></p><div id="ctl00_ctl15_MtpsFeedViewerBasicPanelWebSlice" class="hslice">
+		
+	<p id="ctl00_ctl15_titlediv" class="entry-title"></p>
+	<div class="entry-content">
+			
+		<div id="ctl00_ctl15_MtpsFeedViewerBasicPanel" class="MtpsFeedViewerBasicRootPanelClass">
+				
+			<div id="ctl00_ctl15_MtpsFeedViewerBasicHeaderPanel" class="MtpsFeedViewerBasicHeaderStylePanel">
+					
+			
+				</div>
+		<div class="ColumnDiv">
+					<div id="ctl00_ctl15_ctl02" class="BasicHeadlinesItemPanelCssClass" style="width:99%;">
+						<a id="ctl00_ctl15_ctl03" title="November Issue of MSDN Magazine" class="BasicHeadlinesTitleBold" href="http://blogs.msdn.com/b/msdnmagazine/archive/2013/11/05/10463881.aspx" onclick="javascript:Track(&#39;ctl00_ctl15_ctl02|ctl00_ctl15_ctl03&#39;,this);">November Issue of MSDN Magazine</a><br><span class="BasicHeadlinesDescLabelCssClass">As I wrote earlier, the Government Special Issue of MSDN Magazine, currently live on our Web site, is worth checking out. The articles in the special... </span><a id="ctl00_ctl15_ctl06" title="November Issue of MSDN Magazine" href="http://blogs.msdn.com/b/msdnmagazine/archive/2013/11/05/10463881.aspx" onclick="javascript:Track(&#39;ctl00_ctl15_ctl02|ctl00_ctl15_ctl06&#39;,this);">More...</a><br><span class="FVBPubDateLabel">Tuesday, Nov 5</span>
+					</div>
+				</div><div class="ColumnDiv">
+					<div id="ctl00_ctl15_ctl10" class="BasicHeadlinesItemPanelCssClass" style="width:99%;">
+						<a id="ctl00_ctl15_ctl11" title="Government Special Issue of MSDN Magazine" class="BasicHeadlinesTitleBold" href="http://blogs.msdn.com/b/msdnmagazine/archive/2013/11/01/10462738.aspx" onclick="javascript:Track(&#39;ctl00_ctl15_ctl10|ctl00_ctl15_ctl11&#39;,this);">Government Special Issue of MSDN Magazine</a><br><span class="BasicHeadlinesDescLabelCssClass">Visit the MSDN Magazine Web site and you’ll see we’ve been a bit busier than usual of late. In addition to the regularly scheduled November issue, fea... </span><a id="ctl00_ctl15_ctl14" title="Government Special Issue of MSDN Magazine" href="http://blogs.msdn.com/b/msdnmagazine/archive/2013/11/01/10462738.aspx" onclick="javascript:Track(&#39;ctl00_ctl15_ctl10|ctl00_ctl15_ctl14&#39;,this);">More...</a><br><span class="FVBPubDateLabel">Friday, Nov 1</span>
+					</div>
+				</div><div class="EmptyPanel">
+
+				</div>
+			</div>
+	
+		</div>
+
+	</div><p></p><p><a id="ctl00_ctl16" href="http://blogs.msdn.com/msdnmagazine/" onclick="javascript:Track(&#39;ctl00_ctl11|ctl00_ctl16&#39;,this);">More MSDN Magazine Blog entries &gt;</a></p></div><div style="margin-left:5px; margin-right:5px; background-color:#5b6871;height:12px"><!--PublishThis!: An empty tag was encountered. This comment was inserted to prevent a self-closing tag.--></div><div style="margin-left:5px; margin-right:5px;"><p><br></p><div style="text-align:left;font-family:Segoe UI;font-size:12pt;">Current Issue</div><div style="text-align:center;display:block;height:260px"><p><a id="ctl00_ctl17" href="http://msdn.microsoft.com/en-us/magazine/dn519916.aspx" onclick="javascript:Track(&#39;ctl00_ctl11|ctl00_ctl17&#39;,this);"><br><img align="Middle" alt="January 2014" height="239" src="./Nine Options for Managing Persistent User State in ASP.NET_files/dn519916.cover_lrg(en-us,MSDN.10).jpg" title="January 2014" width="179"></a></p></div><div style="text-align:right;"><p><a id="ctl00_ctl18" href="http://msdn.microsoft.com/en-us/magazine/ee310108.aspx" onclick="javascript:Track(&#39;ctl00_ctl11|ctl00_ctl18&#39;,this);">Browse All MSDN Magazines</a><br></p></div><div style="background-color:#5b6871;height:12px"><!--PublishThis!: An empty tag was encountered. This comment was inserted to prevent a self-closing tag.--></div></div><div style="margin-left:5px; margin-right:5px;"><div style="text-align:Right;font-family:Segoe UI;font-size:12pt;"><p><br><a id="ctl00_ctl19" href="http://msdn.microsoft.com/en-US/aa570311.aspx?ocid=msdn_magazine" onclick="javascript:Track(&#39;ctl00_ctl11|ctl00_ctl19&#39;,this);"><img align="Left" alt="Subscribe to the MSDN Flash newsletter" src="./Nine Options for Managing Persistent User State in ASP.NET_files/dd799403.Question_opt(en-us,MSDN.10).png" title="Subscribe to the MSDN Flash newsletter"> Subscribe to MSDN Flash newsletter</a></p></div><div style="text-align:left;"><p><br>Receive the MSDN Flash e-mail newsletter every other week, with news and information personalized to your interests and areas of focus.</p></div></div></div></div></p:primary>
+</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                    <div id="ctl00_FooterAd" class="MsdnPage_ContentInclude" align="center"><div>
+	<div>
+		<div class="navpage"><p>&nbsp;</p><div><iframe frameborder="0" framespacing="0" height="90" id="4f2320f8e860a" name="4f2320f8e860a" scrolling="no" src="./Nine Options for Managing Persistent User State in ASP.NET_files/afr(2).htm" width="728">&lt;a id="ctl00_ctl28" href="http://ox-d.101m3.com/w/1.0/rc?cs=4f2320f8e860a&amp;cb=INSERT_RANDOM_NUMBER_HERE" onclick="javascript:Track('ctl00_ctl27|ctl00_ctl28',this);"&gt;&lt;img alt="" border="0" src="http://ox-d.101m3.com/w/1.0/ai?auid=139282&amp;amp;cs=4f2320f8e860a&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" /&gt;&lt;/a&gt;</iframe></div></div>
+	</div>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Clearbottom"> </div>
+                        <div class="bottomleftcorner"> </div>
+                        <div class="bottomrightcorner"> </div>
+                        <div id="Footer">
+                            
+
+<div class="FooterLinks">
+    <div id="ctl00_Footer1_SiteLinks">
+
+</div>
+    <span id="ctl00_Footer1_Copyright" title="© 2014  Microsoft. All rights reserved." class="FooterCopyright">© 2014  Microsoft. All rights reserved.</span>
+    <a id="ctl00_Footer1_Terms" title="Terms of Use" href="http://msdn.microsoft.com/cc300389.aspx">Terms of Use</a>
+    <span class="Pipe">|</span>
+    <a id="ctl00_Footer1_Trademarks" title="Trademarks" href="http://www.microsoft.com/library/toolbar/3.0/trademarks/en-us.mspx">Trademarks</a>
+    <span class="Pipe">|</span>
+    <a id="ctl00_Footer1_PrivacyStatement" title="Privacy Statement" href="http://www.microsoft.com/info/privacy.mspx">Privacy Statement</a>
+    <span id="ctl00_Footer1_PipeSpan3" class="Pipe">|</span>
+    <a id="ctl00_Footer1_Feedback" title="Site Feedback" rel="sitefeedback" targeturl="https://lab.msdn.microsoft.com/mailform/contactus.aspx?refurl=http://msdn.microsoft.com/en-us/magazine/cc300437.aspx&amp;loc=en-us" href="https://lab.msdn.microsoft.com/mailform/contactus.aspx?refurl=http://msdn.microsoft.com/en-us/magazine/cc300437.aspx&loc=en-us" target="_blank">Site Feedback</a>
+</div>
+
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none"><img src="./Nine Options for Managing Persistent User State in ASP.NET_files/trans_pixel.asp" width="0" height="0" hspace="0" vspace="0" border="0" alt="Page view tracker"></div>
+    
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/webtrendsscript-bn1651.js" type="text/javascript"></script>
+<noscript>
+&lt;div&gt;&lt;img alt="DCSIMG" id="Img1" width="1" height="1" src="http://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;amp;WT.js=No" /&gt;&lt;/div&gt;
+</noscript>
+    <script type="text/javascript" src="./Nine Options for Managing Persistent User State in ASP.NET_files/mtps-bn1651.js"></script>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+ RegisterAutoSubmit('ctl00_tb1_Flyout_Rating1','ctl00_tb1_Flyout_btnSend','contentRatingcc300437MSDN.10en-us');
+
+//]]>
+</script>
+</form>
+
+
+<script language="javascript" type="text/javascript" src="./Nine Options for Managing Persistent User State in ASP.NET_files/broker.js"></script>
+
+<script src="./Nine Options for Managing Persistent User State in ASP.NET_files/broker-config.js"></script><div id="_WEDCSInsertedData" style="display: none;"><iframe id="_msnFrame" src="./Nine Options for Managing Persistent User State in ASP.NET_files/c.gif" style="z-index:-1;height:1px;width:1px;display:none;visibility:hidden;" onload="javascript:MscomBeacon();"></iframe></div></body></html>

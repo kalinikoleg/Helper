@@ -1,0 +1,39 @@
+http://stackoverflow.com/questions/15093869/mvc-4-losing-custom-principal-between-beginrequest-and-endrequest
+
+
+Code
+      (In HttpModule)
+    private void BeginRequest(object Sender, EventArgs e)
+    {
+        HttpContext context = HttpContext.Current;
+        var Id = new TASBIdentity();
+        context.User = new TASBPrincipal(Id);
+        Thread.CurrentPrincipal = context.User;
+                      (etc...)
+
+    (In global.asax)
+    void Application_BeginRequest(object sender, EventArgs e)
+    {
+        HttpContext context = HttpContext.Current;
+        var user = context.User;  // user is correct type
+    }
+
+    void Application_EndRequest(object sender, EventArgs e)
+    {
+        HttpContext context = HttpContext.Current;
+        var user = context.User;    // user is default type (not correct)
+    }
+
+   (In the authorizeattribute)
+public class SecuredByFunctionAttribute : AuthorizeAttribute
+{
+    private readonly string _functionKey;
+
+    public SecuredByFunctionAttribute(string functionKey)
+    {
+        _functionKey = functionKey;
+    }
+    protected override bool AuthorizeCore(System.Web.HttpContextBase httpContext)
+    {
+        return httpContext.User.IsInRole(_functionKey);
+    }

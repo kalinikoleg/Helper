@@ -1,0 +1,14 @@
+1. ------------------------
+@helper ActionPanel()
+{
+	<div class="commandArea">
+		@if (Model.CanAddBanner)
+		{
+			@ButtonHelpers.LinkButton(SupportPagesSite.CreateReadUpdateDelete.Add, Url.Action("Add", "Advertisement"), MvcHtmlString.Create("Add"))
+		}
+	</div>
+}
+
+
+
+@ActionPanel()

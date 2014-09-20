@@ -1,0 +1,2 @@
+Membership.GetUser().ResetPassword()
+ Membership.GetUser().ChangetPassword()

@@ -1,0 +1,97 @@
+string connectionString = "server=(local)\SQLEXPRESS;database=YourDatabaseName;user id=database;pwd=testdatabase";
+
+string insertStmt = "INSERT INTO dbo.Laptops(Name, Model, ScreenSize) " + 
+                    "VALUES(@Name, @Model, @Screensize)";
+
+using(SqlConnection conn = new SqlConnection(connectionString))
+using(SqlCommand cmd = new SqlCommand(insertStmt, conn))
+{
+    // set up the command's parameters
+    cmd.Parameters.Add("@Name", SqlDbType.VarChar, 100).Value = "ASUS SX30";
+    cmd.Parameters.Add("@Model", SqlDbType.VarChar, 50).Value = "Ultralight";
+    cmd.Parameters.Add("@Screensize", SqlDbType.Int).Value = 15;
+
+    // open connection, execute command, close connection
+    conn.Open();
+    int result = cmd.ExecuteNonQuery();
+    conn.Close();
+}
+
+/////////////////////////////////////
+class Program
+{
+    static void Main()
+    {
+        string connectionString =
+            "Data Source=(local);Initial Catalog=Northwind;"
+            + "Integrated Security=true";
+
+        // Provide the query string with a parameter placeholder.
+        string queryString =
+            "SELECT ProductID, UnitPrice, ProductName from dbo.products "
+                + "WHERE UnitPrice > @pricePoint "
+                + "ORDER BY UnitPrice DESC;";
+
+        // Specify the parameter value.
+        int paramValue = 5;
+
+        // Create and open the connection in a using block. This
+        // ensures that all resources will be closed and disposed
+        // when the code exits.
+        using (SqlConnection connection =
+            new SqlConnection(connectionString))
+        {
+            // Create the Command and Parameter objects.
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.AddWithValue("@pricePoint", paramValue);
+
+            // Open the connection in a try/catch block. 
+            // Create and execute the DataReader, writing the result
+            // set to the console window.
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.WriteLine("\t{0}\t{1}\t{2}",
+                        reader[0], reader[1], reader[2]);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+    }
+
+////////////////////////////////////////////////////////////////////
+public DataTable GetData(SqlCommand cmd)
+{
+    DataTable dt = new DataTable();
+   String strConnString  
+   =System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString;
+    SqlConnection con = new SqlConnection(strConnString);
+    cmd.Connection = con;
+    SqlDataAdapter sda = new SqlDataAdapter();
+    cmd.CommandType = CommandType.Text;
+    try
+    {
+        con.Open();
+        sda.SelectCommand = cmd;
+        sda.Fill(dt);
+    }
+    catch
+    {
+        return dt;
+    }
+    finally
+    {
+        con.Close();
+        cmd.Dispose();
+        sda.Dispose();
+    }
+    return dt;
+}
