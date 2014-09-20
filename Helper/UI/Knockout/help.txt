@@ -1,0 +1,27 @@
+﻿1. ko.applyBindings(personalVewModel); - ko.applyBindings() method tells 
+	Knockout.js to use the object as the ViewModel for the page
+	
+2. Accessing Observables
+	Getting: Use obj.firstName() instead of obj.firstName
+	Setting: Use obj.firstName("Mary") instead of obj.firstName = "Mary"
+
+3. дать знать ноккауту, что изменения прошли через jquery
+.val() does not trigger the change event. 
+So, you can just do .val("blah").change() for KO to pick up the changes.
+
+4.  <a data-bind="attr: { 'href': '@Url.Action("EditTechnician", "Technician")/' + id }">Edit Profile</a>
+
+
+   @Html.TextBox("", (object)Model,
+        new Dictionary<string, object>
+            {
+                { "id", ViewData.ModelMetadata.PropertyName },
+                { "name", ViewData.ModelMetadata.PropertyName },
+                { "class", "text-box single-line"},
+                { "data-bind", "value: " + ViewData.ModelMetadata.PropertyName },
+            })
+
+
+%: Html.ActionLinkHtml5Data("link display", "Action", "Controller", new { id = Model.Id }, new { @class="link" }, new { extra = "some extra info" })  %>
+
+<input checked="checked" value="5473" data-bind="attr: { value: id }, checked: isntPaid" type="checkbox">

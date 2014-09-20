@@ -1,0 +1,23 @@
+var fileChunk = new FormData();
+  
+                      fileChunk.append("name", block.name);
+                      fileChunk.append("index", block.index);
+                      fileChunk.append("file", blob);
+
+-- with js object Data
+$.ajax({
+	  type: 'POST',
+	  async: true,
+	  url: '/AdCampaign/UploadInFormData',
+	  data: fileChunk,
+	  cache: false,
+	  contentType: false,
+	  mimeType: 'multipart/form-data',
+	  processData: false,
+	  success: function (res) {
+		  
+	  }
+  });
+  
+  
+NOTES: на сервере FormData будет в объекте "request.Form"
