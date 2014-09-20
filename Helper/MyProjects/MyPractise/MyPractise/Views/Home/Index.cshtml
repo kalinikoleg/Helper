@@ -1,0 +1,73 @@
+﻿@using MyPractise.Exstentions
+
+@section scripts{
+    @Scripts.Render("~/Base/scripts")
+    @Scripts.Render("~/Scripts/ViewModels/Home/index.js")
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li><a href="#" data-bind="click: chanheVisible.bind($data, 1)">Support Us</a></li>
+            <li><a href="#" data-bind="click: chanheVisible.bind($data, 2)">About Us</a></li>
+            <li><a href="#" data-bind="click: chanheVisible.bind($data, 3)">Register</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-10 col-sm-offset-1">
+        <p id="features1" class="top-buffer" data-bind="visible: feature1Visible">
+            Welcome to Paraben’s customer account management system. Here is where manage your Paraben account information. You can easily update your contact 
+                information including phone number, fax number, primary address information,
+                and even secondary address information. This new system consolidates all 
+            your Paraben passwords into one account. 
+             Welcome to Paraben’s customer account management system. Here is where manage your Paraben account information. You can easily update your contact 
+                information including phone number, fax number, primary address information,
+                and even secondary address information. This new system consolidates all 
+            your Paraben passwords into one account. 
+             Welcome to Paraben’s customer account management system. Here is where manage your Paraben account information. You can easily update your contact 
+                information including phone number, fax number, primary address information,
+                and even secondary address information. This new system consolidates all 
+            your Paraben passwords into one account. 
+             Welcome to Paraben’s customer account management system. Here is where manage your Paraben account information. You can easily update your contact 
+                information including phone number, fax number, primary address information,
+                and even secondary address information. This new system consolidates all 
+                your Paraben passwords into one account. 
+        </p>
+        <p id="features2" class="top-buffer" data-bind="visible: feature2Visible">
+            Paraben Corporation is a longtime leader in the field of digital forensics and investigations. Paraben’s technology is utilized by a variety of 
+            federal, state, and international law enforcement and government agencies to insure the protection of evidence. Paraben’s Hawk Mobile Monitoring 
+            system was designed with parents and companies in mind to be able to watch and secure the data on mobile devices. Paraben’s inspiration for this 
+            system came from their own BYOD policies and the active roles of the executives as parents of teenagers. Paraben has been a trusted source for 
+            securing, protecting, and monitoring mobile devices for over 10 years and continues to lead this field.
+        </p>
+        <p id="features3" class="top-buffer" data-bind="visible: feature3Visible">
+            It may be a federal and/or state offense to install monitoring/surveillance software onto a 
+            Phone/Computer which you do not own or have proper authorization to install. It may also be an 
+            offense in your jurisdiction to monitor the activities of other individuals. Check all state,
+            federal and local laws before installing any Monitoring Software such as Hawk Mobile. You may 
+            also have to notify a person that they are being monitored if they are over age 18. Federal or 
+            local law governs the use of some types of software; it is responsibility of the user to follow such laws.” 
+            The Computer Fraud and Abuse Act ("CFAA", 18 U.S.C. § 1030) In Section 1030(g), CFAA provides that 
+            "[a]ny person who suffers damage or loss by reason of a violation of this section may maintain a 
+            civil action against the violator to obtain compensatory damages and injunctive relief or other 
+            equitable relief." 18 U.S.C. 1030(g). CFAA defines "damage" as "any impairment to the integrity 
+            or availability of data, a program, a system, or information." Id. at § 1030(e)(8). CFAA defines 
+            "loss" as "any reasonable cost to any victim, including the cost of responding to an offense, 
+            conducting a damage assessment, and restoring the data, program, system, or information to its 
+            condition prior to the offense, and any revenue lost, cost incurred, or other consequential damages 
+            incurred because of interruption of service." Id. at § 1030(e)(11). It is the responsibility of 
+            the user to determine, and obey, all applicable laws in their country and/or local jurisdiction 
+            regarding the use of the software and services. The software and service is intended to provide 
+            the Licensee with the ability to capture, store and control access to their own information.
+            By installing Hawk Mobile, you represent that Hawk Mobile will be used in only a lawful manner. 
+            Logging other people's Cell Phone or Computer data or installing Hawk Mobile on another person's 
+            Phone/Computer without their knowledge can be considered as an illegal activity in your country. 
+            Hawk Mobile assumes no liability and is not responsible for any misuse or damage. It is the final 
+            user's responsibility to obey all laws in their country and/or State. Regardless of the state, 
+            it is usually illegal to record a conversation to which you either are not a party, 
+            do not have consent to tape, or could not naturally overhear. Federal law and most state 
+            laws also make it illegal to disclose the contents of an illegally intercepted call or communication.
+        </p>
+    </div>
+</div>

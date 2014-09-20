@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Best Practise</title>
+
+        @Styles.Render("~/Base/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-sm-12">
+                <header>
+
+                    @*Еще одно отличие между двумя способами заключается в том, что Html.RenderPartial 
+                напрямую пишет вывод в выходной поток, поэтому может работать чуть быстрее, чем Html.Partial .
+                @{Html.RenderPartial("Partial");}*@
+
+                    @{Html.RenderPartial("~/Views/Shared/_TopMenu.cshtml");}
+                </header>
+
+                <div id="body" class="container-fluid">
+                    <section>
+                        @RenderBody()
+                    </section>
+                </div>
+                <footer>
+                    <div class="content-wrapper">
+                        <div class="float-left">
+                        </div>
+                  
+                    </div>
+                </footer>
+                @* @Scripts.Render("~/bundles/jquery")*@
+            </div>
+        </div>
+        @RenderSection("scripts", required: false)
+        @RenderSection("featured", required: false)
+    </body>
+</html>
+
+@*@if (IsSectionDefined("Footer"))
+    {
+        @RenderSection("Footer");
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <span>Содержание элемента footer по умолчанию.</span>
+            </div>
+        </div>
+    }*@
+

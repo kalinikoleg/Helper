@@ -1,0 +1,24 @@
+﻿@using MyPractise.Exstentions
+
+<div class="row">
+    <div class="col-xs-2">
+        <img src="@Url.Content("~/Content/Img/logo.png")" width="200" class="img-responsive navbar-brand" />
+    </div>
+    <div class="col-xs-10">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav" role="tablist">
+                    @Html.MenuLinkBootstrap("Home", "Index", "Home")
+                    @Html.MenuLinkBootstrap("Login", "Login", "Account")
+                    @Html.MenuLinkBootstrap("Registration Statistics", "Register", "Account")
+                    @Html.MenuLinkBootstrap("Test", "Index", "Test")
+                    @Html.MenuLinkBootstrap("Ajaxes", "Index", "Ajax")
+                    @Html.MenuLinkBootstrap("Cache", "Index", "Cache")
+                    @Html.MenuLinkBootstrap("Mapper", "Index", "Mapper")
+                    @Html.MenuLinkBootstrap("Shina", "Index", "Shina")
+                    
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
