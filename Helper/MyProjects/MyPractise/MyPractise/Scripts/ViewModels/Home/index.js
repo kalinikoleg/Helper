@@ -29,6 +29,8 @@ var homeViewModel = function () {
 
 $(function () {
     var viewModel = new homeViewModel();
+    debugger;
 
+    ob.fnPrivate();
     ko.applyBindings(viewModel);
-});
+});  
