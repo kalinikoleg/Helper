@@ -1,0 +1,3 @@
+var httpContext = HttpContextBootstrapper.CreateHttpContext("http://test@mail.ru");
+
+controller.ControllerContext = new ControllerContext(new RequestContext(httpContext, new RouteData()), controller);
