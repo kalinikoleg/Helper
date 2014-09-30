@@ -1,3 +1,10 @@
+var model = new Registration()
+{
+	Login = "oleg_kalinik@mail.ru",
+	FirstName = "Oleg",
+	LastName = "Kalinik"
+};
+
 var modelBinder = new ModelBindingContext()
 {
 	ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType()),
