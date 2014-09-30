@@ -1,0 +1,9 @@
+var modelBinder = new ModelBindingContext()
+{
+	ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType()),
+	ValueProvider = new NameValueCollectionValueProvider(new NameValueCollection(), CultureInfo.InvariantCulture)
+};
+
+var binder = new DefaultModelBinder().BindModel(new ControllerContext(), modelBinder);
+controller.ModelState.Clear();
+controller.ModelState.Merge(modelBinder.ModelState);
