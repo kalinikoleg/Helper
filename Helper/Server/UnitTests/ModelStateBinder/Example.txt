@@ -1,16 +1,19 @@
-var model = new Registration()
+ public abstract class BaseControllerTest
 {
-	Login = "oleg_kalinik@mail.ru",
-	FirstName = "Oleg",
-	LastName = "Kalinik"
-};
+	protected TController CreateBinder<TController, TModel>(TController controller, TModel model)
+		where TController : Controller
+		where TModel : class
+	{
+		var modelBinder = new ModelBindingContext()
+		{
+			ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType()),
+			ValueProvider = new NameValueCollectionValueProvider(new NameValueCollection(), CultureInfo.InvariantCulture)
+		};
 
-var modelBinder = new ModelBindingContext()
-{
-	ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType()),
-	ValueProvider = new NameValueCollectionValueProvider(new NameValueCollection(), CultureInfo.InvariantCulture)
-};
+		var binder = new DefaultModelBinder().BindModel(new ControllerContext(), modelBinder);
+		controller.ModelState.Clear();
+		controller.ModelState.Merge(modelBinder.ModelState);
 
-var binder = new DefaultModelBinder().BindModel(new ControllerContext(), modelBinder);
-controller.ModelState.Clear();
-controller.ModelState.Merge(modelBinder.ModelState);
+		return controller;
+	}
+}
