@@ -1,0 +1,3 @@
+Ctrl + M,M - expand/collapse at caret, You can perform this on a selection too.
+Ctrl + M,O - collapse all in document
+Ctrl + M,L - expand all in document
