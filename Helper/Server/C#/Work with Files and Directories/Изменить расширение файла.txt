@@ -1,0 +1,2 @@
+var zipArchive = Path.ChangeExtension(tempFullPathToAgent, ".zip");
+File.Move(tempFullPathToAgent, zipArchive);
