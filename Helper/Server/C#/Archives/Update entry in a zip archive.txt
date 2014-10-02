@@ -1,0 +1,28 @@
+using (FileStream zipToOpen = new FileStream(fullPathToAgentForDownloading, FileMode.Open))
+{
+	using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Update))
+	{
+		var currentConfig = archive.GetEntry(AgentSettings.JsonConfigPath);
+
+		JsonConfigObject jsonObect = new JsonConfigObject();
+
+		using (StreamReader sr = new StreamReader(currentConfig.Open()))
+		{
+			var row = sr.ReadToEnd();
+			jsonObect = JsonConvert.DeserializeObject<JsonConfigObject>(row);
+		}
+
+		// Delete all text from file
+		currentConfig.Delete();
+		currentConfig = archive.CreateEntry(AgentSettings.JsonConfigPath);
+
+		// Changes for current agent
+		jsonObect.agent_id = agentId;
+		jsonObect.agent_name = agentName;
+
+		using (StreamWriter sr = new StreamWriter(currentConfig.Open()))
+		{
+			sr.Write(JsonConvert.SerializeObject(jsonObect));
+		}
+	}
+}
