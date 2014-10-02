@@ -1,36 +1,42 @@
 ﻿--BEST
 
-     var request = $.ajax({
-                type: type,
-                contentType: 'application/json; charset=utf-8',
-                url: url,
-                data: ko.toJSON(requestData),
-                dataType: 'json',
-                beforeSend: function () {
-
-                    loader.ShowLoading("#PageMainContent");
-                }
-            });
-            request.done(function (data) {
-                if (requestData.onSuccess) {
-                    requestData.onSuccess(data);
-                }
-            });
-            request.fail(function (xhr, textStatus, errorThrown) {
-                switch (xhr.status) {
-                    case 401:
-                        window.location.reload(true);
-                        break;
-                    case 500:
-                        getErrorMessage();
-                        return;
-                }
-                getErrorMessage();
-            });
-            request.always(function () {
-                loader.HideLoading("#PageMainContent");
-            });
-        }//end sendAjax
+sendAjaxPost: function (url, requestData) {
+	var request = $.ajax({
+		type: 'POST',
+		contentType: 'application/json; charset=utf-8',
+		url: url,
+		data: ko.toJSON(requestData),
+		dataType: 'json',
+		beforeSend: function () {
+			if (loader) {
+				loader.ShowLoading(MAIN_SELECTOR);
+			}
+		}
+	});
+	request.done(function (data) {
+		if (requestData.onSuccess) {
+			requestData.onSuccess(data);
+		}
+	});
+	request.fail(function (xhr, textStatus, errorThrown) {
+		switch (xhr.status) {
+			case 401:
+				// Unauthorized 
+				window.location.reload(true);
+				break;
+			case 500:
+				// Server is unavailable
+				notificationHandler.showErrorMessage(INTERNAL_SERVER_ERROR);
+				return;
+		}
+		notificationHandler.showErrorMessage(NO_RESPONSE);
+	});
+	request.always(function () {
+		if (loader) {
+			loader.HideLoading(MAIN_SELECTOR);
+		}
+	});
+}//end sendAjax
 
 
 -- with js object Data

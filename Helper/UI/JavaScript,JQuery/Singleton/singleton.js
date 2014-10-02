@@ -1,73 +1,39 @@
-﻿
-var Singleton = (function () {
-    //Class instance
+﻿var NotificationHandler = (function () {
+    // class instance
     var _instance = null;
 
-    //Private
-    var test1 = 1;
-    var options = {};
-    var loader = new Loader();
+    //private
+    var _options = {};
 
-    var getError = function() {
-        return new PNotify({
-            title: 'Oh No!',
-            text: 'An error occurred while processing your request. Please try again.',
-            type: 'error'
-        });
-    }
-    var getSuccess = function() {
-        return new PNotify({
-            title: 'Success',
-            text: 'The information about selected devices was deleted successful.',
-            type: 'success'
-        });
+    var _showSuccessMessage = function(message) {
+        if (message) {
+            alertify.success(message);
+        } 
     }
 
-    //Constructor
+    var _showErrorMessage = function (message) {
+        if (message) {
+            alertify.error(message);
+        } else {
+            alertify.error(NO_RESPONSE);
+        }
+    }
+
+    // constructor
     function Init(o) {
-        options = $.extend(true, options, o || {});
+        _options = $.extend(true, _options, o || {});
     }
 
-    //Public
+    // public
     Init.prototype = {
-        getVar: function () {
-            return test1;
-        },
         getOptions: function () {
-            return options;
+            return _options;
         },
-        getSuccessMessage: function () {
-            getSuccess();
+        showSuccessMessage: function(message) {
+            _showSuccessMessage(message);
         },
-        getErrorMessage: function () {
-            getError();
-        },
-        sendAjax: function (url, requestData, currentObject, type) {
-            if (!type) {
-                type = 'POST';
-            }
-            $.ajax({
-                type: type,
-                url: url,
-                contentType: "application/json; charset=utf-8",
-                data: ko.toJSON(requestData),
-                error: function (jqXHR, textStatus, errorThrown) {
-                    getError();
-                },
-                success: function (result) {
-                    if (requestData.onSuccess) {
-                        requestData.onSuccess(result);
-                    } else {
-                        getError();
-                    }
-                },
-                complete: function (XMLHttpRequest, textStatus) {
-                    loader.HideLoading('mainContent');
-                },
-                beforeSend: function () {
-                    loader.ShowLoading('mainContent');
-                }
-            });
+        showErrorMessage: function(message) {
+            _showErrorMessage(message);
         }
     }
 
@@ -79,5 +45,4 @@ var Singleton = (function () {
     }
 }());
 
-var ob = new Singleton({ x: 1 });
-
+var notificationHandler = new NotificationHandler();
