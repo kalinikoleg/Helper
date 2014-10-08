@@ -1,0 +1,11 @@
+
+Response.ContentType = "Application/pdf";
+Response.Clear();
+Response.ClearContent();
+Response.ClearHeaders();
+Response.ContentType = "application/pdf";
+Response.AddHeader("Content-Disposition", String.Format(String.Format(" attachment; filename=\"{0}\"", "FWS Wiping Report (" + report.WipeHistoryItem.Date + ")")));
+Response.AddHeader("Content-Length", result.Length.ToString());
+Response.BinaryWrite(result);
+Response.Flush();
+Response.End();
