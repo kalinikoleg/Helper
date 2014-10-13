@@ -1,0 +1,133 @@
+ѕриведенный ниже код может быть добавлен в ASP.NET или ASP.NET MVC приложение. 
+¬ каждом приведенном методе используетс€ вызов Debug.Write() из пространства имен 
+System.Diagnostics дл€ вывода уведомлени€ в окно Output. “аком образом можно 
+самосто€тельно посмотреть на пор€док вызова обработчиков событий (код вз€ть из ASP.NET MVC приложени€).
+
+namespace MvcApplication
+{
+    using System;
+    using System.Diagnostics;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+ 
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode,
+    // visit http://go.microsoft.com/?LinkId=9394801
+ 
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+ 
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+ 
+            routes.MapRoute(
+                "User", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new {
+                    controller = "UserProfiles",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                } // Parameter defaults
+            );
+        }
+ 
+        protected void Application_Init(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_Init();");
+        }
+ 
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+ 
+            RegisterGlobalFilters(GlobalFilters.Filters);
+            RegisterRoutes(RouteTable.Routes);
+ 
+            Debug.WriteLine("protected void Application_Start();");
+        }
+ 
+        protected void Application_End(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_End();");
+        }
+ 
+        protected void Application_Disposed(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_Disposed();");
+        }
+ 
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_BeginRequest();");
+        }
+ 
+        protected void Application_EndRequest(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_EndRequest();");
+        }
+ 
+        protected void Application_PreRequestHandlerExecute(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_PreRequestHandlerExecute();");
+        }
+ 
+        protected void Application_PostRequestHandlerExecute(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_PostRequestHandlerExecute();");
+        }
+ 
+        protected void Application_PreSendRequestHeaders(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_PreSendRequestHeaders();");
+        }
+ 
+        protected void Application_PreSendRequestContent(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_PreSendRequestContent();");
+        }
+ 
+        protected void Application_AcquireRequestState(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_AcquireRequestState();");
+        }
+ 
+        protected void Application_ReleaseRequestState(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_ReleaseRequestState();");
+        }
+ 
+        protected void Application_ResolveRequestCache(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_ResolveRequestCache();");
+        }
+ 
+        protected void Application_UpdateRequestCache(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_UpdateRequestCache();");
+        }
+ 
+        protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_AuthenticateRequest();");
+        }
+ 
+        protected void Application_AuthorizeRequest(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Application_AuthorizeRequest();");
+        }
+ 
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Session_Start();");
+        }
+ 
+        protected void Session_End(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("protected void Session_End();");
+        }
+    } 
+}

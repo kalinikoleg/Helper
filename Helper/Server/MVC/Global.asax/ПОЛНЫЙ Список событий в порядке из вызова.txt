@@ -1,0 +1,108 @@
+Список событий в порядке из вызова
+Чтобы не было путаницы в дальнейшем, определим чем аутентификация отличается от авторизации:
+
+Аутентификация – идентификация личности пользователя (например по его имени и пароль).
+Авторизация – определение прав на запрашиваемый пользователем ресурс (страницу, сервис).
+Теперь рассмотрим вариант списка событий без их описания. При этом расположим их в порядке, соответствующем последовательности вызова.
+
+
+
+// запуск веб-приложения
+ 
+protected void Application_Start(Object sender, EventArgs e);
+ 
+// получение запроса
+ 
+protected void Application_BeginRequest(Object sender, EventArgs e);
+protected void Application_AuthenticateRequest(Object sender, EventArgs e);
+protected void Application_AuthorizeRequest(Object sender, EventArgs e);
+protected void Application_ResolveRequestCache(Object sender, EventArgs e);
+ 
+// начало сессии, один раз для каждого клиента
+ 
+protected void Session_Start(Object sender, EventArgs e);
+ 
+// обработка запроса
+ 
+protected void Application_AcquireRequestState(Object sender, EventArgs e);
+protected void Application_PreRequestHandlerExecute(Object sender, EventArgs e);
+protected void Application_PostRequestHandlerExecute(Object sender, EventArgs e);
+protected void Application_ReleaseRequestState(Object sender, EventArgs e);
+protected void Application_UpdateRequestCache(Object sender, EventArgs e);
+protected void Application_EndRequest(Object sender, EventArgs e);
+ 
+// конец запроса
+ 
+// отправка ответа
+ 
+protected void Application_PreSendRequestHeaders(Object sender, EventArgs e);
+protected void Application_PreSendRequestContent(Object sender, EventArgs e);
+ 
+// конец сессии, один раз для каждого клиента
+ 
+protected void Session_End(Object sender, EventArgs e);
+ 
+// завершение работы веб-приложения
+ 
+protected void Application_Disposed(Object sender, EventArgs e);
+protected void Application_End(Object sender, EventArgs e);
+
+
+
+А теперь рассмотрим все эти события более подробно:
+
+protected void Application_Start(Object sender, EventArgs e);
+Вызывается единожды при создании экземпляра класса HttpApplication в момент обращения первого пользователя к нему. Позволяет создать глобальные объекты, доступные во всем приложении.
+
+protected void Application_BeginRequest(Object sender, EventArgs e);
+Вызывается первым каждый раз при получения нового запроса от пользователя.
+
+protected void Application_AuthenticateRequest(Object sender, EventArgs e);
+Вызывается после аутентификации пользователя (установления его виртуальной личности, включая статус "незарегистрированный пользователь"). Данный метод можно использовать для проведения дополнительных проверок его статуса.
+
+protected void Application_AuthorizeRequest(Object sender, EventArgs e);
+Вызывается после авторизации пользователя по отношению к запрашиваемому ресурсу. Т.е. указывает что у пользователя есть права на действие (как правило просмотр), которое он хочет выполнить. Также как и Application_AuthenticateRequest() можно использовать для дополнительных проверок.
+
+protected void Application_ResolveRequestCache(Object sender, EventArgs e);
+Вызывается при поиске в кэше готового результата для запроса. Позволяет модулям вернуть уже готовый ранее результат и не задействовать обработчики. Таким образом снижается нагрузка на сервер, на котором размещено веб-приложение.
+
+protected void Session_Start(Object sender, EventArgs e);
+Вызывается единожды для каждого клиента (посетителя) в начале его сессии.
+
+protected void Application_AcquireRequestState(Object sender, EventArgs e);
+Вызывается после того, как ядро ASP.NET получает текущий контекст (state) запроса (данные сессии).
+
+protected void Application_PreRequestHandlerExecute(Object sender, EventArgs e);
+Вызывается перед обращением к обработчикам запроса (handlers).
+
+protected void Application_PostRequestHandlerExecute(Object sender, EventArgs e);
+Вызывается после завершения работы обработчиков запроса (handlers).
+
+protected void Application_ReleaseRequestState(Object sender, EventArgs e);
+Вызывается после завершения всех обработчиков событий и сохранения контекста (state) запроса. 
+protected void Application_UpdateRequestCache(Object sender, EventArgs e);
+Вызывается после завершения всех обработчиков событий. В данном методе модули имеют возможность сохранить необходимые данные в кэше. В дальнейшем они могут быть использованы при обработке  Application_ResolveRequestCache().
+
+protected void Application_EndRequest(Object sender, EventArgs e);
+Вызывается как последнее событие при завершении обработки запроса от пользователя.
+
+protected void Application_PreSendRequestHeaders(Object sender, EventArgs e);
+Вызывается перед отправкой заголовков ответа клиенту.
+
+protected void Application_PreSendRequestContent(Object sender, EventArgs e);
+Вызывается перед отправкой содержимого ответа (например HTML кода страницы) клиенту.
+
+protected void Session_End(Object sender, EventArgs e);
+Вызывается единожды для каждого клиента (посетителя) при завершении его сессии (закрытии или истечении времени таймаута).
+
+protected void Application_Disposed(Object sender, EventArgs e);
+Вызывается при завершении веб-приложения. Хорошо подходит для методов освобождения используемых ресурсов.
+
+protected void Application_End(Object sender, EventArgs e);
+Вызывается при уничтожении последнего экземпляр класса HttpApplication. Т.е. при истечении таймаута у последнего активного пользователя.
+
+protected void Application_Error(Object sender, EventArgs e);
+В данный метод передаются все необработанные исключения, возникшие в веб-приложении. Как правило используется для записи информации о них в журнал и уведомлений обслуживающего персонала.
+
+protected void [имя_модуля]_[имя-события](Object sender, EventArgs e);
+Позволяет подписаться на событие [имя-события] модуля [имя_модуля]. Например, для обработки события Authenticate класса FormsAuthentication метод должен иметь имя FormsAuthentication_Authenticate.
