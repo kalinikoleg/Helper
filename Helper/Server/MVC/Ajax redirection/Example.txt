@@ -1,0 +1,12 @@
+﻿так как при timeout- е аутентицикации возвращается 302 ошибка(редирект), то ajax не может сделать редирект. 401 возвращает только asmx service. Для
+фикса можно использовать этот хак
+
+protected void Application_EndRequest()
+{
+	// if ajax request response with code 302, UI gets need get code 401  for redirecting
+	if (Context.Response.StatusCode == 302 && Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+	{
+		Context.Response.Clear();
+		Context.Response.StatusCode = 401;
+	}
+}
