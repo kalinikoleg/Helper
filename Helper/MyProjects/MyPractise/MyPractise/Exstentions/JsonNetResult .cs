@@ -22,7 +22,7 @@ namespace MyPractise.Exstentions
             //ставит в нижний регистр только первый символ
             ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 
-            //todo: read about this property
+            //конвертирует enum в названия, а не выдает код перечисления
             Converters = new List<JsonConverter> { new StringEnumConverter() }
         };
         public override void ExecuteResult(ControllerContext context)
