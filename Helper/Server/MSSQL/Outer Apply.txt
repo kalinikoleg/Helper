@@ -1,0 +1,22 @@
+OUTER APPLY (
+  SELECT  (
+   SELECT COUNT(*)
+   FROM   WipeHistory
+   Where TechnicianId = Cte.Id AND WipeStatus = 1
+  ) AS SuccessfulWipes,
+  (
+   SELECT COUNT(*)
+   FROM   WipeHistory
+   WHERE TechnicianId = Cte.Id AND WipeStatus = 2
+  ) AS UnsuccessfulWipes,
+  (
+   SELECT COUNT(*)
+   FROM   DevicePurchaseHistory
+   WHERE TechnicianId = Cte.Id AND PurchaseStatus = 1
+  ) AS Purchased,
+  (
+   SELECT COUNT(*)
+   FROM   DevicePurchaseHistory
+   WHERE TechnicianId = Cte.Id AND PurchaseStatus = 2
+  ) AS NotPurchased
+	) PhoneIdFeatures
