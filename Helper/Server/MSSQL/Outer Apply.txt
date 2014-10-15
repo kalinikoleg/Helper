@@ -1,3 +1,5 @@
+
+FROM Device D
 OUTER APPLY (
   SELECT  (
    SELECT COUNT(*)
@@ -20,3 +22,68 @@ OUTER APPLY (
    WHERE TechnicianId = Cte.Id AND PurchaseStatus = 2
   ) AS NotPurchased
 	) PhoneIdFeatures
+	
+
+***************************
+
+
+        	With Cte As
+	(
+		SELECT
+			rn = ROW_NUMBER() Over(Order by Date DESC),
+			PersonInfoId,
+            TechnicianId,
+	        DeviceId,
+            DeviceClass,
+            ManufactureDate,
+	        AccountId,
+	        FirstName,
+	        LastName,
+	        Date,
+	        PurchaseStatus,
+	        ModelName,
+	        SerialNumber,
+	        Meid,
+	        Imei,
+	        PcIdentifier,
+	        DevicePurchaseHistoryId,
+            AdditionalInfo
+		FROM DeviceStatistics 
+
+	)
+	SELECT  DevicePurchaseHistoryId as Id,
+	        PersonInfoId AS CustomerDetailsId,
+            TechnicianId,
+	        DeviceId,
+	        AccountId,
+            DeviceClass,
+            ManufactureDate,
+	        FirstName,
+	        LastName,
+	        Date,
+	        PurchaseStatus,
+	        ModelName,
+	        SerialNumber,
+	        Meid,
+	        Imei,
+	        PcIdentifier,
+            AdditionalInfo,
+            FirstNameTechnician,
+            LastNameTechnician	        
+	FROM Cte
+
+          OUTER APPLY 
+        (
+          SELECT  (
+           SELECT FirstName
+           FROM   PersonInfo
+           Where Id = TechnicianId
+          ) as FirstNameTechnician,
+           (
+           SELECT LastName
+           FROM   PersonInfo
+           Where Id = TechnicianId
+          ) as LastNameTechnician
+          
+
+        ) TechnicianDetails
