@@ -1,1 +1,6 @@
 Google -> wordwrap in tables
+
+
+.table {
+    word-break: break-all;
+}

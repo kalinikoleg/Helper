@@ -1,0 +1,5 @@
+"\b[0-9]*\.*[0-9]+\b"
+
+
+Money
+ [RegularExpression(@"\b[0-9]*\.*[0-9]{1,2}\b", ErrorMessageResourceName = "PriceFormat", ErrorMessageResourceType = typeof(Error))]
