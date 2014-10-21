@@ -1,0 +1,25 @@
+﻿    
+															//see UriTemplate
+HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create("https://10.100.4.164:89/MobileEnterpriseService.svc/5/0/Update");
+		request1.Method = "POST";
+		request1.ContentLength = 0;
+		request1.ContentType = "application/json; charset=utf-8";
+		
+		//for https connection
+		ServicePointManager.ServerCertificateValidationCallback =
+				delegate(object s, X509Certificate certificate, X509Chain chain,
+				SslPolicyErrors sslPolicyErrors) { return true; };
+				
+		HttpWebResponse response = (HttpWebResponse)request1.GetResponse();
+
+		string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+			
+			
+			
+			
+  [WebInvoke(
+Method = "POST",
+UriTemplate = "{agentID}/{deviceID}/Update",
+RequestFormat = WebMessageFormat.Json,
+ResponseFormat = WebMessageFormat.Json,
+BodyStyle = WebMessageBodyStyle.Bare)]
