@@ -9,3 +9,6 @@ Response.AddHeader("Content-Length", result.Length.ToString());
 Response.BinaryWrite(result);
 Response.Flush();
 Response.End();
+
+!!!!!!!!!!!!!!!!!!!!
+return File(pdfDocument, "application/pdf", "FWS Wiping Report (" + report.WipeHistoryItem.Date.ToString("G") + ")");
