@@ -1,0 +1,11 @@
+public static void Main()
+   {
+      // Retrieve the resource.
+      ResourceManager rm = new ResourceManager("ExampleResources" , 
+                               typeof(Example).Assembly);
+      string greeting = rm.GetString("Greeting");
+
+      Console.Write("Enter your name: ");
+      string name = Console.ReadLine();
+      Console.WriteLine("{0} {1}!", greeting, name);
+   }
