@@ -87,3 +87,11 @@ OUTER APPLY (
           
 
         ) TechnicianDetails
+		
+		***************************
+		select t.taskName, lg.logResult, lg.lastUpdateDate
+from task t
+cross apply (select top 1 taskID, logResult, lastUpdateDate
+             from taskLog l
+             where l.taskID = t.taskID
+             order by lastUpdateDate desc) lg
