@@ -1,0 +1,18 @@
+ [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class AppAuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
+    {
+        private string _roles = null;
+
+        public AppAuthorizeAttribute() { }
+
+        public AppAuthorizeAttribute(params string[] roles)
+        {
+            _roles = string.Join(",", roles);
+        }
+
+        public override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            base.Roles = _roles;
+            base.OnAuthorization(filterContext);
+        }
+    }
