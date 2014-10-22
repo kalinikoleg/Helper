@@ -1,0 +1,41 @@
+	
+Oleg
+реализовать секцию в веб конфиге
+15.10.14	
+и вынести в отдельные части
+
+Oleg
+регул€рки
+16.10.14	
+
+Oleg
+equals and hash
+16.10.14	
+
+Oleg
+linq
+20:56:16	
+
+Oleg
+продумывайте кластерные и некластерные индексы.
+21:14:33	
+
+Oleg
+transaction flow найти в коде
+21:46:05	
+
+Oleg
+записать pager
+
+	
+Oleg
+создавать уникальные в бд
+08.10.14	
+no count
+
+Oleg
+lazy
+08.10.14	
+
+Oleg
+SELECT ROW_NUMBER() OVER(ORDER BY <ColumnName>;) AS RowNo
