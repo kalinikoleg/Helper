@@ -1,0 +1,21 @@
+»нструкци€ CREATE INDEX DDL используетс€ дл€ создани€ дополнительных индексы дл€ существующей таблицы. 
+
+ƒобавл€ет следующие инструкции DDL одному полю, не €вл€ющиес€ уникальными, по возрастанию индекс с 
+именем MyStateIndex в поле состо€ние в таблице адресов:
+   CREATE INDEX MyStateIndex
+   ON Addresses
+   (
+      State ASC
+   )
+				
+—ледующа€ инструкци€ DDL добавл€ет индекс двух полей, уникальный, по возрастанию дл€ пол€ Ђим€ї и Ђ‘амили€ї в таблице с именем MyFullNameIndex јдреса:
+   CREATE UNIQUE INDEX MyFullNameIndex
+   ON Addresses
+   (
+      FirstName ASC,
+      LastName  ASC
+   )
+   
+   
+  Следующая инструкция DDL окончательно удаляет индекс с именем MyUnusedIndex в таблице OverIndexedTable:
+   DROP INDEX MyUnusedIndex ON OverIndexedTable

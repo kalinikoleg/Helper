@@ -1,0 +1,41 @@
+CREATE TABLE TestAllTypes
+(
+
+  MyText       TEXT(50),
+  MyMemo       MEMO,
+  MyByte       BYTE,
+  MyInteger    INTEGER,
+  MyLong       LONG,
+  MyAutoNumber COUNTER,
+  MySingle     SINGLE,
+  MyDouble     DOUBLE,
+  MyCurrency   CURRENCY,
+  MyReplicaID  GUID,
+  MyDateTime   DATETIME,
+  MyYesNo      YESNO,
+  MyOleObject  LONGBINARY,
+  MyBinary     BINARY(50)
+)
+	
+	
+Вы можете Создание таблицы с первичным ключом одному полю с помощью одной инструкции DDL. 
+В Следующий оператор создает таблицу с именем TestPrimaryKey с первичным ключом MyID поле с именем PK_MyID:
+
+CREATE TABLE TestPrimaryKey
+   (
+      MyID LONG CONSTRAINT PK_MyID PRIMARY KEY,
+      FirstName TEXT(20),
+      LastName  TEXT(20)
+   )
+
+Наполнение таблицы   
+	
+	INSERT INTO target_table[(<column-list>)] SELECT ... FROM ...;
+
+Следующая инструкция DDL окончательно удаляет таблицу с именем TempTable:
+
+	DROP TABLE TempTable
+   
+   
+   
+   
