@@ -1,3 +1,18 @@
+namespace PhoneIdWebApp.Attributes
+{
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class AppAuthorizeAttribute : AuthorizeAttribute
+    {
+        public AppAuthorizeAttribute() :base() { }
+
+        public AppAuthorizeAttribute(params string[] roles) : base()
+        {
+            Roles = string.Join(Constant.Comma, roles);
+        }
+    }
+} 
+ 
+ 
  [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class AppAuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
     {
