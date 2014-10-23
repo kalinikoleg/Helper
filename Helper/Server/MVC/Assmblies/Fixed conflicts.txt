@@ -1,0 +1,4 @@
+Install-Package Microsoft.AspNet.Mvc -Version 5.2.0.0 -Project PROJECTNAME
+Also you can try use these code maybe it helps.
+
+Uninstall-Package Microsoft.AspNet.Mvc -Force
