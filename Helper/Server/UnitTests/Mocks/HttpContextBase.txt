@@ -1,0 +1,55 @@
+using System.Collections.Specialized;
+using Moq;
+using Pids.Domain.Entities;
+using PidsWebUnitTests.Mock.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace PidsWebUnitTests.Mock
+{
+    public static class HttpContextBootstrapper
+    {
+        public static HttpContextBase CreateHttpContext(string targetUrl,
+                                                        string httpMethod = "GET",
+                                                        RequestedIdentityType identityType = RequestedIdentityType.Default)
+        {
+            string customUrl = "http://test.com";
+
+            var collection = new NameValueCollection();
+            collection.Add("REMOTE_ADDR", "REMOTE_ADDR");
+
+            //create mock request
+            Mock<HttpRequestBase> mockRequest = new Mock<HttpRequestBase>();
+            mockRequest.Setup(m => m.AppRelativeCurrentExecutionFilePath).Returns(targetUrl);
+            mockRequest.Setup(m => m.HttpMethod).Returns(httpMethod);
+            mockRequest.Setup(m => m.ServerVariables).Returns(collection);
+            mockRequest.Setup(m => m.Url).Returns(new Uri(customUrl));
+            mockRequest.SetupAllProperties();
+
+            //create mock response
+            Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
+            mockResponse.Setup(m => m.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(s => s);
+
+            mockResponse.Setup(m => m.Cookies).Returns(new HttpCookieCollection());
+            mockResponse.SetupAllProperties();
+
+            //create mock of user identity
+            Mock<IPrincipal> mockPrincipal = IdentityBootstrapper.InitializeIdentity(identityType);
+
+            //create the mock context, using the objects created above
+            Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
+            mockContext.Setup(m => m.Request).Returns(mockRequest.Object);
+            mockContext.Setup(m => m.Response).Returns(mockResponse.Object);
+            mockContext.Setup(m => m.User).Returns(mockPrincipal.Object);
+
+
+            //return the mocked object
+            return mockContext.Object;
+        }
+    }
+}
