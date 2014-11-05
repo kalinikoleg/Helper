@@ -1,5 +1,35 @@
 ﻿/// <reference path="knockout-3.1.0.debug.js" />
 
+/*
+ * Aggregate validation of all the validated elements within an array
+ * Parameter: true|false
+ * Example
+ *
+ * viewModel = {
+ *    person: ko.observableArray([{
+ *       name: ko.observable().extend({ required: true }),
+ *       age: ko.observable().extend({ min: 0, max: 120 })
+ *    }, {
+ *       name: ko.observable().extend({ required: true }),
+ *       age: ko.observable().extend({ min:0, max:120 })
+ *    }].extend({ validArray: true })
+ * }   
+*/
+ko.validation.rules["validArray"] = {
+    validator: function (arr, bool) {
+        if (!arr || typeof arr !== "object" || !(arr instanceof Array)) {
+            throw "[validArray] Parameter must be an array";
+        }
+        return bool === (arr.filter(function (element) {
+            return ko.validation.group(ko.utils.unwrapObservable(element))().length !== 0;
+        }).length === 0);
+    },
+    message: "Every element in the array must validate to '{0}'"
+};
+ko.validation.registerExtenders();
+
+
+
 ko.extenders.numeric = function (target, precision) {
     //create a writeable computed observable to intercept writes to our observable
     var result = ko.computed({
@@ -134,32 +164,3 @@ ko.extenders.withPrevious = function (target) {
     // Return modified observable
     return target;
 }
-
-/*
- * Aggregate validation of all the validated elements within an array
- * Parameter: true|false
- * Example
- *
- * viewModel = {
- *    person: ko.observableArray([{
- *       name: ko.observable().extend({ required: true }),
- *       age: ko.observable().extend({ min: 0, max: 120 })
- *    }, {
- *       name: ko.observable().extend({ required: true }),
- *       age: ko.observable().extend({ min:0, max:120 })
- *    }].extend({ validArray: true })
- * }   
-*/
-ko.validation.rules["validArray"] = {
-    validator: function (arr, bool) {
-        if (!arr || typeof arr !== "object" || !(arr instanceof Array)) {
-            throw "[validArray] Parameter must be an array";
-        }
-        return bool === (arr.filter(function (element) {
-            return ko.validation.group(ko.utils.unwrapObservable(element))().length !== 0;
-        }).length === 0);
-    },
-    message: "Every element in the array must validate to '{0}'"
-};
-
-ko.validation.registerExtenders();

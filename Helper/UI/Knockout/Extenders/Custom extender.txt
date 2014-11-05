@@ -1,0 +1,72 @@
+
+ <html>  
+      <head>  
+           <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>  
+           <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>  
+           <script>  
+                ko.extenders.integer = function(target, options) {  
+                     var result = ko.computed({  
+                          read: target,  
+                          write: function(newValue) {  
+                               var currentValue     = target()  
+                               ,     newValueAsInt     = 0  
+                               ;  
+                               if (!isNaN(newValue)) {  
+                                    try {  
+                                         newValueAsInt = parseInt(newValue);  
+                                    } catch (e) {  
+                                         //do nothing, 0 is a good value in this case.  
+                                    }  
+                               }  
+                               if (typeof options.min === "number" && newValueAsInt < options.min) {  
+                                    newValueAsInt = options.min;  
+                      } else if (typeof options.max === "number" && newValueAsInt > options.max) {  
+                           newValueAsInt = options.max;  
+                      }  
+                      //only write if it changed  
+                      if (newValueAsInt !== currentValue) {  
+                        target(newValueAsInt);  
+                      }  
+                          }  
+                     });       
+                     //initialize with current value to make sure it is rounded appropriately  
+                  result(target());  
+                  result.incr = function incrNumeric(viewModel, event) {  
+                       event.stopPropagation();  
+                       var res = result();  
+                       try {  
+                            res = parseInt(res);  
+                            result(res + 1);  
+                       } catch (e) {  
+                            result(0);  
+                       }  
+                  };  
+                  result.decr = function decrNumeric(viewModel, event) {  
+                       event.stopPropagation();  
+                       var res = result();  
+                       try {  
+                            res = parseInt(res);  
+                            result(res - 1);  
+                       } catch (e) {  
+                            result(0);  
+                       }  
+                  };  
+                  //return the new computed observable  
+                  return result;  
+                };  
+				
+				//!!!!
+                $(document).ready(function() {  
+                     ko.applyBindings({  
+                          myNumber: ko.observable(0).extend({integer: {min: 0, max: 10}})  
+                     });  
+                });  
+           </script>  
+      </head>  
+      <body>  
+           <div data-bind="text: myNumber"></div>  
+           <button data-bind="click: myNumber.decr">-</button>  
+           <input data-bind="value: myNumber" />  
+           <button data-bind="click: myNumber.incr">+</button>  
+      </body>  
+ </html>  
