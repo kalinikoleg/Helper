@@ -1,0 +1,2 @@
+1. var filter = /^(?=.*\d)(?=.*[a-zA-Z]).{16,32}(?:[a-zA-Z0-9])$/;
+Promo code length is 16-32 symbols and that you have used both letters (A-Z, a-z) and numbers (0-9) in the Promo code
