@@ -17,7 +17,7 @@ DECLARE @TotalRecords INT = NULL -- this is output parameter
 	--DON`T FORGET MAKE CHANGES IN FILTER "WHERE" IN Cte
     
        
-   	--PAGER
+    --PAGER
     IF (@RecordsPerPage IS NULL)
     BEGIN
         IF (@TotalRecords > 0)
@@ -32,18 +32,18 @@ DECLARE @TotalRecords INT = NULL -- this is output parameter
 
     SET @TotalPages = (@TotalRecords + @RecordsPerPage - 1) / @RecordsPerPage;
 
-    IF (@PageNum > @TotalPages)
+    IF (@Page > @TotalPages)
     BEGIN
-        SET @PageNum = @TotalPages;
+        SET @Page = @TotalPages;
     END
 
-    IF @PageNum < 1 OR @PageNum IS NULL
+    IF @Page < 1 OR @Page IS NULL	
     BEGIN
-        SET @PageNum = 1
+        SET @Page = 1
     END
 
-	SET @Start = ((@PageNum - 1) * @RecordsPerPage)+1;
-	SET @End = @PageNum * @RecordsPerPage;
+	SET @Start = ((@Page - 1) * @RecordsPerPage)+1;
+	SET @End = @Page * @RecordsPerPage;
 	--END PAGER
 
 	;With Cte As
