@@ -1,0 +1,72 @@
+Описание bootstrap 3.0
+
+
+Variables - file
+
+// ** Number of columns in the grid.
+@grid-columns:              12; 
+// ** Padding between columns. Gets divided in half for the left and right.
+@grid-gutter-width:         30px;
+
+Mixing - file
+для генерации новой колонки 
+первой выполняется make-grid-columns() функция, устанавливает для всех единый класс
+col-xs-1{
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+1.
+.make-grid-columns() {
+	
+  .col(1); // начинает загрузку и вызывает функции по очередно
+}
+
+
+2. нужно указать, чтобы он генерировал, потом эти функции вызываются в loop-grid-columns()
+// Generate the extra small columns
+.make-esm-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  (@gutter / 2);
+  padding-right: (@gutter / 2);
+
+  @media (min-width: @screen-esm-min) {
+    float: left;
+    width: percentage((@columns / @grid-columns));
+  }
+}
+.make-esm-column-offset(@columns) {
+  @media (min-width: @screen-esm-min) {
+    margin-left: percentage((@columns / @grid-columns));
+  }
+}
+.make-esm-column-push(@columns) {
+  @media (min-width: @screen-esm-min) {
+    left: percentage((@columns / @grid-columns));
+  }
+}
+.make-esm-column-pull(@columns) {
+  @media (min-width: @screen-esm-min) {
+    right: percentage((@columns / @grid-columns));
+  }
+}
+
+
+3.
+loop-grid-columns - вызывает генерацию остальных классов(width, left, roght, margin-left)
+вызывает  .calc-grid-column(@index, @class, @type); based call for creation of all classes
+(не знаю, как будет неравно, так бы упростило вызов!)
+для отдельного вызова  можно написать свою функцию, указав класс (col-esm-{index})
+.calc-grid-column-for-esm(@index, esm, @type);
+//For esm
+.calc-grid-column-for-esm(@index, @class, @type) when (@type = width) and (@index > 0) {
+  .col-@{class}-@{index} {
+    width: percentage((@index / @grid-columns / 0.0127226463129771 / 100));
+  }
+}
+
+
+
