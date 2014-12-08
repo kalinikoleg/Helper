@@ -1,1 +1,6 @@
 {$smarty.server.HTTP_REFERER|@var_dump}
+
+
+
+в каждом контроллере
+parabenlicensemanagement/override/controllers/front
