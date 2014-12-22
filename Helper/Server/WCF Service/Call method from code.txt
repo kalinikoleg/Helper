@@ -1,25 +1,50 @@
-﻿    
-															//see UriTemplate
-HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create("https://10.100.4.164:89/MobileEnterpriseService.svc/5/0/Update");
-		request1.Method = "POST";
-		request1.ContentLength = 0;
-		request1.ContentType = "application/json; charset=utf-8";
-		
-		//for https connection
-		ServicePointManager.ServerCertificateValidationCallback =
-				delegate(object s, X509Certificate certificate, X509Chain chain,
-				SslPolicyErrors sslPolicyErrors) { return true; };
-				
-		HttpWebResponse response = (HttpWebResponse)request1.GetResponse();
+﻿
+    public class MyPolicy : ICertificatePolicy
+    {
+        public bool CheckValidationResult(ServicePoint srvPoint,
+          X509Certificate certificate, WebRequest request,
+          int certificateProblem)
+        {
+            //Return True to force the certificate to be accepted.
+            return true;
+        }
+    }
 
-		string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-			
-			
-			
-			
-  [WebInvoke(
-Method = "POST",
-UriTemplate = "{agentID}/{deviceID}/Update",
-RequestFormat = WebMessageFormat.Json,
-ResponseFormat = WebMessageFormat.Json,
-BodyStyle = WebMessageBodyStyle.Bare)]
+    static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            //ServiceReference1.PhoneIdWebServiceClient test = new PhoneIdWebServiceClient("WSHttpBinding_IPhoneIdWebService1");
+            //ServiceReference1.PhoneIdWebServiceClient test2 = new PhoneIdWebServiceClient("WSHttpBinding_IPhoneIdWebService");
+
+
+
+            //System.Net.ServicePointManager.CertificatePolicy = new MyPolicy();
+
+            string url = "https://10.100.4.164:89/MobileEnterpriseService.svc/Ping";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.KeepAlive = false;
+            req.ProtocolVersion = HttpVersion.Version11;
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            byte[] postBytes = Encoding.ASCII.GetBytes("username=sample_post_data");
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.ContentLength = postBytes.Length;
+            Stream requestStream = req.GetRequestStream();
+            requestStream.Write(postBytes, 0, postBytes.Length);
+            requestStream.Close();
+
+            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+            Stream resStream = response.GetResponseStream();
+
+            var sr = new StreamReader(response.GetResponseStream());
+            string responseText = sr.ReadToEnd();
+            //Response.Write(responseText);
+
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(responseText);
