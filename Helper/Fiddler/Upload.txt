@@ -1,0 +1,4 @@
+UriTemplate = "{agentID}/{deviceID}/UploadMMSAttachment/{agentAttachmentID}"
+
+Method
+public int OnUpload(string agentID, string deviceID, string agentAttachmentID, Stream data)
