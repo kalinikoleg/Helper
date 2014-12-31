@@ -1,13 +1,17 @@
 --PARAMETRS FROM .NET
-DECLARE @AccountId BIGINT = 2
-DECLARE @RecordsPerPage INT = NULL -- if null or 0 - all records this is output parameter
-DECLARE @Page INT = NULL -- if null or 0 - first page(1) this is output parameter
-DECLARE @TotalRecords INT = NULL -- this is output parameter
+
+var page = new ObjectParameter("Page", typeof(int));
+var totalRecords = new ObjectParameter("TotalRecords", typeof(int));
+var totalPages = new ObjectParameter("TotalPages", typeof(int));
 
 
 
+DECLARE @RecordsPerPage INT = NULL, -- if null or 0 - all records(можно устанавдивать, но не обязательно)
+DECLARE @Page INT = NULL OUTPUT, -- if null or 0 - set first page(можно устанавдивать, но не обязательно)
+DECLARE @TotalRecords INT OUTPUT
+DECLARE @TotalPages INT OUTPUT
 
-    DECLARE @TotalPages INT
+
 	declare @Start int
 	declare @End int
 
@@ -25,8 +29,8 @@ DECLARE @TotalRecords INT = NULL -- this is output parameter
                SELECT @RecordsPerPage = @TotalRecords;
            END
         ELSE
-           BEGIN -- if no records found, then we assume that we have 1 record per page to avoid division by zero
-               SELECT @RecordsPerPage = 1;
+           BEGIN -- if no records found, then we assume that we have 100 record per page to avoid division by zero
+               SELECT @RecordsPerPage = 100;
            END
     END
 
@@ -49,8 +53,8 @@ DECLARE @TotalRecords INT = NULL -- this is output parameter
 	;With Cte As
 	(
 		SELECT
-			rn = ROW_NUMBER() Over(Order by (Select 1))
-			,*
+			rn = ROW_NUMBER() Over(Order by (Select 1)),
+			*
 		FROM DeviceList
 		WHERE AccountId = @AccountId AND DevisePurchaseHistoryActive = 1 
 		
@@ -58,3 +62,8 @@ DECLARE @TotalRecords INT = NULL -- this is output parameter
 	SELECT *
 	FROM Cte
 	WHERE rn between  @Start and @End
+	
+	
+pager.Page = (int) page.Value;
+pager.TotalPages = (int) page.Value;
+pager.TotalRecords = (int) totalRecords.Value;
