@@ -1,0 +1,92 @@
+if exists (select 1
+          from sysobjects
+          where  id = object_id('PAGER')
+          and type in ('P','PC'))
+   drop procedure PAGER
+go
+
+create procedure PAGER
+    --SHOULD BE SET PARAMETERS
+    @RecordsPerPage INT = NULL, -- if null or 0 - all records
+    @Page INT = NULL OUTPUT, -- if null or 0 - set first page
+    @TotalRecords INT OUTPUT, -- this is output parameter
+
+    -- NOT SHOULD BE SET PARAMETERS
+    @Start INT OUTPUT, 
+    @End INT OUTPUT,
+    @TotalPages INT OUTPUT-- this is output parameter
+with encryption    
+as
+begin
+    set nocount on;
+
+    IF (@RecordsPerPage IS NULL)
+    BEGIN
+        IF (@TotalRecords > 0)
+           BEGIN
+               SELECT @RecordsPerPage = @TotalRecords;
+           END
+        ELSE
+           BEGIN -- if no records found, then we assume that we have 100 record per page to avoid division by zero
+               SELECT @RecordsPerPage = 100;
+           END
+    END
+
+    SET @TotalPages = (@TotalRecords + @RecordsPerPage - 1) / @RecordsPerPage;
+
+    IF (@Page > @TotalPages)
+    BEGIN
+        SET @Page = @TotalPages;
+    END
+
+    IF @Page < 1 OR @Page IS NULL	
+    BEGIN
+        SET @Page = 1
+    END
+
+	SET @Start = ((@Page - 1) * @RecordsPerPage)+1;
+	SET @End = @Page * @RecordsPerPage;
+	--END PAGER
+end
+go
+
+
+
+if exists (select 1
+          from sysobjects
+          where  id = object_id('GET_DEVICES_PAGED')
+          and type in ('P','PC'))
+   drop procedure GET_DEVICES_PAGED
+go
+
+
+create procedure GET_DEVICES_PAGED
+    @RecordsPerPage INT = NULL, -- if null or 0 - all records
+    @Page INT = NULL output, -- if null or 0 - set first page
+    @TotalRecords int output, -- this is output parameter
+    @TotalPages int output-- this is output parameter
+
+with encryption    
+as
+begin
+    set nocount on;
+
+	declare @Start int
+	declare @End int
+
+    select @TotalRecords = COUNT(id)
+    from DEVICES
+                
+    EXEC PAGER @RecordsPerPage, @Page OUTPUT, @TotalRecords OUTPUT, @Start OUTPUT, @End OUTPUT,  @TotalPages OUTPUT
+    
+	;With Cte As
+	(
+        SELECT   rn = ROW_NUMBER() Over(Order by (Select 1)), *  
+        from DEVICES
+     )
+	SELECT *
+	FROM Cte
+	WHERE rn between  @Start and @End
+end
+go
+

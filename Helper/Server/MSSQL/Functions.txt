@@ -1,34 +1,19 @@
-	
+IF OBJECT_ID (N'dbo.ufnGetInventoryStock', N'FN') IS NOT NULL
+    DROP FUNCTION ufnGetInventoryStock;
+GO
+CREATE FUNCTION Pager(@ProductID int)
+RETURNS int 
+AS 
+-- Returns the stock level for the product.
 BEGIN
-—put the resultset into a variable so it don't return back
-DECLARE doesUserExist BOOL;
-SELECT EXISTS( SELECT 1 FROM Users where name = UserName and Pwd = password ) INTO doesUserExist;
-IF doesUserExist
-SET userid = 0;
-SET loginid = 0;
-SELECT userid INTO userid
-FROM users
-WHERE name = UserName and Pwd = password;
-IF userid > 0 THEN
-— call a function instead of a procedure so you don't need to call last_insert_id again
-SET loginid = sp_Login(userid);
-END IF;
-//only this result i am expecting.
-IF loginid > 0 THEN
-SELECT userid as userid, loginid AS loginid;
-ELSE
-SELECT 0 userid, 0 loginid;
-END IF;
-END IF;
-END
+    DECLARE @ret int;
+    SELECT @ret = SUM(p.Quantity) 
+    FROM Production.ProductInventory p 
+    WHERE p.ProductID = @ProductID 
+        AND p.LocationID = '6';
+     IF (@ret IS NULL) 
+        SET @ret = 0;
+    RETURN @ret;
+END;
+GO
 
--- this is now a function so it can return what you need
-CREATE FUNCTION sp_Login(Userid int) 
-RETURNS INTEGER
-BEGIN
-INSERT Logins ( userid, datetime )
-VALUES ( Userid, now() );
-
-SET loginid = LAST_INSERT_ID();
-RETURN loginid;
-END
