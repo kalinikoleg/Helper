@@ -5,13 +5,14 @@ if exists (select 1
    drop procedure PAGER
 go
 
-create procedure PAGER
-    --SHOULD BE SET PARAMETERS
+create procedure PAGER 
     @RecordsPerPage INT = NULL, -- if null or 0 - all records
+	
+	--SHOULD BE SETED PARAMETERS
     @Page INT = NULL OUTPUT, -- if null or 0 - set first page
     @TotalRecords INT OUTPUT, -- this is output parameter
 
-    -- NOT SHOULD BE SET PARAMETERS
+    -- NOT SHOULD BE SETED PARAMETERS
     @Start INT OUTPUT, 
     @End INT OUTPUT,
     @TotalPages INT OUTPUT-- this is output parameter
