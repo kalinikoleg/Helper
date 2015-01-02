@@ -1,0 +1,16 @@
+  watch = new Stopwatch();
+            watch.Start();
+
+
+            colors.AsParallel().ForAll(s =>
+            {
+                 Console.WriteLine("{0}, Thread Id= {1}", s, Thread.CurrentThread.ManagedThreadId);
+                Thread.Sleep(30);
+            });
+
+         
+           
+
+            watch.Stop();
+            // Write result
+            Console.WriteLine("PLinq Time elapsed: {0}", watch.Elapsed.TotalSeconds);
