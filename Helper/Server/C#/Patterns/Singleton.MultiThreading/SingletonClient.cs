@@ -1,24 +1,61 @@
 using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Policy;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DoFactory.HeadFirst.Singleton.MultiThreading
 {
-    class SingletonClient
+    public class Singleton<T> where T : class
     {
-        static void Main(string[] args)
+        private static T _instance;
+
+        protected Singleton()
         {
-            var singleton = Singleton.getInstance();
-            singleton.SaySomething();
+        }
 
-            // .NET singleton threadsafe example.
+        private static T CreateInstance()
+        {
+            ConstructorInfo cInfo = typeof(T).GetConstructor(
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                new Type[0],
+                new ParameterModifier[0]);
 
-            var es1 = EagerSingleton.GetInstance();
-            var es2 = EagerSingleton.GetInstance();
-            var es3 = EagerSingleton.GetInstance();
+            return (T)cInfo.Invoke(null);
+        }
 
-            if (es1 == es2 && es2 == es3)
+        public static T Instance
+        {
+            get
             {
-                Console.WriteLine("Same instance");
+                if (_instance == null)
+                {
+                    _instance = CreateInstance();
+                }
+
+                return _instance;
             }
+        }
+    }
+
+    internal class SingletonClient
+    {
+        private static void Main(string[] args)
+        {
+            //проблему видно только в debugger только с классом Singleton, с классом EagerSingleton разбирается CLR
+            Parallel.Invoke(
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); },
+                () => { Singleton.getInstance().SaySomething(); });
 
             // Wait for user
             Console.ReadKey();
@@ -31,6 +68,7 @@ namespace DoFactory.HeadFirst.Singleton.MultiThreading
     {
         private static Singleton _uniqueInstance;
         private static readonly object _syncLock = new Object();
+        private static int g;
 
         // other useful instance variables here
 
@@ -38,12 +76,16 @@ namespace DoFactory.HeadFirst.Singleton.MultiThreading
 
         public static Singleton getInstance()
         {
-            // Lock entire body of method
+            //Lock entire body of method
             lock (_syncLock)
             {
                 if (_uniqueInstance == null)
                 {
                     _uniqueInstance = new Singleton();
+                    Random s = new Random();
+
+                    //отключить блокировку и видно разные значения только в Debugger
+                    g = s.Next();
                 }
                 return _uniqueInstance;
             }
@@ -52,7 +94,8 @@ namespace DoFactory.HeadFirst.Singleton.MultiThreading
         // other useful methods here
         public void SaySomething()
         {
-            Console.WriteLine("I run, therefore I am");
+            Console.WriteLine("Guid:{0}", g);
+            Console.WriteLine("Thread Id:{0}", Thread.CurrentThread.ManagedThreadId);
         }
     }
 
@@ -61,15 +104,21 @@ namespace DoFactory.HeadFirst.Singleton.MultiThreading
         // CLR eagerly initializes static member when class is first used
         // CLR guarantees thread safety for static initialisation
         private static readonly EagerSingleton _instance = new EagerSingleton();
-
+        private static int g = new Random().Next();
         // Note: constructor is private
         private EagerSingleton()
         {
         }
 
-        public static EagerSingleton GetInstance()
+        public static EagerSingleton getInstance()
         {
             return _instance;
+        }
+
+        public void SaySomething()
+        {
+            Thread.Sleep(5);
+            //Console.WriteLine("Thread Id:{0}", Thread.CurrentThread.ManagedThreadId);
         }
     }
     #endregion
