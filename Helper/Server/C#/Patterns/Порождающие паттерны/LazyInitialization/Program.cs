@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using LazyInitialization.Pattern;
@@ -24,17 +25,7 @@ namespace LazyInitialization
         }
     }
 
-    public class Orders
-    {
-        public Orders(string orderId)
-        {
-            Id = orderId;
-        }
-        public string Id { get; set; }
-    }
-
     
-
     class Program
     {
       
@@ -46,8 +37,10 @@ namespace LazyInitialization
             //
             var c = cus.MyOrders;
 
-            //One more example
 
+
+
+            //One more example
             // Create Lazy.
             Lazy<Test> lazy = new Lazy<Test>();
 

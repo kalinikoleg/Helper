@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LazyInitialization.Pattern
 {
+    public class Orders
+    {
+        public Orders(string orderId)
+        {
+            Id = orderId;
+        }
+        public string Id { get; set; }
+    }
+
     class Customer
     {
         private Lazy<Orders> _orders;
@@ -18,7 +28,7 @@ namespace LazyInitialization.Pattern
                 // You can specify any additonal  
                 // initialization steps here. 
                 return new Orders(this.CustomerID);
-            });
+            }, LazyThreadSafetyMode.None);
         }
 
         public Orders MyOrders
