@@ -10,16 +10,21 @@ namespace Multiton.Pattern
             = new ConcurrentDictionary<string, Multiton>();
 
         // запретить создание экземпляров из вне
-        private Multiton(string key) { }
+        private Multiton(string key)
+        {
+            HardwareId = Guid.NewGuid();
+        }
 
         public static Multiton GetInstance(string key)
         {
-            return Multiton._instance.GetOrAdd(key, (x) => new Multiton(x));
+            return _instance.GetOrAdd(key, (x) => new Multiton(x));
         }
 
         public void DoSomething()
         {
-            Console.WriteLine("Hello");
+            Console.WriteLine(HardwareId);
         }
+
+        public Guid HardwareId { get; private set; }
     }
 }

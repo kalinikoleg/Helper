@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{BC79
 		Parallel.txt = Parallel.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTable", "HashTable\HashTable.csproj", "{9B462E6B-D022-48FD-BA73-D46284B13B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Observer", "Observer\Observer.csproj", "{8E65304C-1F50-4FBD-AD20-EC11A14367E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +60,14 @@ Global
 		{AFFBEB03-2838-4526-84B7-9F4CD4174A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFFBEB03-2838-4526-84B7-9F4CD4174A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFFBEB03-2838-4526-84B7-9F4CD4174A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B462E6B-D022-48FD-BA73-D46284B13B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B462E6B-D022-48FD-BA73-D46284B13B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B462E6B-D022-48FD-BA73-D46284B13B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B462E6B-D022-48FD-BA73-D46284B13B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E65304C-1F50-4FBD-AD20-EC11A14367E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E65304C-1F50-4FBD-AD20-EC11A14367E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E65304C-1F50-4FBD-AD20-EC11A14367E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E65304C-1F50-4FBD-AD20-EC11A14367E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

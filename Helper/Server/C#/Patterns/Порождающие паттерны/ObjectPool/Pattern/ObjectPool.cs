@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Xml.Serialization;
 
 namespace ObjectPool.Pattern
 {
-
     public class ObjectPool<T>
     {
-        private ConcurrentBag<T> _objects;
+        private static int _createdObjects = 0;
+        private static int _addedToPool = 0;
+        private static int _removedObjectsCount = 0;
+        private ConcurrentBag<T> _objects; 
         private Func<T> _objectGenerator;
 
         public ObjectPool(Func<T> objectGenerator)
@@ -19,15 +22,34 @@ namespace ObjectPool.Pattern
         public T GetObject()
         {
             T item;
-            if (_objects.TryTake(out item)) return item;
+            if (_objects.TryTake(out item))
+            {
+                _removedObjectsCount++;
+                return item;
+            }
+            _createdObjects++;
             return _objectGenerator();
-
         }
+
 
         public void PutObject(T item)
         {
+            _addedToPool++;
             _objects.Add(item);
         }
-    }
 
+        public int CreatedObjectsCount
+        {
+            get { return _createdObjects; }
+        }
+        public int AddedToPoolCount
+        {
+            get { return _addedToPool; }
+        }
+
+        public int RemovedObjectsFromBagCount
+        {
+            get { return _removedObjectsCount; }
+        }
+    }
 }
