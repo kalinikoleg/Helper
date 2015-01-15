@@ -43,7 +43,7 @@ namespace Multiton
                 mul2.DoSomething();
             });
 
-            var c =new MultitonGeneric<int>();
+            var c = MultitonGeneric<int>.GetInstance(3);
 
             watch.Stop();
             Console.WriteLine("end...... Executed time: {0}", watch.Elapsed);
