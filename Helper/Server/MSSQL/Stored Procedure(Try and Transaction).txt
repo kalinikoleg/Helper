@@ -81,6 +81,8 @@ AS
         SELECT @ErrorSeverity = ERROR_SEVERITY();
         SELECT @ErrorState = ERROR_STATE();
 
+		-- if you won`t raise the error, the data will be rollbacked in current procedure, but the base
+		-- procedure will not know about error inside, only you can see state procedure
         RAISERROR (@ErrorMessage, -- Message text.
                    @ErrorSeverity, -- Severity.
                    @ErrorState -- State.
