@@ -1,0 +1,2 @@
+
+exec sp_rename PNAME_TYPE, PNAME_TYPE_TEMP
