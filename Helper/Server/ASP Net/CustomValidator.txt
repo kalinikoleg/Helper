@@ -1,0 +1,13 @@
+  <asp:CustomValidator ID="ValidTo" runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtDateTo"
+                                        ValidationGroup="PromoCodeinfo"
+                                        OnServerValidate="DateFormat_Validate">
+                                        <span class="alert alert-error inline_alert">The date format is not valid. server</span>
+                                    </asp:CustomValidator>
+									
+									
+protected void DateFormat_Validate(object sender, ServerValidateEventArgs e)
+{
+	e.IsValid = Validator.ValidateDateFormat(e.Value);
+}
