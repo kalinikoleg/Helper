@@ -1,4 +1,8 @@
-Проверить сортировку
+Проверить сортировку, parallel froeach сделать с помощтю PLINq.
+Работает ли   ForAll и froeach с async and await?
+
+код взять с работы
+
 
 Все работает в блокирующей манере
 
@@ -112,7 +116,7 @@ internal class Program
 
 
   ////////////////////ForAll
-///////Принимает Action delegate(ничего не пожет вернуть из нутри)
+///////Принимает Action delegate
 
 
 	    private static void ProcessInDataPLINQ()
