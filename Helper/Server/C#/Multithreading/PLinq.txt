@@ -109,20 +109,22 @@ internal class Program
         }
 
 
-  
-  watch = new Stopwatch();
-            watch.Start();
+  ////////////////////ForAll
+Принимает Action delegate(ничего не пожет вернуть из нутри)
+          private static void ProcessInDataPLINQ()
+        {
+            //получить очень большой массив целых чисел
+            int[] source = Enumerable.Range(1, 100).ToArray();
 
-
-            colors.AsParallel().ForAll(s =>
+            source.AsParallel().ForAll((s) =>
             {
-                 Console.WriteLine("{0}, Thread Id= {1}", s, Thread.CurrentThread.ManagedThreadId);
+                Console.WriteLine("{0}, Thread Id= {1}", s, Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(30);
             });
+                      
+            }
 
-         
-           
-
-            watch.Stop();
-            // Write result
-            Console.WriteLine("PLinq Time elapsed: {0}", watch.Elapsed.TotalSeconds);
+        private static void Click()
+        {
+            ProcessInDataPLINQ(); // 5 секунд выполняется
+        }
