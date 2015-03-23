@@ -1,3 +1,5 @@
+Проверить сортировку
+
 Все работает в блокирующей манере
 
 Во время выполнения PLINQ анализирует общую структуру запроса, и если есть
@@ -110,19 +112,22 @@ internal class Program
 
 
   ////////////////////ForAll
-Принимает Action delegate(ничего не пожет вернуть из нутри)
-          private static void ProcessInDataPLINQ()
+///////Принимает Action delegate(ничего не пожет вернуть из нутри)
+
+
+	    private static void ProcessInDataPLINQ()
         {
             //получить очень большой массив целых чисел
             int[] source = Enumerable.Range(1, 100).ToArray();
-
+			List<int> neList = new List<int>();
             source.AsParallel().ForAll((s) =>
             {
                 Console.WriteLine("{0}, Thread Id= {1}", s, Thread.CurrentThread.ManagedThreadId);
                 Thread.Sleep(30);
+				 neList.Add(s);
             });
-                      
-            }
+                 var c = neList.Count;         
+		}
 
         private static void Click()
         {
