@@ -1,3 +1,115 @@
+Все работает в блокирующей манере
+
+Во время выполнения PLINQ анализирует общую структуру запроса, и если есть
+вероятность, что запрос выиграет от параллелизма, он будет выполнен параллельно.
+Однако если это ухудшит производительность, PLINQ выполнит запрос последователь¬
+но. Если возникает выбор между потенциально дорогостоящим (в смысле ресурсов) па¬
+раллельным алгоритмом и недорогим последовательным, предпочтение по умолчанию
+отдается последовательному алгоритму.
+
+  
+ForAll() - 
+Позволяет обрабатывать результаты параллельно, без предва¬
+рительного слияния с потоком потребителя, как это происхо¬
+дит при перечислении результата LINQ посредством ключево¬
+го слова foreach
+  
+AsParallel() - 
+Указывает, что остаток запроса должен быть выполнен парал¬
+лельно, если это возможно
+
+WithDegreeOfParallelism() -
+Указывает максимальное количество процессоров, которое
+PLINQ должен использовать для распараллеливания запроса
+ 
+WithCancellation() - 
+Указывает, что PLINQ должен периодически следить за состо¬
+янием предоставленного признака отмены и, если понадобит¬
+ся, отменять выполнение
+
+//////////////////asParallel
+private static void ProcessInData()
+{
+	MessageBox.Show("выполнение задачи в потоке ID: " + Thread.CurrentThread.ManagedThreadId);
+	//получить очень большой массив целых чисел
+	int[] source = Enumerable.Range(1, 100000000).ToArray();
+
+	var watch = new Stopwatch();
+	watch.Start();
+	int[] modThreeIsZero = (from num in source
+							where num % 3 == 0
+							orderby num descending
+							select num).ToArray();
+
+	watch.Stop();
+	MessageBox.Show(string.Format("Found {0} numbers that match query!" + Environment.NewLine +
+	"Passed time: {1}", modThreeIsZero.Count(), watch.Elapsed.TotalSeconds));
+}
+
+private static void ProcessInDataPLINQ()
+{
+	GC.Collect(0);
+
+	MessageBox.Show("выполнение PLINQ задачи в потоке ID: " + Thread.CurrentThread.ManagedThreadId);
+	//получить очень большой массив целых чисел
+	int[] source = Enumerable.Range(1, 100000000).ToArray();
+
+	var watch = new Stopwatch();
+	watch.Start();
+	int[] modThreeIsZero = (from num in source.AsParallel()
+							where num % 3 == 0
+							orderby num descending
+							select num).ToArray();
+
+	watch.Stop();
+	MessageBox.Show(string.Format("Found {0} numbers that match query!" + Environment.NewLine +
+	"Passed time: {1}", modThreeIsZero.Count(), watch.Elapsed.TotalSeconds));
+}
+
+private static void Click()
+{
+	ProcessInData(); // 10 секунд выполняется
+	ProcessInDataPLINQ(); // 5 секунд выполняется
+}
+
+
+
+/////////////////with cancel
+internal class Program
+    {
+        private static CancellationTokenSource cancleToken = new CancellationTokenSource();
+
+        private void BtnCancel()
+        {
+            cancleToken.Cancel();
+        }
+        private static void ProcessInDataPLINQ()
+        {
+            //получить очень большой массив целых чисел
+            int[] source = Enumerable.Range(1, 100000000).ToArray();
+
+            try
+            {
+                int[] modThreeIsZero = (from num in source.AsParallel().WithCancellation(cancleToken.Token)
+                    where num%3 == 0
+                    orderby num descending
+                    select num).ToArray();
+
+            }
+            catch (OperationCanceledException ex)
+            {
+                MessageBox.Show("User canceled");
+            }
+          
+        }
+
+        private static void Click()
+        {
+            ProcessInDataPLINQ(); // 5 секунд выполняется
+        }
+
+
+  
   watch = new Stopwatch();
             watch.Start();
 
