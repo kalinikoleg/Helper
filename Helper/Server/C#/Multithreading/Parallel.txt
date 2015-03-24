@@ -1,49 +1,41 @@
- {
-                Parallel.Invoke(
-                    ()=>AnyMethod,
-                    ()=>AnyMethod
-                    );
-            }
-            {
-                watch = new Stopwatch();
-                watch.Start();
-                Parallel.For(0, 201, i =>
-                {
-                    Get();
-                    Console.WriteLine(i+" ");
-                    //Console.WriteLine("Thread Id= {1}", Thread.CurrentThread.ManagedThreadId);
-                });
-                watch.Stop();
-                // Write result
-                Console.WriteLine("Parallel Time elapsed: {0}", watch.Elapsed.TotalSeconds);
-            }
+Тем не менее, если нужна более высокая степень контроля над выполняемыми зада¬
+чами, следует отказаться от Parallel. Invoke () и напрямую работать с классом Task,
 
-            {
-				string[] colors =
-				{
-					"1. Red",
-					"2. Green",
-					"3. Blue",
-					"4. Yellow",
-					"5. White",
-					"6. Black",
-					"7. Violet",
-					"8. Brown",
-					"9. Orange",
-					"10. Pink"
-				};
-               
-                watch = new Stopwatch();
-                watch.Start();
+Все работает в блокирующей манере
 
+{
+Parallel.Invoke(
+	()=>AnyMethod,
+	()=>AnyMethod
+	);
+}
+{
+	Parallel.For(0, 201, i =>
+	{
+		Get();
+		Console.WriteLine(i+" ");
+		//Console.WriteLine("Thread Id= {1}", Thread.CurrentThread.ManagedThreadId);
+	});
+}
 
-                Parallel.ForEach(colors, color =>
-                {
-                    Console.WriteLine("{0}, Thread Id= {1}", color, Thread.CurrentThread.ManagedThreadId);
-                    Thread.Sleep(30);
-                });
-                watch.Stop();
-                // Write result
-                Console.WriteLine("Parallel Time elapsed: {0}", watch.Elapsed.TotalSeconds);
-                
-            }
+{
+string[] colors =
+{
+	"1. Red",
+	"2. Green",
+	"3. Blue",
+	"4. Yellow",
+	"5. White",
+	"6. Black",
+	"7. Violet",
+	"8. Brown",
+	"9. Orange",
+	"10. Pink"
+};
+
+Parallel.ForEach(colors, color =>
+{
+	Console.WriteLine("{0}, Thread Id= {1}", color, Thread.CurrentThread.ManagedThreadId);
+	Thread.Sleep(30);
+});
+}
