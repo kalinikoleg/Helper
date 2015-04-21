@@ -60,6 +60,45 @@ Task task = Task.Factory.StartNew(application.MyTask);
 5. Создание продолжения задачи	
 	
 	
+	
+	
+6. Задача получения  результата блокирует вызывающий код до тех пор, пока результат не будет 
+вычислен.
+	public static bool MyTask()
+	{
+		Console.WriteLine("MyTask ID " + Thread.CurrentThread.ManagedThreadId);
+		Thread.Sleep(5000);
+		return true;
+	}
+
+	public static int Sum(object v)
+	{
+		Console.WriteLine("Sum ID " + Thread.CurrentThread.ManagedThreadId);
+		int x = (int)v;
+		int sum = 0;
+		for (; x > 0; x--)
+		{
+			sum = +x;
+		}
+		return sum;
+	}
+
+	static void Main(string[] args)
+	{
+		Program application = new Program();
+
+		Task<bool> task = Task<bool>.Factory.StartNew(MyTask);
+		Console.WriteLine("Результат после выполнения задачи MyTask: " + task.Result);
+
+		Task<int> task2 = Task<int>.Factory.StartNew(Sum, 2);
+		Console.WriteLine("Результат после выполнения задачи Sumlt: " + task2.Result);
+
+		// Сохранить метод Main() активным до завершения метода MyTask().
+		Console.WriteLine("############ main stream ID" + Thread.CurrentThread.ManagedThreadId);
+
+		task.Dispose();
+	}	
+	
 LinkedList
 написать программу, которая будет 10 раз делать ++ переменной.и запцстить на 10 потоках
 
