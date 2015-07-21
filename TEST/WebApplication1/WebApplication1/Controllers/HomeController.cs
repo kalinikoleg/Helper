@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -16,59 +17,45 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
 
-
-            Test();
-
-            //Console.WriteLine("Основной поток с ID: " + Thread.CurrentThread.ManagedThreadId);
-            //var task = GetResultsAsync();
-            //task.Wait();
-
-
-
-
             Console.WriteLine("Основной поток с ID: " + Thread.CurrentThread.ManagedThreadId);
+            var t = Task.Run(async () => await Test3());
+
+
+            t.Wait();
+
+
+
             return View();
         }
-
 
 
         public async Task Test()
         {
             Console.WriteLine("Основной поток с ID: " + Thread.CurrentThread.ManagedThreadId);
-            Task t1 = ((Func<Task>)(async delegate
+            Task t1 =((Func<Task>)(async delegate
             {
                 Console.WriteLine("Starting first async block");
-                await Task.Delay(2000);
+                await Task.Delay(0);
                 var c = Thread.CurrentThread.ManagedThreadId;
                 Console.WriteLine("Done first block");
             }))();
         }
 
-        public Task GetResultsAsync()
-        {
-            var task = Task.Run(() =>
-            {
-                Console.WriteLine("Выводит самый последний метод в новом потоке с ID: " + Thread.CurrentThread.ManagedThreadId);
 
-
-                Thread.Sleep(5000);
-                var c = 10;
-            });
-            return task;
-        }
-
-        public async Task GetResultsAsync2()
+        public async Task Test2()
         {
             await Task.Run(() =>
             {
-                Console.WriteLine("Выводит самый последний метод в новом потоке с ID: " + Thread.CurrentThread.ManagedThreadId);
-
-
-                Thread.Sleep(5000);
-                var c = 10;
+                Thread.Sleep(1000);
             });
+
+            Thread.Sleep(5000);
         }
 
+        public async Task Test3()
+        {
+             await Test2();
+        }
 
         public ActionResult About()
         {
