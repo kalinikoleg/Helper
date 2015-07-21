@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
         public async Task Test()
         {
             Console.WriteLine("Основной поток с ID: " + Thread.CurrentThread.ManagedThreadId);
-            Task t1 =((Func<Task>)(async delegate
+            Task t1 = ((Func<Task>)(async delegate
             {
                 Console.WriteLine("Starting first async block");
                 await Task.Delay(0);
@@ -45,16 +45,18 @@ namespace WebApplication1.Controllers
         public async Task Test2()
         {
             await Task.Run(() =>
-            {
-                Thread.Sleep(1000);
-            });
+           {
+               Thread.Sleep(1000);
+           });
 
             Thread.Sleep(5000);
         }
 
         public async Task Test3()
         {
-             await Test2();
+            await Test2();
+
+            var c = 10;
         }
 
         public ActionResult About()
