@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,18 +15,28 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-
-            Console.WriteLine("Основной поток с ID: " + Thread.CurrentThread.ManagedThreadId);
-            var t = Task.Run(async () => await Test3());
-
-
-            t.Wait();
+            startButton_Click();
 
 
 
+            //конец метода с. 68
             return View();
+        }
+
+
+        private void LookupHostName()
+        {
+            Task<IPAddress[]> IPAddressPromisse = Dns.GetHostAddressesAsync("oreilly.com");
+
+
+
+            IPAddressPromisse
+                .ContinueWith(_ =>
+                {
+                    IPAddress[] ipAddresses = IPAddressPromisse.Result;
+                }).Wait();
         }
 
 
@@ -42,14 +53,46 @@ namespace WebApplication1.Controllers
         }
 
 
+        public async void startButton_Click()
+        {
+            // ONE
+            Task<int> getLengthTask = AccessTheWebAsync();
+
+            // FOUR
+            var c = "test";
+
+            getLengthTask.ContinueWith(_ => { });
+            // FIVE
+            int contentLength = await getLengthTask;
+
+            // SEVEN
+            Trace.WriteLine(String.Format("\r\nLength of the downloaded string: {0}.\r\n", contentLength));
+        }
+
+        async Task<int> AccessTheWebAsync()
+        {
+            // TWO
+            HttpClient client = new HttpClient();
+            Task<string> getStringTask =
+                client.GetStringAsync("http://msdn.microsoft.com");
+
+            // THREE      
+            Task task2 = Test2();
+            //   await task2;
+            string urlContents = await getStringTask;
+
+
+
+            // SIX
+            return urlContents.Length;
+        }
+
+
         public async Task Test2()
         {
-            await Task.Run(() =>
-           {
-               Thread.Sleep(1000);
-           });
+            await Task.Delay(5000);
 
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
         }
 
         public async Task Test3()
@@ -59,18 +102,5 @@ namespace WebApplication1.Controllers
             var c = 10;
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
