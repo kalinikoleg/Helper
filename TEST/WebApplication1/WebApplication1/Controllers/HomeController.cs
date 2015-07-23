@@ -13,16 +13,86 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Controllers
 {
+
+
+    //исключения
     public class HomeController : Controller
     {
+        public delegate void SetBoolValue();
+
+        public SetBoolValue setBoolValue = null;
+
         public async Task<ActionResult> Index()
         {
-            startButton_Click();
 
 
+            var context = SynchronizationContext.Current;
 
-            //конец метода с. 68
+
+            var task = FirstDeep2Copy();
+
+
+            await Task.WhenAll(task);
+
             return View();
+
+
+
+            //разобраться
+            //  Task t = Task.Factory.StartNew(() => MyLongComputation(a, b), cancellationToken, TaskCreationOptions.LongRunning, taskScheduler);
+ 
+
+            //с.70     понять точно, почему переключается поток
+            // await Task.Delay(delay);
+            // var response = await query.ExecuteNextAsync<T>();
+        }
+
+        //Main
+        public Task<bool> LastDeep2()
+        {
+            {
+                /*  var task = LastDeep2();
+                  setBoolValue();
+
+                  if (await task)
+                  {
+                      var c = 10;
+                  }   */
+            }
+
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+            //создать диалог, через 5 сек пользвотель закроет диалог и нужно сделать задачу завершившийся
+            setBoolValue += delegate
+            {
+                Thread.Sleep(1000);
+                var cxx = Thread.CurrentThread.ManagedThreadId;
+                tcs.SetResult(true);
+            };
+
+            return tcs.Task;
+        }
+
+        public async Task FirstDeep2Copy()
+        {
+            await LastDeep2Copy();
+
+            // callback
+            for (int i = 0; i < 3; i++)
+            {
+                var c = 10;
+            }
+        }
+
+        public Task LastDeep2Copy()
+        {
+            return Task.Run(() =>
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    var c = 1;
+                }
+            });
         }
 
 
@@ -31,7 +101,7 @@ namespace WebApplication1.Controllers
             Task<IPAddress[]> IPAddressPromisse = Dns.GetHostAddressesAsync("oreilly.com");
 
 
-
+            //тоже самое делает await, весь код после него оборачивается в ContinueWith
             IPAddressPromisse
                 .ContinueWith(_ =>
                 {
@@ -53,6 +123,46 @@ namespace WebApplication1.Controllers
         }
 
 
+
+        public async Task StartExanmples()
+        {
+
+            await FirstDeep();
+
+            // call back
+            Thread.Sleep(1000);
+        }
+
+
+        public async Task FirstDeep()
+        {
+            await LasrDeep();
+
+            // call back
+            Thread.Sleep(1000);
+
+            await LasrDeep();
+            // call back
+            Thread.Sleep(1000);
+        }
+
+        public async Task LasrDeep()
+        {
+            // если поставить await, то будет deadlock, разобраться почему это происходит
+            Task.Run(() =>
+            {
+                Thread.Sleep(1000);
+            });
+
+
+            // call back
+            Thread.Sleep(1000);
+
+        }
+
+
+
+
         public async void startButton_Click()
         {
             // ONE
@@ -61,7 +171,6 @@ namespace WebApplication1.Controllers
             // FOUR
             var c = "test";
 
-            getLengthTask.ContinueWith(_ => { });
             // FIVE
             int contentLength = await getLengthTask;
 
@@ -77,7 +186,7 @@ namespace WebApplication1.Controllers
                 client.GetStringAsync("http://msdn.microsoft.com");
 
             // THREE      
-            Task task2 = Test2();
+            //   Task task2 = Test2();
             //   await task2;
             string urlContents = await getStringTask;
 
