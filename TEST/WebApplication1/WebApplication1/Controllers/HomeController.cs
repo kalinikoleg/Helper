@@ -24,15 +24,15 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> Index()
         {
+            try
+            {
 
-
-            var context = SynchronizationContext.Current;
-
-
-            var task = FirstDeep2Copy();
-
-
-            await Task.WhenAll(task);
+                Task.Run(() => Test5()).Wait();
+            }
+            catch (Exception ex)
+            {
+                var c = 10;
+            }
 
             return View();
 
@@ -40,12 +40,65 @@ namespace WebApplication1.Controllers
 
             //разобраться
             //  Task t = Task.Factory.StartNew(() => MyLongComputation(a, b), cancellationToken, TaskCreationOptions.LongRunning, taskScheduler);
- 
+
 
             //с.70     понять точно, почему переключается поток
             // await Task.Delay(delay);
             // var response = await query.ExecuteNextAsync<T>();
+            //http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html
+            //http://andrey.moveax.ru/post/csharp-async-wait-deadlocks
         }
+
+        public async void Test5()
+        {
+
+            throw new Exception("dqwdewdf");
+            var test = startButton_Click();
+
+            var c = 10;
+
+            await test;
+        }
+
+
+        private async Task startButton_Click()
+        {
+            // ONE
+            //углубляется в этотм метод
+            Task<int> getLengthTask = AccessTheWebAsync();
+
+            var c = 10;
+
+            // FOUR
+            //оператор await приостанавливает метод startButton_Click
+            //Поток пользовательского интерфейса покидает метод GetButton_OnClick и освобождается для обработки других действий пользователя.
+
+            int contentLength = await getLengthTask;
+
+            // SIX
+            var mystring =
+                String.Format("\r\nLength of the downloaded string: {0}.\r\n", contentLength);
+        }
+
+
+        async Task<int> AccessTheWebAsync()
+        {
+            // TWO
+            HttpClient client = new HttpClient();
+            // углубляется в этот метод и там возвращается реальный объект Task и доходит до первого оператопа await
+            Task<string> getStringTask =
+                client.GetStringAsync("http://msdn.microsoft.com");
+
+            // THREE   
+            //Запоминается текущий контекст SynchronizationContext.  приостанавливается оператором await, и задача Task из 
+            //getStringTask извещается о том, что она должна возобновиться по завершении скачивания (в запомненном контексте SynchronizationContext)
+            // Поток покидает метод AccessTheWebAsync, который вернул объект Task, и доходит до оператора await в методе startButton_Click. 
+            string urlContents = await getStringTask.ConfigureAwait(false);
+
+            // FIVE
+            return urlContents.Length;
+        }
+
 
         //Main
         public Task<bool> LastDeep2()
@@ -160,41 +213,6 @@ namespace WebApplication1.Controllers
 
         }
 
-
-
-
-        public async void startButton_Click()
-        {
-            // ONE
-            Task<int> getLengthTask = AccessTheWebAsync();
-
-            // FOUR
-            var c = "test";
-
-            // FIVE
-            int contentLength = await getLengthTask;
-
-            // SEVEN
-            Trace.WriteLine(String.Format("\r\nLength of the downloaded string: {0}.\r\n", contentLength));
-        }
-
-        async Task<int> AccessTheWebAsync()
-        {
-            // TWO
-            HttpClient client = new HttpClient();
-            Task<string> getStringTask =
-                client.GetStringAsync("http://msdn.microsoft.com");
-
-            // THREE      
-            //   Task task2 = Test2();
-            //   await task2;
-            string urlContents = await getStringTask;
-
-
-
-            // SIX
-            return urlContents.Length;
-        }
 
 
         public async Task Test2()

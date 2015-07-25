@@ -1,0 +1,62 @@
+код до первого await работает в  рабочем потоке ASP
+
+Часто бывает, что выражение в строке, содержащей первый await, содержит еще один async-метод. 
+Поскольку это выражение предшествует первому await, оно также выполняется в вызывающем потоке. 
+Таким образом, вызывающий поток продолжает «углубляться» в код приложения, пока не встретит метод,
+ действительно возвращающий объект Task. Это может быть метод, являющийся частью каркаса, 
+ или метод, создающий задачу-марионетку с помощью TaskCompletionSource. Именно этот метод и 
+ является источником асинхронности – все прочие async-методы просто распространяют асинхронность
+ вверх по стеку вызовов. 
+ 
+
+		Test5();
+
+		return View();
+
+
+public async void Test5()
+{
+	var test = startButton_Click();
+
+	var c = 10;
+
+	await test;
+}
+
+
+private async Task startButton_Click()
+{
+	// ONE
+	//углубляется в этотм метод
+	Task<int> getLengthTask = AccessTheWebAsync();
+
+	var c = 10;
+
+	// FOUR
+	//оператор await приостанавливает метод startButton_Click
+	//Поток пользовательского интерфейса покидает метод GetButton_OnClick и освобождается для обработки других действий пользователя.
+	int contentLength = await getLengthTask;
+
+	// SIX
+	var mystring =
+		String.Format("\r\nLength of the downloaded string: {0}.\r\n", contentLength);
+}
+
+
+async Task<int> AccessTheWebAsync()
+{
+	// TWO
+	HttpClient client = new HttpClient();
+	// углубляется в этот метод и там возвращается реальный объект Task и доходит до первого оператопа await
+	Task<string> getStringTask =
+		client.GetStringAsync("http://msdn.microsoft.com");
+
+	// THREE   
+	//Запоминается текущий контекст SynchronizationContext.  приостанавливается оператором await, и задача Task из 
+	//getStringTask извещается о том, что она должна возобновиться по завершении скачивания (в запомненном контексте SynchronizationContext)
+	// Поток покидает метод AccessTheWebAsync, который вернул объект Task, и доходит до оператора await в методе startButton_Click. 
+	string urlContents = await getStringTask;
+
+	// FIVE
+	return urlContents.Length;
+}
